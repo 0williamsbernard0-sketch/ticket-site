@@ -1,0 +1,482 @@
+"use client";
+import React, { useMemo, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+
+const ALL_SEATS = [
+  { id: "c-r15-std", section: "C", row: 15, type: "Standard Admission", price: 247.8 },
+  { id: "208-r17-ap", section: "208", row: 17, type: "Artist Presale", price: null },
+  { id: "117-r7-plat", section: "117", row: 7, type: "Official Platinum", price: 401.2 },
+  { id: "213-r20-ap", section: "213", row: 20, type: "Artist Presale", price: null },
+  { id: "108-r8-vip", section: "108", row: 8, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "109-r15-ap", section: "109", row: 15, type: "Artist Presale", price: null },
+  { id: "c-r3-vip", section: "C", row: 3, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "227-r16-ap", section: "227", row: 16, type: "Artist Presale", price: null },
+  { id: "211-r18-ap", section: "211", row: 18, type: "Artist Presale", price: null },
+  { id: "a-r9-plat", section: "A", row: 9, type: "Official Platinum", price: 354.0 },
+  { id: "211-r17-ap", section: "211", row: 17, type: "Artist Presale", price: null },
+  { id: "222-r11-ap", section: "222", row: 11, type: "Artist Presale", price: null },
+  { id: "105-r7-plat", section: "105", row: 7, type: "Official Platinum", price: 271.4 },
+  { id: "108-r10-vip", section: "108", row: 10, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "a-r6-plat", section: "A", row: 6, type: "Official Platinum", price: 401.2 },
+  { id: "208-r9-ap", section: "208", row: 9, type: "Artist Presale", price: null },
+  { id: "a-r3-plat", section: "A", row: 3, type: "Official Platinum", price: 483.8 },
+  { id: "a-r25-std", section: "A", row: 25, type: "Standard Admission", price: 224.2 },
+  { id: "c-r6-vip", section: "C", row: 6, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "209-r9-ap", section: "209", row: 9, type: "Artist Presale", price: null },
+  { id: "108-r10-plat", section: "108", row: 10, type: "Official Platinum", price: 401.2 },
+  { id: "117-r14-plat", section: "117", row: 14, type: "Official Platinum", price: 306.8 },
+  { id: "a-r15-std", section: "A", row: 15, type: "Standard Admission", price: 247.8 },
+  { id: "105-r5-plat", section: "105", row: 5, type: "Official Platinum", price: 295.0 },
+  { id: "213-r15-ap", section: "213", row: 15, type: "Artist Presale", price: null },
+  { id: "226-r2-std", section: "226", row: 2, type: "Standard Admission", price: 147.5 },
+  { id: "209-r2-std", section: "209", row: 2, type: "Standard Admission", price: 147.5 },
+  { id: "223-r4-std", section: "223", row: 4, type: "Standard Admission", price: 147.5 },
+  { id: "116-r8-plat", section: "116", row: 8, type: "Official Platinum", price: 483.8 },
+  { id: "b-r10-plat", section: "B", row: 10, type: "Official Platinum", price: 354.0 },
+  { id: "a-r8-plat", section: "A", row: 8, type: "Official Platinum", price: 354.0 },
+  { id: "a-r11-plat", section: "A", row: 11, type: "Official Platinum", price: 354.0 },
+  { id: "b-r13-plat", section: "B", row: 13, type: "Official Platinum", price: 354.0 },
+  { id: "c-r4-vip", section: "C", row: 4, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "107-r5-plat", section: "107", row: 5, type: "Official Platinum", price: 401.2 },
+  { id: "c-r17-std", section: "C", row: 17, type: "Standard Admission", price: 247.8 },
+  { id: "108-r9-vip", section: "108", row: 9, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "211-r13-ap", section: "211", row: 13, type: "Artist Presale", price: null },
+  { id: "b-r8-plat", section: "B", row: 8, type: "Official Platinum", price: 389.4 },
+  { id: "103-r8-plat", section: "103", row: 8, type: "Official Platinum", price: 271.4 },
+  { id: "104-r4-plat", section: "104", row: 4, type: "Official Platinum", price: 318.6 },
+  { id: "c-r14-plat", section: "C", row: 14, type: "Official Platinum", price: 318.6 },
+  { id: "108-r7-vip", section: "108", row: 7, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "116-r13-plat", section: "116", row: 13, type: "Official Platinum", price: 401.2 },
+  { id: "116-r13-vip", section: "116", row: 13, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "c-r7-vip", section: "C", row: 7, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "120-r5-plat", section: "120", row: 5, type: "Official Platinum", price: 295.0 },
+  { id: "212-r2-std", section: "212", row: 2, type: "Standard Admission", price: 147.5 },
+  { id: "a-r7-vip", section: "A", row: 7, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "c-r25-std", section: "C", row: 25, type: "Standard Admission", price: 224.2 },
+  { id: "a-r19-std", section: "A", row: 19, type: "Standard Admission", price: 247.8 },
+  { id: "b-r9-plat", section: "B", row: 9, type: "Official Platinum", price: 354.0 },
+  { id: "c-r24-std", section: "C", row: 24, type: "Standard Admission", price: 224.2 },
+  { id: "107-r4-plat", section: "107", row: 4, type: "Official Platinum", price: 401.2 },
+  { id: "a-r16-std", section: "A", row: 16, type: "Standard Admission", price: 247.8 },
+  { id: "a-r14-plat", section: "A", row: 14, type: "Official Platinum", price: 318.6 },
+  { id: "c-r12-plat", section: "C", row: 12, type: "Official Platinum", price: 318.6 },
+  { id: "a-r4-plat", section: "A", row: 4, type: "Official Platinum", price: 448.4 },
+  { id: "c-r16-std", section: "C", row: 16, type: "Standard Admission", price: 247.8 },
+  { id: "107-r5-vip", section: "107", row: 5, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "116-r12-plat", section: "116", row: 12, type: "Official Platinum", price: 401.2 },
+  { id: "a-r6-vip", section: "A", row: 6, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "103-r6-plat", section: "103", row: 6, type: "Official Platinum", price: 295.0 },
+  { id: "202-r2-std", section: "202", row: 2, type: "Standard Admission", price: 147.5 },
+  { id: "117-r8-vip", section: "117", row: 8, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "b-r7-vip", section: "B", row: 7, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "c-r20-std", section: "C", row: 20, type: "Standard Admission", price: 247.8 },
+  { id: "117-r7-vip", section: "117", row: 7, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "107-r8-vip", section: "107", row: 8, type: "HOMEWRECKER VIP PACKAGE", price: 412.95 },
+  { id: "118-r14-std", section: "118", row: 14, type: "Standard Admission", price: 247.8 },
+  { id: "117-r12-plat", section: "117", row: 12, type: "Official Platinum", price: 354.0 },
+  { id: "a-r13-plat", section: "A", row: 13, type: "Official Platinum", price: 318.6 },
+  { id: "108-r3-plat", section: "108", row: 3, type: "Official Platinum", price: 483.8 },
+  { id: "119-r5-plat", section: "119", row: 5, type: "Official Platinum", price: 295.0 },
+  { id: "201-r2-std", section: "201", row: 2, type: "Standard Admission", price: 147.5 },
+  { id: "c-r5-plat", section: "C", row: 5, type: "Official Platinum", price: 401.2 },
+  { id: "117-r10-plat", section: "117", row: 10, type: "Official Platinum", price: 354.0 },
+  { id: "b-r12-plat", section: "B", row: 12, type: "Official Platinum", price: 354.0 },
+  { id: "116-r13-plat2", section: "116", row: 13, type: "Official Platinum", price: 401.2 },
+  { id: "b-r11-plat", section: "B", row: 11, type: "Official Platinum", price: 354.0 },
+  { id: "c-r19-std", section: "C", row: 19, type: "Standard Admission", price: 247.8 },
+] as const;
+
+type Seat = (typeof ALL_SEATS)[number];
+type FilterType = "Standard Admission" | "Artist Presale" | "HOMEWRECKER VIP PACKAGE" | "Official Platinum";
+
+const VALID_PASSCODE = "POTENTIAL";
+const TM_BLUE = "#0064d2";
+const TM_BLACK = "#0b0b0b";
+const TM_TEXT = "#0f172a";
+const TM_MUTED = "#4b5563";
+
+function rand50to160() {
+  return 50 + Math.floor(Math.random() * 111);
+}
+
+export default function SeatPage() {
+  const router = useRouter();
+  const params = useParams<{ id: string }>();
+  const eventId = params?.id;
+  const search = useSearchParams();
+
+  const venue = search.get("venue") ?? "Madison Square Garden";
+  const city = search.get("city") ?? "New York, NY";
+  const date = search.get("date") ?? "NOV 23";
+  const day = search.get("day") ?? "Mon";
+  const time = search.get("time") ?? "7:00 PM";
+  const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}`;
+
+  const [showPresaleModal, setShowPresaleModal] = useState(false);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [passcode, setPasscode] = useState("");
+  const [unlockError, setUnlockError] = useState<string | null>(null);
+  const [presaleUnlocked, setPresaleUnlocked] = useState(false);
+  const [sortBy, setSortBy] = useState<"all" | "top">("all");
+
+  const allTypes: FilterType[] = useMemo(
+    () => ["Standard Admission", "Artist Presale", "HOMEWRECKER VIP PACKAGE", "Official Platinum"],
+    []
+  );
+  const [activeFilters, setActiveFilters] = useState<FilterType[]>(allTypes);
+
+  const unlockedPricesBySeatId = useMemo(() => {
+    if (!presaleUnlocked) return {} as Record<string, number>;
+    const map: Record<string, number> = {};
+    for (const s of ALL_SEATS) {
+      if (s.price == null) map[s.id] = rand50to160();
+    }
+    return map;
+  }, [presaleUnlocked]);
+
+  const toggleFilter = (t: FilterType) => {
+    setActiveFilters((prev) => prev.includes(t) ? prev.filter((f) => f !== t) : [...prev, t]);
+  };
+
+  const filtered = useMemo(
+    () => ALL_SEATS.filter((s) => activeFilters.includes(s.type as FilterType)),
+    [activeFilters]
+  );
+
+  const sorted = useMemo(() => {
+    if (sortBy !== "top") return filtered;
+    return [...filtered].sort((a, b) => {
+      const pa = a.price ?? (presaleUnlocked ? unlockedPricesBySeatId[a.id] ?? 9999 : 9999);
+      const pb = b.price ?? (presaleUnlocked ? unlockedPricesBySeatId[b.id] ?? 9999 : 9999);
+      return pa - pb;
+    });
+  }, [filtered, sortBy, presaleUnlocked, unlockedPricesBySeatId]);
+
+  const typeColor = (type: string) => {
+    if (type === "HOMEWRECKER VIP PACKAGE") return "#b45309";
+    if (type === "Official Platinum" || type === "Artist Presale") return TM_BLUE;
+    return TM_TEXT;
+  };
+
+  const getEffectivePrice = (seat: Seat): number | null => {
+    if (seat.price != null) return seat.price;
+    if (!presaleUnlocked) return null;
+    return unlockedPricesBySeatId[seat.id] ?? null;
+  };
+
+  const goToSeatDetail = (seat: Seat) => {
+    if (!eventId) return;
+    const p = getEffectivePrice(seat);
+    router.push(
+      `/seat/${eventId}/detail?section=${seat.section}&row=${seat.row}&type=${encodeURIComponent(seat.type)}&price=${p ?? 0}&seatId=${seat.id}&${venueParams}`
+    );
+  };
+
+  const isLocked = (seat: Seat) => seat.price == null;
+
+  const handleSelect = (seat: Seat) => {
+    if (!isLocked(seat)) { goToSeatDetail(seat); return; }
+    if (!presaleUnlocked) { setShowPresaleModal(true); return; }
+    goToSeatDetail(seat);
+  };
+
+  const handleUnlock = () => {
+    if (passcode.trim().toUpperCase() === VALID_PASSCODE) {
+      setPresaleUnlocked(true);
+      setUnlockError(null);
+      setShowPresaleModal(false);
+    } else {
+      setUnlockError("Invalid passcode. Try POTENTIAL.");
+    }
+  };
+
+  const pillBase: React.CSSProperties = {
+    flex: 1, borderRadius: 999, padding: "11px 10px", fontSize: 13,
+    fontWeight: 800, cursor: "pointer", border: "1px solid #d1d5db",
+    background: "#ffffff", color: TM_TEXT, boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+  };
+
+  const primaryPillSelected: React.CSSProperties = {
+    ...pillBase, background: "#e8f1ff", border: `1px solid ${TM_BLUE}`, color: TM_BLUE,
+  };
+
+  if (!eventId) return <div style={{ padding: 24 }}>Loading…</div>;
+
+  return (
+    <div style={{ fontFamily: "system-ui, Arial", background: "#f3f4f6", minHeight: "100vh", color: TM_TEXT }}>
+      <div style={{ background: TM_BLUE, height: 4 }} />
+      <div style={{ background: TM_BLACK, color: "white", padding: "16px 16px 14px" }}>
+        <div style={{ fontSize: 18, fontWeight: 900, fontStyle: "italic", letterSpacing: -0.3, marginBottom: 10 }}>
+          ticketmaster
+        </div>
+        <h2 style={{ margin: 0, fontSize: 17, fontWeight: 900, lineHeight: 1.2 }}>
+          SOMBR - You Are The Reason Tour
+        </h2>
+        <p style={{ margin: "6px 0 0", color: "rgba(255,255,255,0.78)", fontSize: 13, fontWeight: 600 }}>
+          {day} • {date}, 2026 • {time} — {venue}, {city}
+        </p>
+      </div>
+
+      <div style={{ background: "#e9edf2", padding: 16, textAlign: "center", borderBottom: "1px solid #d7dde6" }}>
+        <button type="button" style={{ background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: 999, padding: "10px 16px", fontSize: 13, fontWeight: 900, color: TM_TEXT, cursor: "pointer", marginBottom: 12, width: "100%", maxWidth: 520 }}>
+          ⇄ Switch to Map
+        </button>
+        <svg width="340" height="340" viewBox="0 0 500 500" style={{ display: "block", margin: "0 auto" }}>
+  {/* Outer ring - upper sections gray */}
+  <ellipse cx="250" cy="260" rx="235" ry="225" fill="#d1d5db" stroke="#9ca3af" strokeWidth="1.5" />
+  {/* Middle ring - lower bowl light blue */}
+  <ellipse cx="250" cy="260" rx="185" ry="175" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
+  {/* Inner ring - lower bowl dark blue */}
+  <ellipse cx="250" cy="260" rx="140" ry="130" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
+  {/* Floor oval */}
+  <ellipse cx="250" cy="270" rx="90" ry="100" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
+
+  {/* STAGE */}
+  <rect x="205" y="115" width="90" height="50" rx="4" fill="#111827" />
+  <text x="250" y="146" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">STAGE</text>
+  {/* Stage pole */}
+  <rect x="246" y="165" width="8" height="28" fill="#374151" />
+
+  {/* PIT sections */}
+  <rect x="185" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
+  <text x="211" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT LEFT</text>
+  <rect x="263" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
+  <text x="289" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT RIGHT</text>
+
+  {/* Floor sections row 1: A B C D E F */}
+  {["A","B","C","D","E","F"].map((s, i) => (
+    <g key={s}>
+      <rect x={172 + i*26} y={233} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+      <text x={184 + i*26} y={248} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+    </g>
+  ))}
+
+  {/* Floor sections row 2: G H J K L M */}
+  {["G","H","J","K","L","M"].map((s, i) => (
+    <g key={s}>
+      <rect x={172 + i*26} y={259} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+      <text x={184 + i*26} y={274} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+    </g>
+  ))}
+
+  {/* Floor sections row 3: N P */}
+  <rect x="210" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+  <text x="222" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">N</text>
+  <rect x="266" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+  <text x="278" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">P</text>
+
+  {/* B STAGE bottom */}
+  <rect x="234" y="312" width="32" height="20" rx="3" fill="#111827" />
+  <text x="250" y="326" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">B STAGE</text>
+
+  {/* Bottom floor numbers 1 2 3 */}
+  {["1","2","3"].map((s, i) => (
+    <g key={s}>
+      <rect x={210 + i*27} y={335} width="22" height="18" rx="2" fill="#3b82f6" stroke="#2563eb" strokeWidth="0.8" />
+      <text x={221 + i*27} y={348} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+    </g>
+  ))}
+
+  {/* Lower bowl section numbers - bottom arc 101-136 */}
+  {[
+    {n:"136",x:196,y:373},{n:"135",x:211,y:382},{n:"101",x:227,y:388},
+    {n:"102",x:245,y:392},{n:"103",x:263,y:388},{n:"104",x:279,y:382},{n:"105",x:294,y:373}
+  ].map(s => (
+    <g key={s.n}>
+      <text x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+    </g>
+  ))}
+
+  {/* Lower bowl - left side 125-134 */}
+  {[
+    {n:"134",x:178,y:358},{n:"133",x:167,y:340},{n:"132",x:160,y:320},
+    {n:"131",x:156,y:298},{n:"130",x:157,y:276},{n:"129",x:161,y:255},
+    {n:"128",x:168,y:236},{n:"127",x:177,y:218},{n:"126",x:188,y:202},
+    {n:"125",x:200,y:188}
+  ].map(s => (
+    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+  ))}
+
+  {/* Lower bowl - right side 106-116 */}
+  {[
+    {n:"106",x:310,y:358},{n:"107",x:322,y:340},{n:"108",x:329,y:320},
+    {n:"109",x:333,y:298},{n:"110",x:332,y:276},{n:"111",x:328,y:255},
+    {n:"112",x:321,y:236},{n:"113",x:312,y:218},{n:"114",x:301,y:202},
+    {n:"115",x:289,y:188}
+  ].map(s => (
+    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+  ))}
+
+  {/* Top lower bowl 116-124 */}
+  {[
+    {n:"116",x:278,y:178},{n:"117",x:264,y:172},{n:"118",x:250,y:170},
+    {n:"119",x:236,y:172},{n:"120",x:222,y:178}
+  ].map(s => (
+    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+  ))}
+
+  {/* Upper sections - outer ring labels */}
+  {[
+    {n:"235",x:210,y:468},{n:"236",x:250,y:474},{n:"201",x:290,y:468},
+    {n:"234",x:178,y:450},{n:"202",x:322,y:450},
+    {n:"233",x:155,y:428},{n:"203",x:345,y:428},
+    {n:"232",x:137,y:403},{n:"204",x:363,y:403},
+    {n:"231",x:125,y:374},{n:"205",x:375,y:374},
+    {n:"230",x:118,y:343},{n:"206",x:382,y:343},
+    {n:"229",x:116,y:310},{n:"207",x:384,y:310},
+    {n:"228",x:120,y:277},{n:"208",x:380,y:277},
+    {n:"227",x:129,y:246},{n:"209",x:371,y:246},
+    {n:"226",x:142,y:218},{n:"210",x:358,y:218},
+    {n:"225",x:159,y:193},{n:"211",x:341,y:193},
+    {n:"224",x:180,y:173},{n:"212",x:320,y:173},
+    {n:"223",x:204,y:158},{n:"213",x:296,y:158},
+    {n:"222",x:228,y:150},{n:"214",x:272,y:150},
+    {n:"221",x:250,y:147}
+  ].map(s => (
+    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{s.n}</text>
+  ))}
+
+  {/* Box section labels */}
+  {[
+    {n:"BOX 224",x:168,y:183},{n:"BOX 212",x:332,y:183},
+    {n:"BOX 226",x:138,y:230},{n:"BOX 210",x:362,y:230},
+    {n:"BOX 228",x:124,y:285},{n:"BOX 208",x:376,y:285},
+    {n:"BOX 230",x:124,y:338},{n:"BOX 206",x:376,y:338},
+    {n:"BOX 232",x:132,y:390},{n:"BOX 204",x:368,y:390},
+    {n:"BOX 236",x:250,y:455}
+  ].map(s => (
+    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#6b7280" fontSize="6">{s.n}</text>
+  ))}
+</svg>
+      </div>
+
+      <div style={{ padding: "12px 16px", display: "flex", gap: 10, background: "#f3f4f6" }}>
+        <button type="button" style={pillBase}>1 Ticket ▾</button>
+        <button type="button" onClick={() => { setUnlockError(null); setShowPresaleModal(true); }} style={{ ...pillBase, border: presaleUnlocked ? "1px solid #16a34a" : pillBase.border, color: presaleUnlocked ? "#166534" : TM_TEXT, background: presaleUnlocked ? "#dcfce7" : "#ffffff" }}>
+          🔒 {presaleUnlocked ? "Unlocked" : "Unlock"}
+        </button>
+        <button type="button" onClick={() => setShowFilterModal(true)} style={pillBase}>⚙ Filters</button>
+      </div>
+
+      <div style={{ margin: "0 16px 10px", background: "#ffffff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <span style={{ fontSize: 18 }}>📢</span>
+            <span style={{ fontSize: 13, fontWeight: 900 }}>PRESALE HAPPENING NOW!</span>
+          </div>
+          <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View Sales</span>
+        </div>
+      </div>
+
+      <div style={{ margin: "0 16px 10px", background: "#fff7ed", borderRadius: 10, padding: "10px 12px", border: "1px solid #fed7aa" }}>
+        <p style={{ margin: 0, fontSize: 13, color: "#7c2d12", fontWeight: 700 }}>
+          <strong>We&apos;re All In:</strong> Prices include fees (before taxes).
+        </p>
+      </div>
+
+      <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <span>⭐</span>
+          <strong style={{ fontSize: 15 }}>VIP Packages</strong>
+        </div>
+        <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
+      </div>
+      <div style={{ margin: "0 16px", height: 3, background: "#f59e0b" }} />
+
+      <div style={{ margin: "10px 16px 90px" }}>
+        {sorted.map((seat) => {
+          const locked = isLocked(seat);
+          const effective = getEffectivePrice(seat);
+          return (
+            <div key={seat.id} onClick={() => handleSelect(seat)} style={{ background: "#ffffff", borderRadius: 12, marginBottom: 10, padding: "14px 14px", display: "flex", gap: 12, alignItems: "center", border: locked && !presaleUnlocked ? "1px solid #cbd5e1" : "1px solid #e5e7eb", boxShadow: "0 2px 10px rgba(15,23,42,0.06)", cursor: "pointer" }}>
+              <div style={{ width: 46, height: 46, background: locked && !presaleUnlocked ? "#f8fafc" : "#eef2ff", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 20, border: "1px solid #e5e7eb" }}>
+                📍
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <p style={{ margin: 0, fontWeight: 950, fontSize: 16, color: TM_TEXT }}>Sec {seat.section} • Row {seat.row}</p>
+                <p style={{ margin: "4px 0 0", fontSize: 13, fontWeight: 800, color: typeColor(seat.type) }}>
+                  {seat.type === "HOMEWRECKER VIP PACKAGE" ? <span>⭐ {seat.type}</span> : seat.type === "Artist Presale" ? <span>🔒 {seat.type}</span> : seat.type}
+                </p>
+              </div>
+              <div style={{ textAlign: "right", flexShrink: 0 }}>
+                {effective != null ? (
+                  <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>${effective.toFixed(2)}</p>
+                ) : (
+                  <button type="button" style={{ background: "#ffffff", border: `2px solid ${TM_BLUE}`, color: TM_BLUE, borderRadius: 10, padding: "8px 12px", fontSize: 13, cursor: "pointer", fontWeight: 950 }} onClick={(e) => { e.stopPropagation(); setUnlockError(null); setShowPresaleModal(true); }}>
+                    🔒 Unlock
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {(showPresaleModal || showFilterModal) && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 100 }}>
+          <div style={{ background: "#ffffff", borderRadius: "16px 16px 0 0", padding: "18px 18px 34px", maxHeight: "90vh", overflowY: "auto", width: "100%", maxWidth: 520 }}>
+            {showPresaleModal && (
+              <>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                  <h3 style={{ margin: 0, fontSize: 18, fontWeight: 950 }}>Presale happening now!</h3>
+                  <span style={{ fontSize: 22, cursor: "pointer" }} onClick={() => setShowPresaleModal(false)}>✕</span>
+                </div>
+                <p style={{ fontWeight: 950, margin: "0 0 10px" }}>GET EARLY ACCESS TO TICKETS DURING PRESALE.</p>
+                <p style={{ color: TM_MUTED, fontSize: 13, margin: "0 0 10px", fontWeight: 700 }}>Enter Offer Passcode</p>
+                <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                  <input value={passcode} onChange={(e) => setPasscode(e.target.value)} placeholder="POTENTIAL" style={{ flex: 1, padding: "12px", border: "1px solid #cbd5e1", borderRadius: 10, fontSize: 15, fontWeight: 700, outline: "none" }} />
+                  <button type="button" onClick={handleUnlock} style={{ padding: "12px 14px", background: TM_BLUE, color: "white", border: "none", borderRadius: 10, fontSize: 14, cursor: "pointer", fontWeight: 950 }}>Unlock</button>
+                </div>
+                {unlockError && <p style={{ margin: "0 0 12px", color: "#b91c1c", fontSize: 13, fontWeight: 800 }}>{unlockError}</p>}
+                <p style={{ fontWeight: 950, margin: "10px 0 10px" }}>Sort list by</p>
+                <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
+                  {["All Tickets", "Top Seats"].map((opt) => {
+                    const active = (opt === "All Tickets" && sortBy === "all") || (opt === "Top Seats" && sortBy === "top");
+                    return <button key={opt} type="button" onClick={() => setSortBy(opt === "All Tickets" ? "all" : "top")} style={active ? primaryPillSelected : pillBase}>{opt}</button>;
+                  })}
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+                  <strong style={{ fontSize: 14 }}>Presale Options</strong>
+                  <div style={{ fontWeight: 800 }}>
+                    <span style={{ color: TM_BLUE, cursor: "pointer" }} onClick={() => setActiveFilters(allTypes)}>Select All</span>
+                    <span style={{ color: "#9ca3af" }}> | </span>
+                    <span style={{ color: TM_BLUE, cursor: "pointer" }} onClick={() => setActiveFilters([])}>Clear All</span>
+                  </div>
+                </div>
+                <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "0 0 12px" }} />
+                {allTypes.map((t) => (
+                  <div key={t} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, cursor: "pointer" }} onClick={() => toggleFilter(t)}>
+                    <div style={{ width: 24, height: 24, background: activeFilters.includes(t) ? TM_BLUE : "#ffffff", border: `2px solid ${TM_BLUE}`, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {activeFilters.includes(t) && <span style={{ color: "white", fontSize: 14, fontWeight: 950 }}>✓</span>}
+                    </div>
+                    {t === "Artist Presale" && <span style={{ fontSize: 18 }}>🔒</span>}
+                    {t === "HOMEWRECKER VIP PACKAGE" && <span style={{ fontSize: 18 }}>⭐</span>}
+                    <span style={{ color: t === "Artist Presale" ? TM_BLUE : TM_TEXT, fontWeight: t === "HOMEWRECKER VIP PACKAGE" ? 950 : 750 }}>{t}</span>
+                  </div>
+                ))}
+                <button type="button" onClick={() => setShowPresaleModal(false)} style={{ width: "100%", padding: 14, background: TM_BLUE, color: "white", border: "none", borderRadius: 10, fontSize: 16, fontWeight: 950, cursor: "pointer", marginTop: 6 }}>View Seats</button>
+              </>
+            )}
+            {showFilterModal && (
+              <>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                  <h3 style={{ margin: 0, fontWeight: 950 }}>Filters</h3>
+                  <span style={{ fontSize: 22, cursor: "pointer" }} onClick={() => setShowFilterModal(false)}>✕</span>
+                </div>
+                {allTypes.map((t) => (
+                  <div key={t} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, cursor: "pointer" }} onClick={() => toggleFilter(t)}>
+                    <div style={{ width: 24, height: 24, background: activeFilters.includes(t) ? TM_BLUE : "#ffffff", border: `2px solid ${TM_BLUE}`, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      {activeFilters.includes(t) && <span style={{ color: "white", fontSize: 14, fontWeight: 950 }}>✓</span>}
+                    </div>
+                    <span style={{ color: TM_TEXT, fontWeight: 800 }}>{t}</span>
+                  </div>
+                ))}
+                <button type="button" onClick={() => setShowFilterModal(false)} style={{ width: "100%", padding: 14, background: TM_BLUE, color: "white", border: "none", borderRadius: 10, fontSize: 16, fontWeight: 950, cursor: "pointer", marginTop: 6 }}>Apply Filters</button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
