@@ -64,8 +64,9 @@ export default function CheckoutPage() {
   const [phone, setPhone] = useState("");
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handlePay = () => {
+  const handlePay = async () => {
     setError(null);
 
     if (!eventId) {
@@ -85,41 +86,39 @@ export default function CheckoutPage() {
       return;
     }
 
-    const url = new URL("https://nopayment.io/checkout");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/nowpayments/create-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventId,
+          seatId,
+          section,
+          row,
+          type,
+          total,
+          email: email.trim(),
+          name: name.trim(),
+          phone: phone.trim(),
+        }),
+      });
 
-    url.searchParams.set("eventId", eventId);
-    url.searchParams.set("seatId", seatId);
-    url.searchParams.set("section", section);
-    url.searchParams.set("row", row);
-    url.searchParams.set("type", type);
+      const data = (await res.json()) as { error?: string; checkoutUrl?: string };
 
-    url.searchParams.set("currency", "USD");
-    url.searchParams.set("price", String(price));
-    url.searchParams.set("fees", String(fees));
-    url.searchParams.set("tax", String(tax));
-    url.searchParams.set("total", String(total));
-    url.searchParams.set("totalCents", String(Math.round(total * 100)));
+      if (!res.ok) {
+        throw new Error(data?.error || "Unable to initialize payment.");
+      }
+      if (!data.checkoutUrl) {
+        throw new Error("No checkout URL returned.");
+      }
 
-    url.searchParams.set("email", email.trim());
-    if (name.trim()) url.searchParams.set("name", name.trim());
-    if (phone.trim()) url.searchParams.set("phone", phone.trim());
-
-    // Fixed: point to existing route app/ticket/[id]/page.tsx
-    url.searchParams.set(
-      "successUrl",
-      `${window.location.origin}/ticket/${eventId}?seat=${encodeURIComponent(seatId)}`
-    );
-
-    url.searchParams.set(
-      "cancelUrl",
-      `${window.location.origin}/checkout/${eventId}?seat=${encodeURIComponent(
-        seatId
-      )}&price=${encodeURIComponent(String(price))}&section=${encodeURIComponent(
-        section
-      )}&row=${encodeURIComponent(row)}&type=${encodeURIComponent(type)}`
-    );
-
-    window.location.href = url.toString();
+      window.location.href = data.checkoutUrl;
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Payment initialization failed.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!eventId) {
@@ -261,7 +260,7 @@ export default function CheckoutPage() {
           )}
 
           <p style={{ margin: "12px 0 0", fontSize: 12, color: "#6b7280", lineHeight: 1.5, fontWeight: 650 }}>
-            You will be redirected to <span style={{ color: "#111827", fontWeight: 900 }}>nopayment.io</span> to complete payment.
+            You will be redirected to NOWPayments to complete payment.
           </p>
         </div>
       </div>
@@ -281,6 +280,7 @@ export default function CheckoutPage() {
         <button
           type="button"
           onClick={handlePay}
+          disabled={loading}
           style={{
             ...btnReset,
             width: "100%",
@@ -291,11 +291,12 @@ export default function CheckoutPage() {
             borderRadius: 12,
             fontSize: 17,
             fontWeight: 950,
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
             boxShadow: "0 10px 24px rgba(22, 163, 74, 0.25)",
+            opacity: loading ? 0.75 : 1,
           }}
         >
-          Pay {money(total)}
+          {loading ? "Redirecting..." : `Pay ${money(total)}`}
         </button>
         <p style={{ margin: "10px 0 0", textAlign: "center", fontSize: 12, color: "#6b7280", fontWeight: 650 }}>
           Total due {money(total)} • Secure checkout

@@ -63,18 +63,19 @@ export default function Home() {
           }}
         >
           Sign In
-        </button>
-      </header>
-      <main style={{ padding: "24px 20px 48px", maxWidth: 960, margin: "0 auto" }}>
-        <div style={{ marginBottom: 20 }}>
-          <h2
-            style={{
-              margin: 0,
-              fontSize: 28,
-              fontWeight: 800,
-              color: "#111",
-              letterSpacing: "-0.02em",
-            }}
+       <button
+  type="button"
+  onClick={() => (window.location.href = "/login")}
+  style={{
+    background: "#fff",
+    color: "#000",
+    padding: "10px 16px",
+    borderRadius: 4,
+    border: "none",
+    fontWeight: 700,
+    fontSize: 14,
+    cursor: "pointer",
+  }}
           >
             Upcoming Events
           </h2>

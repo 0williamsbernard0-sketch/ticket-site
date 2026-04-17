@@ -1,21 +1,33 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 export async function POST(req: Request) {
-  const { eventId } = await req.json();
+  try {
+    const { eventId } = (await req.json()) as { eventId?: string };
 
-  const queueId = crypto.randomUUID();
+    if (!eventId) {
+      return NextResponse.json({ error: "eventId is required" }, { status: 400 });
+    }
 
-  const { error } = await supabase.from("queue").insert({
-    id: queueId,
-    event_id: eventId,
-    status: "waiting",
-    created_at: new Date().toISOString(),
-  });
+    const queueId = crypto.randomUUID();
+    const supabase = getSupabase();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const { error } = await supabase.from("queue").insert({
+      id: queueId,
+      event_id: eventId,
+      status: "waiting",
+      created_at: new Date().toISOString(),
+    });
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ queueId });
+  } catch (e) {
+    return NextResponse.json(
+      { error: e instanceof Error ? e.message : "Unknown server error" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ queueId });
 }
