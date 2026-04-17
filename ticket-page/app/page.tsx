@@ -144,28 +144,10 @@ export default function Home() {
                 style={{
                   padding: "16px 18px",
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "flex-end",
                   alignItems: "center",
-                  gap: 16,
-                  flexWrap: "wrap",
                 }}
               >
-                <div style={{ minWidth: 0 }}>
-                  <p
-                    style={{
-                      margin: 0,
-                      color: "#333",
-                      fontSize: 14,
-                      lineHeight: 1.5,
-                      fontWeight: 600,
-                    }}
-                  >
-                    <span style={{ color: "#111" }}>{event.date}</span>
-                    <span style={{ color: "#9ca3af", margin: "0 8px" }}>•</span>
-                    <span style={{ color: "#444" }}>{event.location}</span>
-                  </p>
-                </div>
-
                 <Link href={`/event/${event.id}`} style={{ textDecoration: "none" }}>
                   <button
                     type="button"
