@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { events } from "@/lib/events";
+
 export default function Home() {
   return (
     <div
@@ -10,7 +11,6 @@ export default function Home() {
         minHeight: "100vh",
       }}
     >
-      {/* NAVBAR — Ticketmaster-ish */}
       <header
         style={{
           display: "flex",
@@ -20,6 +20,7 @@ export default function Home() {
           background: "#000",
           color: "#fff",
           borderBottom: "3px solid #0064d2",
+          gap: 12,
         }}
       >
         <h1
@@ -33,6 +34,7 @@ export default function Home() {
         >
           ticketmaster
         </h1>
+
         <input
           type="search"
           placeholder="Search events, artists, teams..."
@@ -49,33 +51,37 @@ export default function Home() {
             outline: "none",
           }}
         />
-        <button
-          type="button"
-          style={{
-            background: "#fff",
-            color: "#000",
-            padding: "10px 16px",
-            borderRadius: 4,
-            border: "none",
-            fontWeight: 700,
-            fontSize: 14,
-            cursor: "pointer",
-          }}
-        >
-          Sign In
-       <button
-  type="button"
-  onClick={() => (window.location.href = "/login")}
-  style={{
-    background: "#fff",
-    color: "#000",
-    padding: "10px 16px",
-    borderRadius: 4,
-    border: "none",
-    fontWeight: 700,
-    fontSize: 14,
-    cursor: "pointer",
-  }}
+
+        <Link href="/login" style={{ textDecoration: "none" }}>
+          <button
+            type="button"
+            style={{
+              background: "#fff",
+              color: "#000",
+              padding: "10px 16px",
+              borderRadius: 4,
+              border: "none",
+              fontWeight: 700,
+              fontSize: 14,
+              cursor: "pointer",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Sign In
+          </button>
+        </Link>
+      </header>
+
+      <main style={{ padding: "24px 20px 48px", maxWidth: 960, margin: "0 auto" }}>
+        <div style={{ marginBottom: 20 }}>
+          <h2
+            style={{
+              margin: 0,
+              fontSize: 28,
+              fontWeight: 800,
+              color: "#111",
+              letterSpacing: "-0.02em",
+            }}
           >
             Upcoming Events
           </h2>
@@ -83,6 +89,7 @@ export default function Home() {
             Find and book your favorite live events
           </p>
         </div>
+
         <div style={{ display: "grid", gap: 18 }}>
           {events.map((event) => (
             <article
@@ -95,12 +102,11 @@ export default function Home() {
                 border: "1px solid #e5e7eb",
               }}
             >
-              {/* Image + gradient overlay for readable title (Ticketmaster-style) */}
               <div style={{ position: "relative" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={event.image}
-                  alt=""
+                  alt={event.name}
                   style={{
                     width: "100%",
                     height: 200,
@@ -133,6 +139,7 @@ export default function Home() {
                   </h3>
                 </div>
               </div>
+
               <div
                 style={{
                   padding: "16px 18px",
@@ -158,6 +165,7 @@ export default function Home() {
                     <span style={{ color: "#444" }}>{event.location}</span>
                   </p>
                 </div>
+
                 <Link href={`/event/${event.id}`} style={{ textDecoration: "none" }}>
                   <button
                     type="button"
