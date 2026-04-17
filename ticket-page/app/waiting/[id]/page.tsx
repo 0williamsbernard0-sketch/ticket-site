@@ -1,20 +1,23 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 type Stage = "lobby" | "waiting" | "queue" | "ready";
 
-export default function WaitingPage({ params }: { params: Promise<{ id: string }> }) {
+export default function WaitingPage() {
   const router = useRouter();
-  const { id: eventId } = React.use(params);
-  const search = useSearchParams();
+  const params = useParams<{ id: string }>();
+  const eventId = params?.id ?? "";
 
+  const search = useSearchParams();
   const venue = search.get("venue") ?? "Madison Square Garden";
   const city = search.get("city") ?? "New York, NY";
   const date = search.get("date") ?? "NOV 23";
   const day = search.get("day") ?? "Mon";
   const time = search.get("time") ?? "7:00 PM";
+
   const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}`;
 
   const [stage, setStage] = useState<Stage>("lobby");
@@ -23,16 +26,23 @@ export default function WaitingPage({ params }: { params: Promise<{ id: string }
   const [position, setPosition] = useState(Math.floor(Math.random() * 80) + 20);
 
   useEffect(() => {
+    if (!eventId) return;
+
     const joinQueue = async () => {
-      const newQueueId = crypto.randomUUID();
-      setQueueId(newQueueId);
-      await supabase.from("queue").insert({
-        id: newQueueId,
-        event_id: eventId,
-        status: "waiting",
-        created_at: new Date().toISOString(),
-      });
+      try {
+        const newQueueId = crypto.randomUUID();
+        setQueueId(newQueueId);
+        await supabase.from("queue").insert({
+          id: newQueueId,
+          event_id: eventId,
+          status: "waiting",
+          created_at: new Date().toISOString(),
+        });
+      } catch {
+        // keep UI flow even if queue write fails
+      }
     };
+
     joinQueue();
 
     const t1 = setTimeout(() => setStage("waiting"), 2000);
@@ -105,14 +115,12 @@ export default function WaitingPage({ params }: { params: Promise<{ id: string }
 
       <div style={{ margin: "16px 16px 0", background: "white", borderRadius: 4, color: "black", overflow: "hidden" }}>
         <div style={{ background: "#0050d0", height: 6 }} />
-
         {stage === "lobby" && (
           <div style={{ padding: 40, textAlign: "center" }}>
             <div style={{ width: 50, height: 50, borderRadius: "50%", border: "4px solid #0050d0", borderTopColor: "transparent", animation: "spin 1s linear infinite", margin: "0 auto" }} />
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         )}
-
         {stage === "waiting" && (
           <div style={{ padding: 40, textAlign: "center" }}>
             <div style={{ width: 50, height: 50, borderRadius: "50%", border: "4px solid #0050d0", borderTopColor: "transparent", animation: "spin 1s linear infinite", margin: "0 auto" }} />
@@ -120,7 +128,6 @@ export default function WaitingPage({ params }: { params: Promise<{ id: string }
             <p style={{ marginTop: 16, color: "#555" }}>Getting you in line...</p>
           </div>
         )}
-
         {stage === "queue" && (
           <div style={{ padding: 30, textAlign: "center" }}>
             <p style={{ fontSize: 13, color: "#555", margin: "0 0 8px" }}>YOUR POSITION</p>
@@ -131,12 +138,11 @@ export default function WaitingPage({ params }: { params: Promise<{ id: string }
             </div>
           </div>
         )}
-
         {stage === "ready" && (
           <div style={{ padding: 30, textAlign: "center" }}>
-            <p style={{ fontSize: 20, fontWeight: "bold" }}>IT'S YOUR TURN ⓘ</p>
+            <p style={{ fontSize: 20, fontWeight: "bold" }}>IT&apos;S YOUR TURN ⓘ</p>
             <div style={{ fontSize: 40, margin: "12px 0" }}>🎟</div>
-            <p style={{ fontWeight: "bold" }}>LET'S GO!</p>
+            <p style={{ fontWeight: "bold" }}>LET&apos;S GO!</p>
             {queueId && (
               <p style={{ fontSize: 11, color: "#888", marginTop: 12 }}>
                 QUEUE ID: {queueId.toUpperCase()}

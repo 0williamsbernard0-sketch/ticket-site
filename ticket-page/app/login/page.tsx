@@ -1,37 +1,40 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const redirect = searchParams.get("redirect") || "/";
-
   const [email, setEmail] = useState("");
 
+  // Build-safe: don't use useSearchParams here
+  const redirect = useMemo(() => {
+    if (typeof window === "undefined") return "/";
+    const sp = new URLSearchParams(window.location.search);
+    return sp.get("redirect") || "/";
+  }, []);
+
   const handleLogin = () => {
-    if (!email) return alert("Enter email");
+    if (!email.trim()) {
+      alert("Enter email");
+      return;
+    }
 
-    // fake session
-    localStorage.setItem("user", JSON.stringify({ email }));
-
+    localStorage.setItem("user", JSON.stringify({ email: email.trim() }));
     router.push(redirect);
   };
 
   return (
-    <div style={{
-      fontFamily: "Arial",
-      maxWidth: 400,
-      margin: "0 auto",
-      padding: 30
-    }}>
+    <div
+      style={{
+        fontFamily: "Arial",
+        maxWidth: 400,
+        margin: "0 auto",
+        padding: 30,
+      }}
+    >
       <h1>Login</h1>
-
-      <p style={{ color: "gray" }}>
-        You must be signed in to continue
-      </p>
+      <p style={{ color: "gray" }}>You must be signed in to continue</p>
 
       <input
         placeholder="Enter email"
@@ -42,7 +45,7 @@ export default function LoginPage() {
           padding: 12,
           marginTop: 20,
           border: "1px solid #ccc",
-          borderRadius: 6
+          borderRadius: 6,
         }}
       />
 
@@ -55,7 +58,8 @@ export default function LoginPage() {
           background: "black",
           color: "white",
           border: "none",
-          borderRadius: 6
+          borderRadius: 6,
+          cursor: "pointer",
         }}
       >
         Sign In
