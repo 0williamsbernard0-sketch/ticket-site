@@ -1,7 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-
 const ALL_SEATS = [
   { id: "c-r15-std", section: "C", row: 15, type: "Standard Admission", price: 247.8 },
   { id: "208-r17-ap", section: "208", row: 17, type: "Artist Presale", price: null },
