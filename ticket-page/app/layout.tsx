@@ -20,9 +20,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SOMBR - You Are The Reason Tour",
     description: "Get tickets for the SOMBR You Are The Reason Tour at venues across the US.",
+    url: "https://sombr.vercel.app",
+    siteName: "SOMBR Tickets",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://sombr.vercel.app/og-image.png", // 👈 full URL, not /og-image.png
         width: 1200,
         height: 630,
         alt: "SOMBR - You Are The Reason Tour",
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SOMBR - You Are The Reason Tour",
     description: "Get tickets for the SOMBR You Are The Reason Tour at venues across the US.",
-    images: ["/og-image.png"],
+    images: ["https://sombr.vercel.app/og-image.png"], // 👈 same here
   },
 };
 
