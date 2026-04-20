@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { events } from "@/lib/events";
+import Header from "@/components/Header"; // adjust path if needed
 
 export default function Home() {
   return (
@@ -11,66 +12,7 @@ export default function Home() {
         minHeight: "100vh",
       }}
     >
-      <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "14px 20px",
-          background: "#000",
-          color: "#fff",
-          borderBottom: "3px solid #0064d2",
-          gap: 12,
-        }}
-      >
-        <h1
-          style={{
-            margin: 0,
-            fontSize: 22,
-            fontWeight: 800,
-            fontStyle: "italic",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          ticketmaster
-        </h1>
-
-        <input
-          type="search"
-          placeholder="Search events, artists, teams..."
-          aria-label="Search"
-          style={{
-            padding: "10px 14px",
-            borderRadius: 4,
-            border: "1px solid #333",
-            width: "min(420px, 42vw)",
-            maxWidth: "100%",
-            background: "#1a1a1a",
-            color: "#fff",
-            fontSize: 14,
-            outline: "none",
-          }}
-        />
-
-        <Link href="/login" style={{ textDecoration: "none" }}>
-          <button
-            type="button"
-            style={{
-              background: "#fff",
-              color: "#000",
-              padding: "10px 16px",
-              borderRadius: 4,
-              border: "none",
-              fontWeight: 700,
-              fontSize: 14,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Sign In
-          </button>
-        </Link>
-      </header>
+      <Header />
 
       <main style={{ padding: "24px 20px 48px", maxWidth: 960, margin: "0 auto" }}>
         <div style={{ marginBottom: 20 }}>
