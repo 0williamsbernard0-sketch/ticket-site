@@ -61,20 +61,6 @@ export default function EventClient({ event }: { event: Event }) {
         </div>
       </div>
       <div style={{ padding: "20px 18px 28px", maxWidth: 900, margin: "0 auto" }}>
-        <p
-          style={{
-            margin: "0 0 14px",
-            color: "#111",
-            fontSize: 15,
-            fontWeight: 700,
-            lineHeight: 1.5,
-          }}
-        >
-          <span>{event.date}</span>
-          <span style={{ color: "#9ca3af", margin: "0 10px" }}>•</span>
-          <span style={{ color: "#333" }}>{event.location}</span>
-        </p>
-        {/* No pricing on this screen */}
         <Link href={`/event/${event.id}/dates`} style={{ textDecoration: "none" }}>
           <button
             type="button"
