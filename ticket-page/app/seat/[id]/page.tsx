@@ -1,7 +1,9 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+
 const ALL_SEATS = [
+  // ── Existing seats ──
   { id: "c-r15-std", section: "C", row: 15, type: "Standard Admission", price: 247.8 },
   { id: "208-r17-ap", section: "208", row: 17, type: "Artist Presale", price: null },
   { id: "117-r7-plat", section: "117", row: 7, type: "Official Platinum", price: 401.2 },
@@ -83,6 +85,92 @@ const ALL_SEATS = [
   { id: "116-r13-plat2", section: "116", row: 13, type: "Official Platinum", price: 401.2 },
   { id: "b-r11-plat", section: "B", row: 11, type: "Official Platinum", price: 354.0 },
   { id: "c-r19-std", section: "C", row: 19, type: "Standard Admission", price: 247.8 },
+
+  // ── New $63.35 Standard Admission seats ──
+  { id: "207-r19-std63", section: "207", row: 19, type: "Standard Admission", price: 63.35 },
+  { id: "207-r20-std63", section: "207", row: 20, type: "Standard Admission", price: 63.35 },
+  { id: "226-r19-std63", section: "226", row: 19, type: "Standard Admission", price: 63.35 },
+  { id: "226-r20-std63", section: "226", row: 20, type: "Standard Admission", price: 63.35 },
+  { id: "209-r19-std63", section: "209", row: 19, type: "Standard Admission", price: 63.35 },
+  { id: "209-r20-std63", section: "209", row: 20, type: "Standard Admission", price: 63.35 },
+  { id: "210-r18-std63", section: "210", row: 18, type: "Standard Admission", price: 63.35 },
+  { id: "211-r16-std63", section: "211", row: 16, type: "Standard Admission", price: 63.35 },
+  { id: "211-r17-std63", section: "211", row: 17, type: "Standard Admission", price: 63.35 },
+  { id: "211-r18-std63", section: "211", row: 18, type: "Standard Admission", price: 63.35 },
+  { id: "222-r16-std63", section: "222", row: 16, type: "Standard Admission", price: 63.35 },
+  { id: "222-r17-std63", section: "222", row: 17, type: "Standard Admission", price: 63.35 },
+
+  // ── New $75.70 Standard Admission seats ──
+  { id: "208-r16-std75", section: "208", row: 16, type: "Standard Admission", price: 75.70 },
+  { id: "208-r17-std75", section: "208", row: 17, type: "Standard Admission", price: 75.70 },
+  { id: "208-r18-std75", section: "208", row: 18, type: "Standard Admission", price: 75.70 },
+  { id: "207-r16-std75", section: "207", row: 16, type: "Standard Admission", price: 75.70 },
+  { id: "207-r17-std75", section: "207", row: 17, type: "Standard Admission", price: 75.70 },
+  { id: "207-r18-std75", section: "207", row: 18, type: "Standard Admission", price: 75.70 },
+  { id: "226-r16-std75", section: "226", row: 16, type: "Standard Admission", price: 75.70 },
+  { id: "226-r17-std75", section: "226", row: 17, type: "Standard Admission", price: 75.70 },
+  { id: "209-r16-std75", section: "209", row: 16, type: "Standard Admission", price: 75.70 },
+  { id: "209-r17-std75", section: "209", row: 17, type: "Standard Admission", price: 75.70 },
+  { id: "224-r16-std75", section: "224", row: 16, type: "Standard Admission", price: 75.70 },
+  { id: "210-r13-std75", section: "210", row: 13, type: "Standard Admission", price: 75.70 },
+  { id: "210-r14-std75", section: "210", row: 14, type: "Standard Admission", price: 75.70 },
+  { id: "210-r15-std75", section: "210", row: 15, type: "Standard Admission", price: 75.70 },
+  { id: "223-r16-std75", section: "223", row: 16, type: "Standard Admission", price: 75.70 },
+  { id: "223-r17-std75", section: "223", row: 17, type: "Standard Admission", price: 75.70 },
+  { id: "211-r13-std75", section: "211", row: 13, type: "Standard Admission", price: 75.70 },
+  { id: "211-r14-std75", section: "211", row: 14, type: "Standard Admission", price: 75.70 },
+  { id: "211-r15-std75", section: "211", row: 15, type: "Standard Admission", price: 75.70 },
+  { id: "222-r13-std75", section: "222", row: 13, type: "Standard Admission", price: 75.70 },
+  { id: "222-r14-std75", section: "222", row: 14, type: "Standard Admission", price: 75.70 },
+  { id: "222-r15-std75", section: "222", row: 15, type: "Standard Admission", price: 75.70 },
+  { id: "221-r12-std75", section: "221", row: 12, type: "Standard Admission", price: 75.70 },
+  { id: "212-r12-std75", section: "212", row: 12, type: "Standard Admission", price: 75.70 },
+  { id: "213-r11-std75", section: "213", row: 11, type: "Standard Admission", price: 75.70 },
+  { id: "214-r11-std75", section: "214", row: 11, type: "Standard Admission", price: 75.70 },
+  { id: "219-r10-std75", section: "219", row: 10, type: "Standard Admission", price: 75.70 },
+  { id: "219-r11-std75", section: "219", row: 11, type: "Standard Admission", price: 75.70 },
+
+  // ── New $88.05 Standard Admission seats ──
+  { id: "208-r13-std88", section: "208", row: 13, type: "Standard Admission", price: 88.05 },
+  { id: "208-r14-std88", section: "208", row: 14, type: "Standard Admission", price: 88.05 },
+  { id: "208-r15-std88", section: "208", row: 15, type: "Standard Admission", price: 88.05 },
+  { id: "207-r13-std88", section: "207", row: 13, type: "Standard Admission", price: 88.05 },
+  { id: "207-r14-std88", section: "207", row: 14, type: "Standard Admission", price: 88.05 },
+  { id: "207-r15-std88", section: "207", row: 15, type: "Standard Admission", price: 88.05 },
+  { id: "209-r13-std88", section: "209", row: 13, type: "Standard Admission", price: 88.05 },
+  { id: "209-r14-std88", section: "209", row: 14, type: "Standard Admission", price: 88.05 },
+  { id: "209-r15-std88", section: "209", row: 15, type: "Standard Admission", price: 88.05 },
+  { id: "224-r13-std88", section: "224", row: 13, type: "Standard Admission", price: 88.05 },
+  { id: "224-r14-std88", section: "224", row: 14, type: "Standard Admission", price: 88.05 },
+  { id: "224-r15-std88", section: "224", row: 15, type: "Standard Admission", price: 88.05 },
+  { id: "210-r8-std88", section: "210", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "210-r9-std88", section: "210", row: 9, type: "Standard Admission", price: 88.05 },
+  { id: "210-r10-std88", section: "210", row: 10, type: "Standard Admission", price: 88.05 },
+  { id: "210-r11-std88", section: "210", row: 11, type: "Standard Admission", price: 88.05 },
+  { id: "210-r12-std88", section: "210", row: 12, type: "Standard Admission", price: 88.05 },
+  { id: "223-r13-std88", section: "223", row: 13, type: "Standard Admission", price: 88.05 },
+  { id: "223-r14-std88", section: "223", row: 14, type: "Standard Admission", price: 88.05 },
+  { id: "223-r15-std88", section: "223", row: 15, type: "Standard Admission", price: 88.05 },
+  { id: "222-r8-std88", section: "222", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "222-r9-std88", section: "222", row: 9, type: "Standard Admission", price: 88.05 },
+  { id: "222-r10-std88", section: "222", row: 10, type: "Standard Admission", price: 88.05 },
+  { id: "222-r11-std88", section: "222", row: 11, type: "Standard Admission", price: 88.05 },
+  { id: "222-r12-std88", section: "222", row: 12, type: "Standard Admission", price: 88.05 },
+  { id: "211-r8-std88", section: "211", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "211-r9-std88", section: "211", row: 9, type: "Standard Admission", price: 88.05 },
+  { id: "211-r10-std88", section: "211", row: 10, type: "Standard Admission", price: 88.05 },
+  { id: "211-r11-std88", section: "211", row: 11, type: "Standard Admission", price: 88.05 },
+  { id: "211-r12-std88", section: "211", row: 12, type: "Standard Admission", price: 88.05 },
+  { id: "221-r8-std88", section: "221", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "221-r9-std88", section: "221", row: 9, type: "Standard Admission", price: 88.05 },
+  { id: "221-r10-std88", section: "221", row: 10, type: "Standard Admission", price: 88.05 },
+  { id: "221-r11-std88", section: "221", row: 11, type: "Standard Admission", price: 88.05 },
+  { id: "212-r8-std88", section: "212", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "220-r8-std88", section: "220", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "220-r9-std88", section: "220", row: 9, type: "Standard Admission", price: 88.05 },
+  { id: "220-r10-std88", section: "220", row: 10, type: "Standard Admission", price: 88.05 },
+  { id: "219-r8-std88", section: "219", row: 8, type: "Standard Admission", price: 88.05 },
+  { id: "219-r9-std88", section: "219", row: 9, type: "Standard Admission", price: 88.05 },
 ] as const;
 
 type Seat = (typeof ALL_SEATS)[number];
@@ -221,132 +309,57 @@ export default function SeatPage() {
           ⇄ Switch to Map
         </button>
         <svg width="340" height="340" viewBox="0 0 500 500" style={{ display: "block", margin: "0 auto" }}>
-  {/* Outer ring - upper sections gray */}
-  <ellipse cx="250" cy="260" rx="235" ry="225" fill="#d1d5db" stroke="#9ca3af" strokeWidth="1.5" />
-  {/* Middle ring - lower bowl light blue */}
-  <ellipse cx="250" cy="260" rx="185" ry="175" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
-  {/* Inner ring - lower bowl dark blue */}
-  <ellipse cx="250" cy="260" rx="140" ry="130" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
-  {/* Floor oval */}
-  <ellipse cx="250" cy="270" rx="90" ry="100" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
-
-  {/* STAGE */}
-  <rect x="205" y="115" width="90" height="50" rx="4" fill="#111827" />
-  <text x="250" y="146" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">STAGE</text>
-  {/* Stage pole */}
-  <rect x="246" y="165" width="8" height="28" fill="#374151" />
-
-  {/* PIT sections */}
-  <rect x="185" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
-  <text x="211" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT LEFT</text>
-  <rect x="263" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
-  <text x="289" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT RIGHT</text>
-
-  {/* Floor sections row 1: A B C D E F */}
-  {["A","B","C","D","E","F"].map((s, i) => (
-    <g key={s}>
-      <rect x={172 + i*26} y={233} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-      <text x={184 + i*26} y={248} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
-    </g>
-  ))}
-
-  {/* Floor sections row 2: G H J K L M */}
-  {["G","H","J","K","L","M"].map((s, i) => (
-    <g key={s}>
-      <rect x={172 + i*26} y={259} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-      <text x={184 + i*26} y={274} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
-    </g>
-  ))}
-
-  {/* Floor sections row 3: N P */}
-  <rect x="210" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-  <text x="222" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">N</text>
-  <rect x="266" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-  <text x="278" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">P</text>
-
-  {/* B STAGE bottom */}
-  <rect x="234" y="312" width="32" height="20" rx="3" fill="#111827" />
-  <text x="250" y="326" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">B STAGE</text>
-
-  {/* Bottom floor numbers 1 2 3 */}
-  {["1","2","3"].map((s, i) => (
-    <g key={s}>
-      <rect x={210 + i*27} y={335} width="22" height="18" rx="2" fill="#3b82f6" stroke="#2563eb" strokeWidth="0.8" />
-      <text x={221 + i*27} y={348} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
-    </g>
-  ))}
-
-  {/* Lower bowl section numbers - bottom arc 101-136 */}
-  {[
-    {n:"136",x:196,y:373},{n:"135",x:211,y:382},{n:"101",x:227,y:388},
-    {n:"102",x:245,y:392},{n:"103",x:263,y:388},{n:"104",x:279,y:382},{n:"105",x:294,y:373}
-  ].map(s => (
-    <g key={s.n}>
-      <text x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-    </g>
-  ))}
-
-  {/* Lower bowl - left side 125-134 */}
-  {[
-    {n:"134",x:178,y:358},{n:"133",x:167,y:340},{n:"132",x:160,y:320},
-    {n:"131",x:156,y:298},{n:"130",x:157,y:276},{n:"129",x:161,y:255},
-    {n:"128",x:168,y:236},{n:"127",x:177,y:218},{n:"126",x:188,y:202},
-    {n:"125",x:200,y:188}
-  ].map(s => (
-    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-  ))}
-
-  {/* Lower bowl - right side 106-116 */}
-  {[
-    {n:"106",x:310,y:358},{n:"107",x:322,y:340},{n:"108",x:329,y:320},
-    {n:"109",x:333,y:298},{n:"110",x:332,y:276},{n:"111",x:328,y:255},
-    {n:"112",x:321,y:236},{n:"113",x:312,y:218},{n:"114",x:301,y:202},
-    {n:"115",x:289,y:188}
-  ].map(s => (
-    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-  ))}
-
-  {/* Top lower bowl 116-124 */}
-  {[
-    {n:"116",x:278,y:178},{n:"117",x:264,y:172},{n:"118",x:250,y:170},
-    {n:"119",x:236,y:172},{n:"120",x:222,y:178}
-  ].map(s => (
-    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-  ))}
-
-  {/* Upper sections - outer ring labels */}
-  {[
-    {n:"235",x:210,y:468},{n:"236",x:250,y:474},{n:"201",x:290,y:468},
-    {n:"234",x:178,y:450},{n:"202",x:322,y:450},
-    {n:"233",x:155,y:428},{n:"203",x:345,y:428},
-    {n:"232",x:137,y:403},{n:"204",x:363,y:403},
-    {n:"231",x:125,y:374},{n:"205",x:375,y:374},
-    {n:"230",x:118,y:343},{n:"206",x:382,y:343},
-    {n:"229",x:116,y:310},{n:"207",x:384,y:310},
-    {n:"228",x:120,y:277},{n:"208",x:380,y:277},
-    {n:"227",x:129,y:246},{n:"209",x:371,y:246},
-    {n:"226",x:142,y:218},{n:"210",x:358,y:218},
-    {n:"225",x:159,y:193},{n:"211",x:341,y:193},
-    {n:"224",x:180,y:173},{n:"212",x:320,y:173},
-    {n:"223",x:204,y:158},{n:"213",x:296,y:158},
-    {n:"222",x:228,y:150},{n:"214",x:272,y:150},
-    {n:"221",x:250,y:147}
-  ].map(s => (
-    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{s.n}</text>
-  ))}
-
-  {/* Box section labels */}
-  {[
-    {n:"BOX 224",x:168,y:183},{n:"BOX 212",x:332,y:183},
-    {n:"BOX 226",x:138,y:230},{n:"BOX 210",x:362,y:230},
-    {n:"BOX 228",x:124,y:285},{n:"BOX 208",x:376,y:285},
-    {n:"BOX 230",x:124,y:338},{n:"BOX 206",x:376,y:338},
-    {n:"BOX 232",x:132,y:390},{n:"BOX 204",x:368,y:390},
-    {n:"BOX 236",x:250,y:455}
-  ].map(s => (
-    <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#6b7280" fontSize="6">{s.n}</text>
-  ))}
-</svg>
+          <ellipse cx="250" cy="260" rx="235" ry="225" fill="#d1d5db" stroke="#9ca3af" strokeWidth="1.5" />
+          <ellipse cx="250" cy="260" rx="185" ry="175" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
+          <ellipse cx="250" cy="260" rx="140" ry="130" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
+          <ellipse cx="250" cy="270" rx="90" ry="100" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
+          <rect x="205" y="115" width="90" height="50" rx="4" fill="#111827" />
+          <text x="250" y="146" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">STAGE</text>
+          <rect x="246" y="165" width="8" height="28" fill="#374151" />
+          <rect x="185" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
+          <text x="211" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT LEFT</text>
+          <rect x="263" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
+          <text x="289" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT RIGHT</text>
+          {["A","B","C","D","E","F"].map((s, i) => (
+            <g key={s}>
+              <rect x={172 + i*26} y={233} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+              <text x={184 + i*26} y={248} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+            </g>
+          ))}
+          {["G","H","J","K","L","M"].map((s, i) => (
+            <g key={s}>
+              <rect x={172 + i*26} y={259} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+              <text x={184 + i*26} y={274} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+            </g>
+          ))}
+          <rect x="210" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+          <text x="222" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">N</text>
+          <rect x="266" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+          <text x="278" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">P</text>
+          <rect x="234" y="312" width="32" height="20" rx="3" fill="#111827" />
+          <text x="250" y="326" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">B STAGE</text>
+          {["1","2","3"].map((s, i) => (
+            <g key={s}>
+              <rect x={210 + i*27} y={335} width="22" height="18" rx="2" fill="#3b82f6" stroke="#2563eb" strokeWidth="0.8" />
+              <text x={221 + i*27} y={348} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+            </g>
+          ))}
+          {[{n:"136",x:196,y:373},{n:"135",x:211,y:382},{n:"101",x:227,y:388},{n:"102",x:245,y:392},{n:"103",x:263,y:388},{n:"104",x:279,y:382},{n:"105",x:294,y:373}].map(s => (
+            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+          ))}
+          {[{n:"134",x:178,y:358},{n:"133",x:167,y:340},{n:"132",x:160,y:320},{n:"131",x:156,y:298},{n:"130",x:157,y:276},{n:"129",x:161,y:255},{n:"128",x:168,y:236},{n:"127",x:177,y:218},{n:"126",x:188,y:202},{n:"125",x:200,y:188}].map(s => (
+            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+          ))}
+          {[{n:"106",x:310,y:358},{n:"107",x:322,y:340},{n:"108",x:329,y:320},{n:"109",x:333,y:298},{n:"110",x:332,y:276},{n:"111",x:328,y:255},{n:"112",x:321,y:236},{n:"113",x:312,y:218},{n:"114",x:301,y:202},{n:"115",x:289,y:188}].map(s => (
+            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+          ))}
+          {[{n:"116",x:278,y:178},{n:"117",x:264,y:172},{n:"118",x:250,y:170},{n:"119",x:236,y:172},{n:"120",x:222,y:178}].map(s => (
+            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+          ))}
+          {[{n:"235",x:210,y:468},{n:"236",x:250,y:474},{n:"201",x:290,y:468},{n:"234",x:178,y:450},{n:"202",x:322,y:450},{n:"233",x:155,y:428},{n:"203",x:345,y:428},{n:"232",x:137,y:403},{n:"204",x:363,y:403},{n:"231",x:125,y:374},{n:"205",x:375,y:374},{n:"230",x:118,y:343},{n:"206",x:382,y:343},{n:"229",x:116,y:310},{n:"207",x:384,y:310},{n:"228",x:120,y:277},{n:"208",x:380,y:277},{n:"227",x:129,y:246},{n:"209",x:371,y:246},{n:"226",x:142,y:218},{n:"210",x:358,y:218},{n:"225",x:159,y:193},{n:"211",x:341,y:193},{n:"224",x:180,y:173},{n:"212",x:320,y:173},{n:"223",x:204,y:158},{n:"213",x:296,y:158},{n:"222",x:228,y:150},{n:"214",x:272,y:150},{n:"221",x:250,y:147}].map(s => (
+            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{s.n}</text>
+          ))}
+        </svg>
       </div>
 
       <div style={{ padding: "12px 16px", display: "flex", gap: 10, background: "#f3f4f6" }}>
