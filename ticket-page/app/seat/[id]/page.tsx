@@ -2,8 +2,9 @@
 import React, { useMemo, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 
-const ALL_SEATS = [
-  // ── Existing seats ──
+// ─── SOMBR SEATS ─────────────────────────────────────────────────────────────
+const SOMBR_SEATS = [
+    // ── Existing seats ──
   { id: "c-r15-std", section: "C", row: 15, type: "Standard Admission", price: 247.8 },
   { id: "208-r17-ap", section: "208", row: 17, type: "Artist Presale", price: null },
   { id: "117-r7-plat", section: "117", row: 7, type: "Official Platinum", price: 401.2 },
@@ -173,8 +174,131 @@ const ALL_SEATS = [
   { id: "219-r9-std88", section: "219", row: 9, type: "Standard Admission", price: 88.05 },
 ] as const;
 
-type Seat = (typeof ALL_SEATS)[number];
-type FilterType = "Standard Admission" | "Artist Presale" | "HOMEWRECKER VIP PACKAGE" | "Official Platinum";
+// ─── BRUNO MARS SEATS ─────────────────────────────────────────────────────────
+const BRUNO_MARS_SEATS = [
+  // Upper Level
+  { id: "bm-426-r21", section: "426", row: 21, type: "Resale - Upper Level", price: 213.01 },
+  { id: "bm-403-r18", section: "403", row: 18, type: "Resale - Upper Level", price: 215.39 },
+  { id: "bm-425-r18", section: "425", row: 18, type: "Resale - Upper Level", price: 220.15 },
+  { id: "bm-425-r17", section: "425", row: 17, type: "Resale - Upper Level", price: 223.72 },
+  { id: "bm-428-r6", section: "428", row: 6, type: "Resale - Upper Level", price: 226.10 },
+  { id: "bm-402-r13", section: "402", row: 13, type: "Resale - Upper Level", price: 232.05 },
+  { id: "bm-403-r1", section: "403", row: 1, type: "Resale - Upper Level", price: 232.05 },
+  { id: "bm-426-r8", section: "426", row: 8, type: "Resale - Upper Level", price: 246.33 },
+  { id: "bm-402-r2", section: "402", row: 2, type: "Resale - Upper Level", price: 245.14 },
+  { id: "bm-426-r10", section: "426", row: 10, type: "Resale - Upper Level", price: 251.09 },
+  { id: "bm-402-r9", section: "402", row: 9, type: "Resale - Upper Level", price: 258.23 },
+  { id: "bm-426-r3", section: "426", row: 3, type: "Resale - Upper Level", price: 268.94 },
+  { id: "bm-426-r1", section: "426", row: 1, type: "Resale - Upper Level", price: 302.26 },
+  { id: "bm-426-r18", section: "426", row: 18, type: "Resale - Upper Level", price: 305.83 },
+  { id: "bm-426-r14", section: "426", row: 14, type: "Resale - Upper Level", price: 312.97 },
+  { id: "bm-429-r15", section: "429", row: 15, type: "Resale - Upper Level", price: 304.64 },
+  { id: "bm-430-r20", section: "430", row: 20, type: "Resale - Upper Level", price: 324.87 },
+  { id: "bm-432-r3", section: "432", row: 3, type: "Resale - Upper Level", price: 362.95 },
+  { id: "bm-451-r11", section: "451", row: 11, type: "Resale - Upper Level", price: 303.45 },
+  { id: "bm-453-r17", section: "453", row: 17, type: "Resale - Upper Level", price: 280.84 },
+  // Club Level
+  { id: "bm-319-r18", section: "319", row: 18, type: "Resale - Club Level", price: 272.51 },
+  { id: "bm-319-r17", section: "319", row: 17, type: "Resale - Club Level", price: 274.89 },
+  { id: "bm-303-r16", section: "303", row: 16, type: "Resale - Club Level", price: 276.08 },
+  { id: "bm-303-r15", section: "303", row: 15, type: "Resale - Club Level", price: 277.27 },
+  { id: "bm-319-r14", section: "319", row: 14, type: "Resale - Club Level", price: 282.03 },
+  { id: "bm-303-r13", section: "303", row: 13, type: "Resale - Club Level", price: 286.79 },
+  { id: "bm-401-r16", section: "401", row: 16, type: "Resale - Club Level", price: 289.17 },
+  { id: "bm-303-r11", section: "303", row: 11, type: "Resale - Club Level", price: 328.44 },
+  { id: "bm-219-r8", section: "219", row: 8, type: "Resale - Club Level", price: 337.96 },
+  { id: "bm-326-r17", section: "326", row: 17, type: "Resale - Club Level", price: 360.57 },
+  { id: "bm-320-r19", section: "320", row: 19, type: "Resale - Club Level", price: 367.71 },
+  { id: "bm-324-r8", section: "324", row: 8, type: "Resale - Club Level", price: 370.09 },
+  { id: "bm-319-r11", section: "319", row: 11, type: "Resale - Club Level", price: 379.61 },
+  { id: "bm-325-r6", section: "325", row: 6, type: "Resale - Club Level", price: 399.84 },
+  { id: "bm-321-r17", section: "321", row: 17, type: "Resale - Club Level", price: 408.17 },
+  { id: "bm-329-r9", section: "329", row: 9, type: "Resale - Club Level", price: 414.12 },
+  { id: "bm-334-r9", section: "334", row: 9, type: "Resale - Club Level", price: 414.12 },
+  { id: "bm-338-r15", section: "338", row: 15, type: "Resale - Club Level", price: 464.10 },
+  { id: "bm-226-r11", section: "226", row: 11, type: "Resale - Club Level", price: 434.35 },
+  { id: "bm-228-r2", section: "228", row: 2, type: "Resale - Club Level", price: 418.88 },
+  // Lower Level
+  { id: "bm-136-r20", section: "136", row: 20, type: "Resale - Lower Level", price: 380.80 },
+  { id: "bm-127-r16", section: "127", row: 16, type: "Resale - Lower Level", price: 395.08 },
+  { id: "bm-135-r14", section: "135", row: 14, type: "Resale - Lower Level", price: 399.84 },
+  { id: "bm-134-r27", section: "134", row: 27, type: "Resale - Lower Level", price: 402.22 },
+  { id: "bm-127-r13", section: "127", row: 13, type: "Resale - Lower Level", price: 404.60 },
+  { id: "bm-135-r13", section: "135", row: 13, type: "Resale - Lower Level", price: 405.79 },
+  { id: "bm-127-r10", section: "127", row: 10, type: "Resale - Lower Level", price: 409.36 },
+  { id: "bm-134-r26", section: "134", row: 26, type: "Resale - Lower Level", price: 412.93 },
+  { id: "bm-130-r27", section: "130", row: 27, type: "Resale - Lower Level", price: 416.50 },
+  { id: "bm-135-r9", section: "135", row: 9, type: "Resale - Lower Level", price: 418.88 },
+  { id: "bm-124-r22", section: "124", row: 22, type: "Resale - Lower Level", price: 420.07 },
+  { id: "bm-135-r10", section: "135", row: 10, type: "Resale - Lower Level", price: 421.26 },
+  { id: "bm-134-r21", section: "134", row: 21, type: "Resale - Lower Level", price: 423.64 },
+  { id: "bm-135-r15", section: "135", row: 15, type: "Resale - Lower Level", price: 424.83 },
+  { id: "bm-127-r8", section: "127", row: 8, type: "Resale - Lower Level", price: 427.21 },
+  { id: "bm-124-r24", section: "124", row: 24, type: "Resale - Lower Level", price: 428.40 },
+  { id: "bm-126-r20", section: "126", row: 20, type: "Resale - Lower Level", price: 433.16 },
+  { id: "bm-130-r11", section: "130", row: 11, type: "Resale - Lower Level", price: 439.11 },
+  { id: "bm-124-r20", section: "124", row: 20, type: "Resale - Lower Level", price: 446.25 },
+  { id: "bm-126-r19", section: "126", row: 19, type: "Resale - Lower Level", price: 452.20 },
+  { id: "bm-138-r7", section: "138", row: 7, type: "Resale - Lower Level", price: 455.77 },
+  { id: "bm-127-r6", section: "127", row: 6, type: "Resale - Lower Level", price: 459.34 },
+  { id: "bm-135-r5", section: "135", row: 5, type: "Resale - Lower Level", price: 461.72 },
+  { id: "bm-126-r5", section: "126", row: 5, type: "Resale - Lower Level", price: 464.10 },
+  { id: "bm-126-r2", section: "126", row: 2, type: "Resale - Lower Level", price: 466.48 },
+  { id: "bm-138-r2", section: "138", row: 2, type: "Resale - Lower Level", price: 490.28 },
+  { id: "bm-126-r1", section: "126", row: 1, type: "Resale - Lower Level", price: 493.85 },
+  { id: "bm-138-r1", section: "138", row: 1, type: "Resale - Lower Level", price: 534.31 },
+  { id: "bm-134-r10", section: "134", row: 10, type: "Resale - Lower Level", price: 535.50 },
+  { id: "bm-119-r26", section: "119", row: 26, type: "Resale - Lower Level", price: 545.02 },
+  { id: "bm-126-r13", section: "126", row: 13, type: "Resale - Lower Level", price: 584.29 },
+  { id: "bm-123-r12", section: "123", row: 12, type: "Resale - Lower Level", price: 608.09 },
+  { id: "bm-134-r8", section: "134", row: 8, type: "Resale - Lower Level", price: 621.18 },
+  { id: "bm-126-r6", section: "126", row: 6, type: "Resale - Lower Level", price: 623.56 },
+  { id: "bm-102-r9", section: "102", row: 9, type: "Resale - Lower Level", price: 729.47 },
+  { id: "bm-101-r12", section: "101", row: 12, type: "Resale - Lower Level", price: 785.40 },
+  { id: "bm-120-r5", section: "120", row: 5, type: "Resale - Lower Level", price: 850.85 },
+  { id: "bm-121-r4", section: "121", row: 4, type: "Resale - Lower Level", price: 896.07 },
+  // Floor / Field
+  { id: "bm-fielda10-r19", section: "FIELD A10", row: 19, type: "Resale - Floor/Field", price: 672.35 },
+  { id: "bm-a9-r6", section: "A9", row: 6, type: "Resale - Floor/Field", price: 706.86 },
+  { id: "bm-a7-r15", section: "A7", row: 15, type: "Resale - Floor/Field", price: 724.71 },
+  { id: "bm-floora2-r6", section: "FLOOR A2", row: 6, type: "Resale - Floor/Field", price: 728.28 },
+  { id: "bm-floora4-r6", section: "FLOOR A4", row: 6, type: "Resale - Floor/Field", price: 769.93 },
+  { id: "bm-a2-r29", section: "A2", row: 29, type: "Resale - Floor/Field", price: 785.40 },
+  { id: "bm-a14-r1", section: "A14", row: 1, type: "Resale - Floor/Field", price: 786.59 },
+  { id: "bm-a8-r5", section: "A8", row: 5, type: "Resale - Floor/Field", price: 850.85 },
+  { id: "bm-a4-r29", section: "A4", row: 29, type: "Resale - Floor/Field", price: 863.94 },
+  { id: "bm-a1-r5", section: "A1", row: 5, type: "Resale - Floor/Field", price: 896.07 },
+  { id: "bm-a2-r14", section: "A2", row: 14, type: "Resale - Floor/Field", price: 896.07 },
+  { id: "bm-a4-r11", section: "A4", row: 11, type: "Resale - Floor/Field", price: 896.07 },
+  { id: "bm-a5-r4", section: "A5", row: 4, type: "Resale - Floor/Field", price: 896.07 },
+  { id: "bm-119-r23", section: "119", row: 23, type: "Resale - Floor/Field", price: 997.22 },
+  { id: "bm-floora2-r20", section: "FLOOR A2", row: 20, type: "Resale - Floor/Field", price: 1019.83 },
+  { id: "bm-floora4-r19", section: "FLOOR A4", row: 19, type: "Resale - Floor/Field", price: 1032.92 },
+  { id: "bm-a3-r29", section: "A3", row: 29, type: "Resale - Floor/Field", price: 1106.70 },
+  { id: "bm-a3-r23", section: "A3", row: 23, type: "Resale - Floor/Field", price: 1204.28 },
+  { id: "bm-a8-r1", section: "A8", row: 1, type: "Resale - Floor/Field", price: 1228.08 },
+  { id: "bm-floora1-r25", section: "FLOOR A1", row: 25, type: "Resale - Floor/Field", price: 1284.01 },
+  { id: "bm-119-r1", section: "119", row: 1, type: "Resale - Floor/Field", price: 1447.04 },
+  { id: "bm-floora1-r1", section: "FLOOR A1", row: 1, type: "Resale - Floor/Field", price: 1483.93 },
+  { id: "bm-floora2-r30", section: "FLOOR A2", row: 30, type: "Resale - Floor/Field", price: 1506.54 },
+  { id: "bm-floora2-r22", section: "FLOOR A2", row: 22, type: "Resale - Floor/Field", price: 1580.32 },
+  { id: "bm-a3-r20", section: "A3", row: 20, type: "Resale - Floor/Field", price: 1683.85 },
+  { id: "bm-a2-r1", section: "A2", row: 1, type: "Resale - Floor/Field", price: 1717.17 },
+  { id: "bm-floora3-r30", section: "FLOOR A3", row: 30, type: "Resale - Floor/Field", price: 1964.69 },
+  { id: "bm-floora3-r9", section: "FLOOR A3", row: 9, type: "Resale - Floor/Field", price: 1970.64 },
+] as const;
+
+// ─── TYPES ────────────────────────────────────────────────────────────────────
+type SombrSeat = (typeof SOMBR_SEATS)[number];
+type BrunoSeat = (typeof BRUNO_MARS_SEATS)[number];
+type AnySeat = SombrSeat | BrunoSeat;
+
+type SombrFilter = "Standard Admission" | "Artist Presale" | "HOMEWRECKER VIP PACKAGE" | "Official Platinum";
+type BrunoFilter = "Resale - Upper Level" | "Resale - Club Level" | "Resale - Lower Level" | "Resale - Floor/Field";
+type AnyFilter = SombrFilter | BrunoFilter;
+
+const SOMBR_FILTERS: SombrFilter[] = ["Standard Admission", "Artist Presale", "HOMEWRECKER VIP PACKAGE", "Official Platinum"];
+const BRUNO_FILTERS: BrunoFilter[] = ["Resale - Upper Level", "Resale - Club Level", "Resale - Lower Level", "Resale - Floor/Field"];
 
 const VALID_PASSCODE = "POTENTIAL";
 const TM_BLUE = "#0064d2";
@@ -182,22 +306,179 @@ const TM_BLACK = "#0b0b0b";
 const TM_TEXT = "#0f172a";
 const TM_MUTED = "#4b5563";
 
-function rand50to160() {
-  return 50 + Math.floor(Math.random() * 111);
+function rand50to160() { return 50 + Math.floor(Math.random() * 111); }
+
+// ─── ARENA MAPS ───────────────────────────────────────────────────────────────
+function SombrArenaMap() {
+  return (
+    <svg width="300" height="300" viewBox="0 0 500 500" style={{ display: "block", margin: "0 auto" }}>
+      <ellipse cx="250" cy="260" rx="235" ry="225" fill="#d1d5db" stroke="#9ca3af" strokeWidth="1.5" />
+      <ellipse cx="250" cy="260" rx="185" ry="175" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
+      <ellipse cx="250" cy="260" rx="140" ry="130" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
+      <ellipse cx="250" cy="270" rx="90" ry="100" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
+      <rect x="205" y="115" width="90" height="50" rx="4" fill="#111827" />
+      <text x="250" y="146" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">STAGE</text>
+      <rect x="246" y="165" width="8" height="28" fill="#374151" />
+      <rect x="185" y="193" width="52" height="35" rx="3" fill="#2563eb" />
+      <text x="211" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT LEFT</text>
+      <rect x="263" y="193" width="52" height="35" rx="3" fill="#2563eb" />
+      <text x="289" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT RIGHT</text>
+      {["A","B","C","D","E","F"].map((s, i) => (
+        <g key={s}>
+          <rect x={172 + i*26} y={233} width="24" height="22" rx="2" fill="#1d4ed8" />
+          <text x={184 + i*26} y={248} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+        </g>
+      ))}
+      {["G","H","J","K","L","M"].map((s, i) => (
+        <g key={s}>
+          <rect x={172 + i*26} y={259} width="24" height="22" rx="2" fill="#1d4ed8" />
+          <text x={184 + i*26} y={274} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
+        </g>
+      ))}
+      <rect x="234" y="312" width="32" height="20" rx="3" fill="#111827" />
+      <text x="250" y="326" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">B STAGE</text>
+      {[
+        {n:"201",x:290,y:468},{n:"202",x:322,y:450},{n:"203",x:345,y:428},
+        {n:"204",x:363,y:403},{n:"205",x:375,y:374},{n:"206",x:382,y:343},
+        {n:"207",x:384,y:310},{n:"208",x:380,y:277},{n:"209",x:371,y:246},
+        {n:"210",x:358,y:218},{n:"211",x:341,y:193},{n:"212",x:320,y:173},
+        {n:"213",x:296,y:158},{n:"214",x:272,y:150},{n:"221",x:250,y:147},
+        {n:"222",x:228,y:150},{n:"223",x:204,y:158},{n:"224",x:180,y:173},
+        {n:"225",x:159,y:193},{n:"226",x:142,y:218},{n:"227",x:129,y:246},
+        {n:"228",x:120,y:277},{n:"229",x:116,y:310},{n:"230",x:118,y:343},
+        {n:"231",x:125,y:374},{n:"232",x:137,y:403},{n:"233",x:155,y:428},
+        {n:"234",x:178,y:450},{n:"235",x:210,y:468},{n:"236",x:250,y:474},
+      ].map(s => (
+        <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{s.n}</text>
+      ))}
+      {[
+        {n:"101",x:227,y:388},{n:"102",x:245,y:392},{n:"103",x:263,y:388},
+        {n:"104",x:279,y:382},{n:"105",x:294,y:373},{n:"106",x:310,y:358},
+        {n:"107",x:322,y:340},{n:"108",x:329,y:320},{n:"109",x:333,y:298},
+        {n:"110",x:332,y:276},{n:"111",x:328,y:255},{n:"112",x:321,y:236},
+        {n:"113",x:312,y:218},{n:"114",x:301,y:202},{n:"115",x:289,y:188},
+        {n:"116",x:278,y:178},{n:"117",x:264,y:172},{n:"118",x:250,y:170},
+        {n:"119",x:236,y:172},{n:"120",x:222,y:178},{n:"125",x:200,y:188},
+        {n:"126",x:188,y:202},{n:"127",x:177,y:218},{n:"128",x:168,y:236},
+        {n:"129",x:161,y:255},{n:"130",x:157,y:276},{n:"131",x:156,y:298},
+        {n:"132",x:160,y:320},{n:"133",x:167,y:340},{n:"134",x:178,y:358},
+        {n:"135",x:196,y:373},{n:"136",x:211,y:382},
+      ].map(s => (
+        <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+      ))}
+    </svg>
+  );
 }
 
+function BrunoArenaMap() {
+  return (
+    <svg width="340" height="220" viewBox="0 0 680 440" style={{ display: "block", margin: "0 auto" }}>
+      {/* Outer stadium - gray upper sections */}
+      <rect x="20" y="20" width="640" height="400" rx="80" fill="#d1d5db" stroke="#9ca3af" strokeWidth="2" />
+      {/* Club level - light blue */}
+      <rect x="60" y="60" width="560" height="320" rx="60" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
+      {/* Lower level - blue */}
+      <rect x="110" y="100" width="460" height="240" rx="40" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
+      {/* Field - light */}
+      <rect x="160" y="130" width="360" height="180" rx="20" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
+
+      {/* STAGE left side */}
+      <rect x="30" y="170" width="80" height="100" rx="6" fill="#111827" />
+      <text x="70" y="225" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">STAGE</text>
+
+      {/* Floor sections A1-A14 */}
+      {[
+        {n:"A1",x:175,y:145},{n:"A2",x:215,y:145},{n:"A3",x:255,y:145},{n:"A4",x:295,y:145},
+        {n:"A5",x:335,y:145},{n:"A6",x:375,y:145},{n:"A7",x:415,y:145},{n:"A8",x:455,y:145},
+        {n:"A9",x:175,y:175},{n:"A10",x:215,y:175},{n:"A11",x:255,y:175},{n:"A12",x:295,y:175},
+        {n:"A13",x:335,y:175},{n:"A14",x:375,y:175},
+      ].map(s => (
+        <g key={s.n}>
+          <rect x={s.x - 17} y={s.y - 13} width="36" height="22" rx="3" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+          <text x={s.x} y={s.y + 2} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+        </g>
+      ))}
+
+      {/* Floor sections bottom */}
+      {[
+        {n:"A1",x:175,y:210},{n:"A2",x:215,y:210},{n:"A3",x:255,y:210},{n:"A4",x:295,y:210},
+        {n:"A5",x:335,y:210},{n:"A6",x:375,y:210},{n:"A7",x:415,y:210},{n:"A8",x:455,y:210},
+      ].map((s, i) => (
+        <g key={`bot-${i}`}>
+          <rect x={s.x - 17} y={s.y - 13} width="36" height="22" rx="3" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
+          <text x={s.x} y={s.y + 2} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
+        </g>
+      ))}
+
+      {/* Lower sections top row */}
+      {["119","120","121","122","123","124","125","126","127","128","129","130"].map((n, i) => (
+        <text key={n} x={130 + i*35} y={118} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
+      ))}
+      {/* Lower sections bottom row */}
+      {["131","132","133","134","135","136","137","138","139","140","141","142"].map((n, i) => (
+        <text key={n} x={130 + i*35} y={322} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
+      ))}
+      {/* Lower left side */}
+      {["101","102","103","104"].map((n, i) => (
+        <text key={n} x={125} y={160 + i*28} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
+      ))}
+      {/* Right side lower */}
+      {["107","108","109","110"].map((n, i) => (
+        <text key={n} x={555} y={160 + i*28} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
+      ))}
+
+      {/* Club sections 200s top */}
+      {["219","220","221","222","223","224","225","226","227","228"].map((n, i) => (
+        <text key={n} x={100 + i*48} y={82} textAnchor="middle" fill="#1e3a8a" fontSize="9" fontWeight="bold">{n}</text>
+      ))}
+      {/* Club sections 300s top */}
+      {["319","320","321","322","323","324","325","326","327","328"].map((n, i) => (
+        <text key={n} x={100 + i*48} y={48} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{n}</text>
+      ))}
+
+      {/* Upper sections 400s top */}
+      {["424","425","426","427","428","429","430","431"].map((n, i) => (
+        <text key={n} x={110 + i*58} y={28} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
+      ))}
+      {/* Upper sections 400s bottom */}
+      {["401","402","403","404","405","406","407","408"].map((n, i) => (
+        <text key={n} x={110 + i*58} y={428} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
+      ))}
+
+      {/* Left side sections */}
+      {["450","451","452","453","454"].map((n, i) => (
+        <text key={n} x={45} y={160 + i*22} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
+      ))}
+      {/* Right side sections */}
+      {["432","433","434","435","436"].map((n, i) => (
+        <text key={n} x={635} y={160 + i*22} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
+      ))}
+
+      {/* MIX label */}
+      <rect x="488" y="203" width="30" height="16" rx="3" fill="#374151" />
+      <text x="503" y="215" textAnchor="middle" fill="white" fontSize="8">MIX</text>
+    </svg>
+  );
+}
+
+// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function SeatPage() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
-  const eventId = params?.id;
+  const eventId = params?.id ?? "sombr";
   const search = useSearchParams();
+  const isBruno = eventId === "bruno-mars";
 
-  const venue = search.get("venue") ?? "Madison Square Garden";
-  const city = search.get("city") ?? "New York, NY";
-  const date = search.get("date") ?? "NOV 23";
-  const day = search.get("day") ?? "Mon";
+  const venue = search.get("venue") ?? (isBruno ? "MetLife Stadium" : "Madison Square Garden");
+  const city = search.get("city") ?? (isBruno ? "East Rutherford, NJ" : "New York, NY");
+  const date = search.get("date") ?? (isBruno ? "AUG 21" : "NOV 23");
+  const day = search.get("day") ?? (isBruno ? "Fri" : "Mon");
   const time = search.get("time") ?? "7:00 PM";
   const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}`;
+
+  const tourName = isBruno ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour";
+  const allSeats: readonly AnySeat[] = isBruno ? BRUNO_MARS_SEATS : SOMBR_SEATS;
+  const allTypes: AnyFilter[] = isBruno ? [...BRUNO_FILTERS] : [...SOMBR_FILTERS];
 
   const [showPresaleModal, setShowPresaleModal] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -205,66 +486,63 @@ export default function SeatPage() {
   const [unlockError, setUnlockError] = useState<string | null>(null);
   const [presaleUnlocked, setPresaleUnlocked] = useState(false);
   const [sortBy, setSortBy] = useState<"all" | "top">("all");
+  const [activeFilters, setActiveFilters] = useState<AnyFilter[]>(allTypes);
 
-  const allTypes: FilterType[] = useMemo(
-    () => ["Standard Admission", "Artist Presale", "HOMEWRECKER VIP PACKAGE", "Official Platinum"],
-    []
-  );
-  const [activeFilters, setActiveFilters] = useState<FilterType[]>(allTypes);
-
-  const unlockedPricesBySeatId = useMemo(() => {
-    if (!presaleUnlocked) return {} as Record<string, number>;
+  const unlockedPrices = useMemo(() => {
+    if (!presaleUnlocked || isBruno) return {} as Record<string, number>;
     const map: Record<string, number> = {};
-    for (const s of ALL_SEATS) {
+    for (const s of SOMBR_SEATS) {
       if (s.price == null) map[s.id] = rand50to160();
     }
     return map;
-  }, [presaleUnlocked]);
+  }, [presaleUnlocked, isBruno]);
 
-  const toggleFilter = (t: FilterType) => {
+  const toggleFilter = (t: AnyFilter) => {
     setActiveFilters((prev) => prev.includes(t) ? prev.filter((f) => f !== t) : [...prev, t]);
   };
 
   const filtered = useMemo(
-    () => ALL_SEATS.filter((s) => activeFilters.includes(s.type as FilterType)),
-    [activeFilters]
+    () => allSeats.filter((s) => activeFilters.includes(s.type as AnyFilter)),
+    [allSeats, activeFilters]
   );
 
   const sorted = useMemo(() => {
     if (sortBy !== "top") return filtered;
     return [...filtered].sort((a, b) => {
-      const pa = a.price ?? (presaleUnlocked ? unlockedPricesBySeatId[a.id] ?? 9999 : 9999);
-      const pb = b.price ?? (presaleUnlocked ? unlockedPricesBySeatId[b.id] ?? 9999 : 9999);
+      const pa = a.price ?? (presaleUnlocked ? unlockedPrices[a.id] ?? 9999 : 9999);
+      const pb = b.price ?? (presaleUnlocked ? unlockedPrices[b.id] ?? 9999 : 9999);
       return pa - pb;
     });
-  }, [filtered, sortBy, presaleUnlocked, unlockedPricesBySeatId]);
+  }, [filtered, sortBy, presaleUnlocked, unlockedPrices]);
 
   const typeColor = (type: string) => {
     if (type === "HOMEWRECKER VIP PACKAGE") return "#b45309";
+    if (type === "Resale - Floor/Field") return "#7c3aed";
+    if (type === "Resale - Lower Level") return TM_BLUE;
+    if (type === "Resale - Club Level") return "#0891b2";
+    if (type === "Resale - Upper Level") return "#374151";
     if (type === "Official Platinum" || type === "Artist Presale") return TM_BLUE;
     return TM_TEXT;
   };
 
-  const getEffectivePrice = (seat: Seat): number | null => {
+  const getEffectivePrice = (seat: AnySeat): number | null => {
     if (seat.price != null) return seat.price;
     if (!presaleUnlocked) return null;
-    return unlockedPricesBySeatId[seat.id] ?? null;
+    return unlockedPrices[seat.id] ?? null;
   };
 
-  const goToSeatDetail = (seat: Seat) => {
+  const isLocked = (seat: AnySeat) => seat.price == null;
+
+  const goToDetail = (seat: AnySeat) => {
     if (!eventId) return;
     const p = getEffectivePrice(seat);
-    router.push(
-      `/seat/${eventId}/detail?section=${seat.section}&row=${seat.row}&type=${encodeURIComponent(seat.type)}&price=${p ?? 0}&seatId=${seat.id}&${venueParams}`
-    );
+    router.push(`/seat/${eventId}/detail?section=${seat.section}&row=${seat.row}&type=${encodeURIComponent(seat.type)}&price=${p ?? 0}&seatId=${seat.id}&${venueParams}`);
   };
 
-  const isLocked = (seat: Seat) => seat.price == null;
-
-  const handleSelect = (seat: Seat) => {
-    if (!isLocked(seat)) { goToSeatDetail(seat); return; }
+  const handleSelect = (seat: AnySeat) => {
+    if (!isLocked(seat)) { goToDetail(seat); return; }
     if (!presaleUnlocked) { setShowPresaleModal(true); return; }
-    goToSeatDetail(seat);
+    goToDetail(seat);
   };
 
   const handleUnlock = () => {
@@ -280,10 +558,10 @@ export default function SeatPage() {
   const pillBase: React.CSSProperties = {
     flex: 1, borderRadius: 999, padding: "11px 10px", fontSize: 13,
     fontWeight: 800, cursor: "pointer", border: "1px solid #d1d5db",
-    background: "#ffffff", color: TM_TEXT, boxShadow: "0 1px 0 rgba(0,0,0,0.05)",
+    background: "#ffffff", color: TM_TEXT,
   };
 
-  const primaryPillSelected: React.CSSProperties = {
+  const pillSelected: React.CSSProperties = {
     ...pillBase, background: "#e8f1ff", border: `1px solid ${TM_BLUE}`, color: TM_BLUE,
   };
 
@@ -293,128 +571,100 @@ export default function SeatPage() {
     <div style={{ fontFamily: "system-ui, Arial", background: "#f3f4f6", minHeight: "100vh", color: TM_TEXT }}>
       <div style={{ background: TM_BLUE, height: 4 }} />
       <div style={{ background: TM_BLACK, color: "white", padding: "16px 16px 14px" }}>
-        <div style={{ fontSize: 18, fontWeight: 900, fontStyle: "italic", letterSpacing: -0.3, marginBottom: 10 }}>
-          ticketmaster
-        </div>
-        <h2 style={{ margin: 0, fontSize: 17, fontWeight: 900, lineHeight: 1.2 }}>
-          SOMBR - You Are The Reason Tour
-        </h2>
-        <p style={{ margin: "6px 0 0", color: "rgba(255,255,255,0.78)", fontSize: 13, fontWeight: 600 }}>
+        <div style={{ fontSize: 18, fontWeight: 900, fontStyle: "italic", letterSpacing: -0.3, marginBottom: 10 }}>ticketmaster</div>
+        <h2 style={{ margin: 0, fontSize: 17, fontWeight: 900 }}>{tourName}</h2>
+        <p style={{ margin: "6px 0 0", color: "rgba(255,255,255,0.78)", fontSize: 13 }}>
           {day} • {date}, 2026 • {time} — {venue}, {city}
         </p>
       </div>
 
       <div style={{ background: "#e9edf2", padding: 16, textAlign: "center", borderBottom: "1px solid #d7dde6" }}>
-        <button type="button" style={{ background: "#ffffff", border: "1px solid #cbd5e1", borderRadius: 999, padding: "10px 16px", fontSize: 13, fontWeight: 900, color: TM_TEXT, cursor: "pointer", marginBottom: 12, width: "100%", maxWidth: 520 }}>
+        <button type="button" style={{ background: "#fff", border: "1px solid #cbd5e1", borderRadius: 999, padding: "10px 16px", fontSize: 13, fontWeight: 900, color: TM_TEXT, cursor: "pointer", marginBottom: 12, width: "100%", maxWidth: 520 }}>
           ⇄ Switch to Map
         </button>
-        <svg width="340" height="340" viewBox="0 0 500 500" style={{ display: "block", margin: "0 auto" }}>
-          <ellipse cx="250" cy="260" rx="235" ry="225" fill="#d1d5db" stroke="#9ca3af" strokeWidth="1.5" />
-          <ellipse cx="250" cy="260" rx="185" ry="175" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
-          <ellipse cx="250" cy="260" rx="140" ry="130" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
-          <ellipse cx="250" cy="270" rx="90" ry="100" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
-          <rect x="205" y="115" width="90" height="50" rx="4" fill="#111827" />
-          <text x="250" y="146" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">STAGE</text>
-          <rect x="246" y="165" width="8" height="28" fill="#374151" />
-          <rect x="185" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
-          <text x="211" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT LEFT</text>
-          <rect x="263" y="193" width="52" height="35" rx="3" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
-          <text x="289" y="215" textAnchor="middle" fill="white" fontSize="8" fontWeight="bold">PIT RIGHT</text>
-          {["A","B","C","D","E","F"].map((s, i) => (
-            <g key={s}>
-              <rect x={172 + i*26} y={233} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-              <text x={184 + i*26} y={248} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
-            </g>
-          ))}
-          {["G","H","J","K","L","M"].map((s, i) => (
-            <g key={s}>
-              <rect x={172 + i*26} y={259} width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-              <text x={184 + i*26} y={274} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
-            </g>
-          ))}
-          <rect x="210" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-          <text x="222" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">N</text>
-          <rect x="266" y="285" width="24" height="22" rx="2" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-          <text x="278" y="300" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">P</text>
-          <rect x="234" y="312" width="32" height="20" rx="3" fill="#111827" />
-          <text x="250" y="326" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">B STAGE</text>
-          {["1","2","3"].map((s, i) => (
-            <g key={s}>
-              <rect x={210 + i*27} y={335} width="22" height="18" rx="2" fill="#3b82f6" stroke="#2563eb" strokeWidth="0.8" />
-              <text x={221 + i*27} y={348} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s}</text>
-            </g>
-          ))}
-          {[{n:"136",x:196,y:373},{n:"135",x:211,y:382},{n:"101",x:227,y:388},{n:"102",x:245,y:392},{n:"103",x:263,y:388},{n:"104",x:279,y:382},{n:"105",x:294,y:373}].map(s => (
-            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-          ))}
-          {[{n:"134",x:178,y:358},{n:"133",x:167,y:340},{n:"132",x:160,y:320},{n:"131",x:156,y:298},{n:"130",x:157,y:276},{n:"129",x:161,y:255},{n:"128",x:168,y:236},{n:"127",x:177,y:218},{n:"126",x:188,y:202},{n:"125",x:200,y:188}].map(s => (
-            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-          ))}
-          {[{n:"106",x:310,y:358},{n:"107",x:322,y:340},{n:"108",x:329,y:320},{n:"109",x:333,y:298},{n:"110",x:332,y:276},{n:"111",x:328,y:255},{n:"112",x:321,y:236},{n:"113",x:312,y:218},{n:"114",x:301,y:202},{n:"115",x:289,y:188}].map(s => (
-            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-          ))}
-          {[{n:"116",x:278,y:178},{n:"117",x:264,y:172},{n:"118",x:250,y:170},{n:"119",x:236,y:172},{n:"120",x:222,y:178}].map(s => (
-            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-          ))}
-          {[{n:"235",x:210,y:468},{n:"236",x:250,y:474},{n:"201",x:290,y:468},{n:"234",x:178,y:450},{n:"202",x:322,y:450},{n:"233",x:155,y:428},{n:"203",x:345,y:428},{n:"232",x:137,y:403},{n:"204",x:363,y:403},{n:"231",x:125,y:374},{n:"205",x:375,y:374},{n:"230",x:118,y:343},{n:"206",x:382,y:343},{n:"229",x:116,y:310},{n:"207",x:384,y:310},{n:"228",x:120,y:277},{n:"208",x:380,y:277},{n:"227",x:129,y:246},{n:"209",x:371,y:246},{n:"226",x:142,y:218},{n:"210",x:358,y:218},{n:"225",x:159,y:193},{n:"211",x:341,y:193},{n:"224",x:180,y:173},{n:"212",x:320,y:173},{n:"223",x:204,y:158},{n:"213",x:296,y:158},{n:"222",x:228,y:150},{n:"214",x:272,y:150},{n:"221",x:250,y:147}].map(s => (
-            <text key={s.n} x={s.x} y={s.y} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{s.n}</text>
-          ))}
-        </svg>
+        {isBruno ? <BrunoArenaMap /> : <SombrArenaMap />}
       </div>
 
-      <div style={{ padding: "12px 16px", display: "flex", gap: 10, background: "#f3f4f6" }}>
+      <div style={{ padding: "12px 16px", display: "flex", gap: 10 }}>
         <button type="button" style={pillBase}>1 Ticket ▾</button>
-        <button type="button" onClick={() => { setUnlockError(null); setShowPresaleModal(true); }} style={{ ...pillBase, border: presaleUnlocked ? "1px solid #16a34a" : pillBase.border, color: presaleUnlocked ? "#166534" : TM_TEXT, background: presaleUnlocked ? "#dcfce7" : "#ffffff" }}>
-          🔒 {presaleUnlocked ? "Unlocked" : "Unlock"}
-        </button>
+        {!isBruno && (
+          <button type="button" onClick={() => { setUnlockError(null); setShowPresaleModal(true); }}
+            style={{ ...pillBase, border: presaleUnlocked ? "1px solid #16a34a" : pillBase.border, color: presaleUnlocked ? "#166534" : TM_TEXT, background: presaleUnlocked ? "#dcfce7" : "#fff" }}>
+            🔒 {presaleUnlocked ? "Unlocked" : "Unlock"}
+          </button>
+        )}
         <button type="button" onClick={() => setShowFilterModal(true)} style={pillBase}>⚙ Filters</button>
       </div>
 
-      <div style={{ margin: "0 16px 10px", background: "#ffffff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
+      <div style={{ margin: "0 16px 10px", background: "#fff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <span style={{ fontSize: 18 }}>📢</span>
-            <span style={{ fontSize: 13, fontWeight: 900 }}>PRESALE HAPPENING NOW!</span>
+            <span>📢</span>
+            <span style={{ fontSize: 13, fontWeight: 900 }}>
+              {isBruno ? "RESALE TICKETS AVAILABLE!" : "PRESALE HAPPENING NOW!"}
+            </span>
           </div>
-          <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View Sales</span>
+          <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View All</span>
         </div>
       </div>
 
       <div style={{ margin: "0 16px 10px", background: "#fff7ed", borderRadius: 10, padding: "10px 12px", border: "1px solid #fed7aa" }}>
         <p style={{ margin: 0, fontSize: 13, color: "#7c2d12", fontWeight: 700 }}>
-          <strong>We&apos;re All In:</strong> Prices include fees (before taxes).
+          <strong>All-In Pricing:</strong> Prices include fees (before taxes).
         </p>
       </div>
 
-      <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <span>⭐</span>
-          <strong style={{ fontSize: 15 }}>VIP Packages</strong>
-        </div>
-        <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
-      </div>
-      <div style={{ margin: "0 16px", height: 3, background: "#f59e0b" }} />
+      {!isBruno && (
+        <>
+          <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span>⭐</span>
+              <strong style={{ fontSize: 15 }}>VIP Packages</strong>
+            </div>
+            <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
+          </div>
+          <div style={{ margin: "0 16px", height: 3, background: "#f59e0b" }} />
+        </>
+      )}
+
+      {isBruno && (
+        <>
+          <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span>🎤</span>
+              <strong style={{ fontSize: 15 }}>Floor & Field Seats</strong>
+            </div>
+            <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
+          </div>
+          <div style={{ margin: "0 16px", height: 3, background: "#7c3aed" }} />
+        </>
+      )}
 
       <div style={{ margin: "10px 16px 90px" }}>
         {sorted.map((seat) => {
           const locked = isLocked(seat);
           const effective = getEffectivePrice(seat);
           return (
-            <div key={seat.id} onClick={() => handleSelect(seat)} style={{ background: "#ffffff", borderRadius: 12, marginBottom: 10, padding: "14px 14px", display: "flex", gap: 12, alignItems: "center", border: locked && !presaleUnlocked ? "1px solid #cbd5e1" : "1px solid #e5e7eb", boxShadow: "0 2px 10px rgba(15,23,42,0.06)", cursor: "pointer" }}>
-              <div style={{ width: 46, height: 46, background: locked && !presaleUnlocked ? "#f8fafc" : "#eef2ff", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 20, border: "1px solid #e5e7eb" }}>
+            <div key={seat.id} onClick={() => handleSelect(seat)} style={{ background: "#fff", borderRadius: 12, marginBottom: 10, padding: "14px", display: "flex", gap: 12, alignItems: "center", border: "1px solid #e5e7eb", boxShadow: "0 2px 10px rgba(15,23,42,0.06)", cursor: "pointer" }}>
+              <div style={{ width: 46, height: 46, background: "#eef2ff", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 20, border: "1px solid #e5e7eb" }}>
                 📍
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <p style={{ margin: 0, fontWeight: 950, fontSize: 16, color: TM_TEXT }}>Sec {seat.section} • Row {seat.row}</p>
                 <p style={{ margin: "4px 0 0", fontSize: 13, fontWeight: 800, color: typeColor(seat.type) }}>
-                  {seat.type === "HOMEWRECKER VIP PACKAGE" ? <span>⭐ {seat.type}</span> : seat.type === "Artist Presale" ? <span>🔒 {seat.type}</span> : seat.type}
+                  {seat.type === "HOMEWRECKER VIP PACKAGE" ? <span>⭐ {seat.type}</span>
+                    : seat.type === "Artist Presale" ? <span>🔒 {seat.type}</span>
+                    : seat.type === "Resale - Floor/Field" ? <span>🎤 {seat.type}</span>
+                    : seat.type}
                 </p>
+                {isBruno && <p style={{ margin: "2px 0 0", fontSize: 12, color: "#6b7280" }}>Mobile Entry</p>}
               </div>
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 {effective != null ? (
                   <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>${effective.toFixed(2)}</p>
                 ) : (
-                  <button type="button" style={{ background: "#ffffff", border: `2px solid ${TM_BLUE}`, color: TM_BLUE, borderRadius: 10, padding: "8px 12px", fontSize: 13, cursor: "pointer", fontWeight: 950 }} onClick={(e) => { e.stopPropagation(); setUnlockError(null); setShowPresaleModal(true); }}>
+                  <button type="button" style={{ background: "#fff", border: `2px solid ${TM_BLUE}`, color: TM_BLUE, borderRadius: 10, padding: "8px 12px", fontSize: 13, cursor: "pointer", fontWeight: 950 }}
+                    onClick={(e) => { e.stopPropagation(); setUnlockError(null); setShowPresaleModal(true); }}>
                     🔒 Unlock
                   </button>
                 )}
@@ -426,8 +676,9 @@ export default function SeatPage() {
 
       {(showPresaleModal || showFilterModal) && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.55)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 100 }}>
-          <div style={{ background: "#ffffff", borderRadius: "16px 16px 0 0", padding: "18px 18px 34px", maxHeight: "90vh", overflowY: "auto", width: "100%", maxWidth: 520 }}>
-            {showPresaleModal && (
+          <div style={{ background: "#fff", borderRadius: "16px 16px 0 0", padding: "18px 18px 34px", maxHeight: "90vh", overflowY: "auto", width: "100%", maxWidth: 520 }}>
+
+            {showPresaleModal && !isBruno && (
               <>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
                   <h3 style={{ margin: 0, fontSize: 18, fontWeight: 950 }}>Presale happening now!</h3>
@@ -436,19 +687,20 @@ export default function SeatPage() {
                 <p style={{ fontWeight: 950, margin: "0 0 10px" }}>GET EARLY ACCESS TO TICKETS DURING PRESALE.</p>
                 <p style={{ color: TM_MUTED, fontSize: 13, margin: "0 0 10px", fontWeight: 700 }}>Enter Offer Passcode</p>
                 <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-                  <input value={passcode} onChange={(e) => setPasscode(e.target.value)} placeholder="POTENTIAL" style={{ flex: 1, padding: "12px", border: "1px solid #cbd5e1", borderRadius: 10, fontSize: 15, fontWeight: 700, outline: "none" }} />
+                  <input value={passcode} onChange={(e) => setPasscode(e.target.value)} placeholder="POTENTIAL"
+                    style={{ flex: 1, padding: "12px", border: "1px solid #cbd5e1", borderRadius: 10, fontSize: 15, fontWeight: 700, outline: "none" }} />
                   <button type="button" onClick={handleUnlock} style={{ padding: "12px 14px", background: TM_BLUE, color: "white", border: "none", borderRadius: 10, fontSize: 14, cursor: "pointer", fontWeight: 950 }}>Unlock</button>
                 </div>
                 {unlockError && <p style={{ margin: "0 0 12px", color: "#b91c1c", fontSize: 13, fontWeight: 800 }}>{unlockError}</p>}
-                <p style={{ fontWeight: 950, margin: "10px 0 10px" }}>Sort list by</p>
+                <p style={{ fontWeight: 950, margin: "10px 0" }}>Sort list by</p>
                 <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
                   {["All Tickets", "Top Seats"].map((opt) => {
                     const active = (opt === "All Tickets" && sortBy === "all") || (opt === "Top Seats" && sortBy === "top");
-                    return <button key={opt} type="button" onClick={() => setSortBy(opt === "All Tickets" ? "all" : "top")} style={active ? primaryPillSelected : pillBase}>{opt}</button>;
+                    return <button key={opt} type="button" onClick={() => setSortBy(opt === "All Tickets" ? "all" : "top")} style={active ? pillSelected : pillBase}>{opt}</button>;
                   })}
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                  <strong style={{ fontSize: 14 }}>Presale Options</strong>
+                  <strong>Presale Options</strong>
                   <div style={{ fontWeight: 800 }}>
                     <span style={{ color: TM_BLUE, cursor: "pointer" }} onClick={() => setActiveFilters(allTypes)}>Select All</span>
                     <span style={{ color: "#9ca3af" }}> | </span>
@@ -458,29 +710,36 @@ export default function SeatPage() {
                 <hr style={{ border: "none", borderTop: "1px solid #e5e7eb", margin: "0 0 12px" }} />
                 {allTypes.map((t) => (
                   <div key={t} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, cursor: "pointer" }} onClick={() => toggleFilter(t)}>
-                    <div style={{ width: 24, height: 24, background: activeFilters.includes(t) ? TM_BLUE : "#ffffff", border: `2px solid ${TM_BLUE}`, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: 24, height: 24, background: activeFilters.includes(t) ? TM_BLUE : "#fff", border: `2px solid ${TM_BLUE}`, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {activeFilters.includes(t) && <span style={{ color: "white", fontSize: 14, fontWeight: 950 }}>✓</span>}
                     </div>
-                    {t === "Artist Presale" && <span style={{ fontSize: 18 }}>🔒</span>}
-                    {t === "HOMEWRECKER VIP PACKAGE" && <span style={{ fontSize: 18 }}>⭐</span>}
-                    <span style={{ color: t === "Artist Presale" ? TM_BLUE : TM_TEXT, fontWeight: t === "HOMEWRECKER VIP PACKAGE" ? 950 : 750 }}>{t}</span>
+                    <span style={{ color: typeColor(t), fontWeight: 800 }}>{t}</span>
                   </div>
                 ))}
                 <button type="button" onClick={() => setShowPresaleModal(false)} style={{ width: "100%", padding: 14, background: TM_BLUE, color: "white", border: "none", borderRadius: 10, fontSize: 16, fontWeight: 950, cursor: "pointer", marginTop: 6 }}>View Seats</button>
               </>
             )}
+
             {showFilterModal && (
               <>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
                   <h3 style={{ margin: 0, fontWeight: 950 }}>Filters</h3>
                   <span style={{ fontSize: 22, cursor: "pointer" }} onClick={() => setShowFilterModal(false)}>✕</span>
                 </div>
+                <p style={{ fontWeight: 950, margin: "0 0 10px" }}>Sort by</p>
+                <div style={{ display: "flex", gap: 10, marginBottom: 16 }}>
+                  {["All Tickets", "Top Seats"].map((opt) => {
+                    const active = (opt === "All Tickets" && sortBy === "all") || (opt === "Top Seats" && sortBy === "top");
+                    return <button key={opt} type="button" onClick={() => setSortBy(opt === "All Tickets" ? "all" : "top")} style={active ? pillSelected : pillBase}>{opt}</button>;
+                  })}
+                </div>
+                <p style={{ fontWeight: 950, margin: "0 0 10px" }}>Ticket Type</p>
                 {allTypes.map((t) => (
                   <div key={t} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, cursor: "pointer" }} onClick={() => toggleFilter(t)}>
-                    <div style={{ width: 24, height: 24, background: activeFilters.includes(t) ? TM_BLUE : "#ffffff", border: `2px solid ${TM_BLUE}`, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ width: 24, height: 24, background: activeFilters.includes(t) ? TM_BLUE : "#fff", border: `2px solid ${TM_BLUE}`, borderRadius: 6, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       {activeFilters.includes(t) && <span style={{ color: "white", fontSize: 14, fontWeight: 950 }}>✓</span>}
                     </div>
-                    <span style={{ color: TM_TEXT, fontWeight: 800 }}>{t}</span>
+                    <span style={{ color: typeColor(t), fontWeight: 800 }}>{t}</span>
                   </div>
                 ))}
                 <button type="button" onClick={() => setShowFilterModal(false)} style={{ width: "100%", padding: 14, background: TM_BLUE, color: "white", border: "none", borderRadius: 10, fontSize: 16, fontWeight: 950, cursor: "pointer", marginTop: 6 }}>Apply Filters</button>
