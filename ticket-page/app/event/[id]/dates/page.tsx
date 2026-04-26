@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 
 // ─── SOMBR DATA ───────────────────────────────────────────────────────────────
 
-const TOUR_DATES = [
+const SOMBR_DATES = [
   // ── International ──
   { id: "sombr-mexico", date: "JUL 22", day: "Wed", time: "9:00 PM", city: "México, CDMX, Mexico", venue: "Pepsi Center" },
   // ── Summer ──
