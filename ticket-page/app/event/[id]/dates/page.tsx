@@ -191,9 +191,11 @@ export default function TourDatesPage() {
     const day = parts[1];
     return (
       <div key={event.id} style={{ borderBottom: "1px solid #e0e0e0", padding: "16px 20px", background: "white", marginBottom: 2 }}>
-        <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#7b2fbe", letterSpacing: 0.5 }}>
-          PRESALE HAPPENING NOW
-        </p>
+     {!isBruno && (
+  <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#7b2fbe", letterSpacing: 0.5 }}>
+    PRESALE HAPPENING NOW
+  </p>
+)}
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ width: 56, minWidth: 56, textAlign: "center", border: "1px solid #ddd", borderRadius: 6, padding: "8px 0", background: "#fafafa" }}>
             <p style={{ margin: 0, fontSize: 11, color: "#888", fontWeight: "bold" }}>{month}</p>
