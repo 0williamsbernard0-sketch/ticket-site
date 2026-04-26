@@ -43,7 +43,9 @@ export default function SeatDetailPage() {
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <button type="button" onClick={() => router.back()} style={{ ...btnReset, width: 44, height: 44, borderRadius: 10, border: "1px solid rgba(255,255,255,0.25)", background: "rgba(255,255,255,0.10)", color: "#ffffff", fontSize: 20, fontWeight: 900, cursor: "pointer" }} aria-label="Back">←</button>
           <div style={{ minWidth: 0 }}>
-            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 950, lineHeight: 1.2 }}>SOMBR - You Are The Reason Tour</h2>
+           <h2 style={{ margin: 0, fontSize: 16, fontWeight: 950, lineHeight: 1.2 }}>
+  {eventId === "bruno-mars" ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour"}
+</h2>
             <p style={{ margin: "4px 0 0", color: "rgba(255,255,255,0.78)", fontSize: 13, fontWeight: 650 }}>
               {day} • {date}, 2026 • {time} • {venue}, {city}
             </p>
