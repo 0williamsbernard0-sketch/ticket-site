@@ -36,6 +36,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const eventId = params?.id;
+  const isBruno = eventId === "bruno-mars";
 
   const search = useSearchParams();
   const seatId = search.get("seat") ?? "";
@@ -43,6 +44,16 @@ export default function CheckoutPage() {
   const row = search.get("row") ?? "";
   const type = search.get("type") ?? "";
   const price = parseFloat(search.get("price") ?? "0");
+
+  const venue = search.get("venue") ?? (isBruno ? "MetLife Stadium" : "Madison Square Garden");
+  const city = search.get("city") ?? (isBruno ? "East Rutherford, NJ" : "New York, NY");
+  const date = search.get("date") ?? (isBruno ? "AUG 21" : "NOV 23");
+  const day = search.get("day") ?? (isBruno ? "Fri" : "Mon");
+  const time = search.get("time") ?? "7:00 PM";
+
+  const tourName = isBruno
+    ? "Bruno Mars - The Romantic Tour"
+    : "SOMBR - You Are The Reason Tour";
 
   const fees = useMemo(() => {
     const pct = Math.min(45, Math.max(5, price * 0.12));
@@ -69,22 +80,10 @@ export default function CheckoutPage() {
   const handlePay = async () => {
     setError(null);
 
-    if (!eventId) {
-      setError("Missing event id in URL.");
-      return;
-    }
-    if (!seatId) {
-      setError("Missing seat selection. Go back and select a seat.");
-      return;
-    }
-    if (!email.trim()) {
-      setError("Please enter your email.");
-      return;
-    }
-    if (!agree) {
-      setError("Please accept the terms to continue.");
-      return;
-    }
+    if (!eventId) { setError("Missing event id in URL."); return; }
+    if (!seatId) { setError("Missing seat selection. Go back and select a seat."); return; }
+    if (!email.trim()) { setError("Please enter your email."); return; }
+    if (!agree) { setError("Please accept the terms to continue."); return; }
 
     setLoading(true);
     try {
@@ -106,12 +105,8 @@ export default function CheckoutPage() {
 
       const data = (await res.json()) as { error?: string; checkoutUrl?: string };
 
-      if (!res.ok) {
-        throw new Error(data?.error || "Unable to initialize payment.");
-      }
-      if (!data.checkoutUrl) {
-        throw new Error("No checkout URL returned.");
-      }
+      if (!res.ok) throw new Error(data?.error || "Unable to initialize payment.");
+      if (!data.checkoutUrl) throw new Error("No checkout URL returned.");
 
       window.location.href = data.checkoutUrl;
     } catch (e) {
@@ -133,8 +128,7 @@ export default function CheckoutPage() {
   return (
     <div
       style={{
-        fontFamily:
-          'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif',
+        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif',
         background: "#f3f4f6",
         minHeight: "100vh",
         color: TM_TEXT,
@@ -143,6 +137,7 @@ export default function CheckoutPage() {
     >
       <div style={{ background: TM_BLUE, height: 4 }} />
 
+      {/* HEADER */}
       <div style={{ background: TM_BLACK, color: "white", padding: "14px 16px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <button
@@ -150,16 +145,11 @@ export default function CheckoutPage() {
             onClick={() => router.back()}
             style={{
               ...btnReset,
-              width: 44,
-              height: 44,
-              borderRadius: 10,
+              width: 44, height: 44, borderRadius: 10,
               border: "1px solid rgba(255,255,255,0.25)",
               background: "rgba(255,255,255,0.10)",
-              color: "#ffffff",
-              fontSize: 20,
-              fontWeight: 900,
-              cursor: "pointer",
-              lineHeight: 1,
+              color: "#ffffff", fontSize: 20, fontWeight: 900,
+              cursor: "pointer", lineHeight: 1,
             }}
             aria-label="Back"
           >
@@ -167,23 +157,20 @@ export default function CheckoutPage() {
           </button>
           <div style={{ minWidth: 0 }}>
             <h2 style={{ margin: 0, fontSize: 16, fontWeight: 950, lineHeight: 1.2 }}>Checkout</h2>
-            <p style={{ margin: "4px 0 0", color: "rgba(255,255,255,0.78)", fontSize: 13, fontWeight: 650 }}>
-              SOMBR - You Are The Reason Tour
+            <p style={{ margin: "2px 0 0", color: "rgba(255,255,255,0.9)", fontSize: 14, fontWeight: 800 }}>
+              {tourName}
+            </p>
+            <p style={{ margin: "2px 0 0", color: "rgba(255,255,255,0.65)", fontSize: 12, fontWeight: 600 }}>
+              {day} • {date}, 2026 • {time} — {venue}, {city}
             </p>
           </div>
         </div>
       </div>
 
       <div style={{ padding: 16, maxWidth: 560, margin: "0 auto" }}>
-        <div
-          style={{
-            background: "#ffffff",
-            borderRadius: 12,
-            padding: 16,
-            border: "1px solid #e5e7eb",
-            boxShadow: "0 8px 24px rgba(15,23,42,0.06)",
-          }}
-        >
+
+        {/* ORDER SUMMARY */}
+        <div style={{ background: "#ffffff", borderRadius: 12, padding: 16, border: "1px solid #e5e7eb", boxShadow: "0 8px 24px rgba(15,23,42,0.06)" }}>
           <h3 style={{ margin: "0 0 10px", fontSize: 16, fontWeight: 950 }}>Order summary</h3>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
             <div style={{ minWidth: 220, flex: 1 }}>
@@ -192,6 +179,9 @@ export default function CheckoutPage() {
                 Sec {section || "—"} • Row {row || "—"}
               </p>
               <p style={{ margin: "8px 0 0", fontSize: 14, color: TM_BLUE, fontWeight: 950 }}>{type || "Ticket"}</p>
+              <p style={{ margin: "4px 0 0", fontSize: 12, color: "#6b7280", fontWeight: 700 }}>
+                {venue} • {city}
+              </p>
               <p style={{ margin: "10px 0 0", fontSize: 12, color: "#6b7280", fontWeight: 750 }}>
                 Seat ID: <span style={{ color: "#111827", fontWeight: 900 }}>{seatId || "—"}</span>
               </p>
@@ -220,15 +210,8 @@ export default function CheckoutPage() {
 
         <div style={{ height: 12 }} />
 
-        <div
-          style={{
-            background: "#ffffff",
-            borderRadius: 12,
-            padding: 16,
-            border: "1px solid #e5e7eb",
-            boxShadow: "0 8px 24px rgba(15,23,42,0.06)",
-          }}
-        >
+        {/* YOUR INFO */}
+        <div style={{ background: "#ffffff", borderRadius: 12, padding: 16, border: "1px solid #e5e7eb", boxShadow: "0 8px 24px rgba(15,23,42,0.06)" }}>
           <h3 style={{ margin: "0 0 10px", fontSize: 16, fontWeight: 950 }}>Your info</h3>
 
           <label style={{ display: "block", fontSize: 12, color: TM_MUTED, marginTop: 6, fontWeight: 900 }}>
@@ -254,9 +237,7 @@ export default function CheckoutPage() {
           </div>
 
           {error && (
-            <p style={{ margin: "12px 0 0", color: "#b91c1c", fontSize: 13, fontWeight: 900 }}>
-              {error}
-            </p>
+            <p style={{ margin: "12px 0 0", color: "#b91c1c", fontSize: 13, fontWeight: 900 }}>{error}</p>
           )}
 
           <p style={{ margin: "12px 0 0", fontSize: 12, color: "#6b7280", lineHeight: 1.5, fontWeight: 650 }}>
@@ -265,12 +246,10 @@ export default function CheckoutPage() {
         </div>
       </div>
 
+      {/* PAY BUTTON */}
       <div
         style={{
-          position: "fixed",
-          left: 0,
-          right: 0,
-          bottom: 0,
+          position: "fixed", left: 0, right: 0, bottom: 0,
           padding: "12px 12px calc(12px + env(safe-area-inset-bottom))",
           background: "rgba(255,255,255,0.92)",
           borderTop: "1px solid #e5e7eb",
@@ -283,14 +262,10 @@ export default function CheckoutPage() {
           disabled={loading}
           style={{
             ...btnReset,
-            width: "100%",
-            padding: "16px 14px",
-            background: "#16a34a",
-            color: "#ffffff",
-            border: "2px solid #15803d",
-            borderRadius: 12,
-            fontSize: 17,
-            fontWeight: 950,
+            width: "100%", padding: "16px 14px",
+            background: "#16a34a", color: "#ffffff",
+            border: "2px solid #15803d", borderRadius: 12,
+            fontSize: 17, fontWeight: 950,
             cursor: loading ? "not-allowed" : "pointer",
             boxShadow: "0 10px 24px rgba(22, 163, 74, 0.25)",
             opacity: loading ? 0.75 : 1,
