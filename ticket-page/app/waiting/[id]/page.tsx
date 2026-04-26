@@ -96,7 +96,10 @@ export default function WaitingPage() {
         <div style={{ fontSize: 22, fontStyle: "italic", fontWeight: "bold", marginBottom: 12 }}>
           ticketmaster
         </div>
-        <h2 style={{ margin: 0, fontSize: 18, fontWeight: "bold" }}>SOMBR - You Are The Reason Tour</h2>
+        <h2 style={{ margin: 0, fontSize: 18, fontWeight: "bold" }}>
+  {eventId === "bruno-mars" ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour"}
+</h2>
+
         <p style={{ margin: "4px 0 0", color: "#aaa", fontSize: 14 }}>
           {day} • {date} • {time} • {venue} • {city}
         </p>
