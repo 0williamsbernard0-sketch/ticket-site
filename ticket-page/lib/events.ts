@@ -33,4 +33,10 @@ export const events: Event[] = [
     price: 80,
     image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
   },
+{
+  id: "bruno-mars",
+  name: "Bruno Mars - The Romantic Tour",
+  genre: "Pop",
+  description: "Bruno Mars - The Romantic Tour. Get your tickets now.",
+},
 ];
