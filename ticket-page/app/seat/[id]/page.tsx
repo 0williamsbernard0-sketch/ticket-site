@@ -4,7 +4,6 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 // ─── SOMBR SEATS ─────────────────────────────────────────────────────────────
 const SOMBR_SEATS = [
-    // ── Existing seats ──
   { id: "c-r15-std", section: "C", row: 15, type: "Standard Admission", price: 247.8 },
   { id: "208-r17-ap", section: "208", row: 17, type: "Artist Presale", price: null },
   { id: "117-r7-plat", section: "117", row: 7, type: "Official Platinum", price: 401.2 },
@@ -86,8 +85,6 @@ const SOMBR_SEATS = [
   { id: "116-r13-plat2", section: "116", row: 13, type: "Official Platinum", price: 401.2 },
   { id: "b-r11-plat", section: "B", row: 11, type: "Official Platinum", price: 354.0 },
   { id: "c-r19-std", section: "C", row: 19, type: "Standard Admission", price: 247.8 },
-
-  // ── New $63.35 Standard Admission seats ──
   { id: "207-r19-std63", section: "207", row: 19, type: "Standard Admission", price: 63.35 },
   { id: "207-r20-std63", section: "207", row: 20, type: "Standard Admission", price: 63.35 },
   { id: "226-r19-std63", section: "226", row: 19, type: "Standard Admission", price: 63.35 },
@@ -100,8 +97,6 @@ const SOMBR_SEATS = [
   { id: "211-r18-std63", section: "211", row: 18, type: "Standard Admission", price: 63.35 },
   { id: "222-r16-std63", section: "222", row: 16, type: "Standard Admission", price: 63.35 },
   { id: "222-r17-std63", section: "222", row: 17, type: "Standard Admission", price: 63.35 },
-
-  // ── New $75.70 Standard Admission seats ──
   { id: "208-r16-std75", section: "208", row: 16, type: "Standard Admission", price: 75.70 },
   { id: "208-r17-std75", section: "208", row: 17, type: "Standard Admission", price: 75.70 },
   { id: "208-r18-std75", section: "208", row: 18, type: "Standard Admission", price: 75.70 },
@@ -130,8 +125,6 @@ const SOMBR_SEATS = [
   { id: "214-r11-std75", section: "214", row: 11, type: "Standard Admission", price: 75.70 },
   { id: "219-r10-std75", section: "219", row: 10, type: "Standard Admission", price: 75.70 },
   { id: "219-r11-std75", section: "219", row: 11, type: "Standard Admission", price: 75.70 },
-
-  // ── New $88.05 Standard Admission seats ──
   { id: "208-r13-std88", section: "208", row: 13, type: "Standard Admission", price: 88.05 },
   { id: "208-r14-std88", section: "208", row: 14, type: "Standard Admission", price: 88.05 },
   { id: "208-r15-std88", section: "208", row: 15, type: "Standard Admission", price: 88.05 },
@@ -176,36 +169,34 @@ const SOMBR_SEATS = [
 
 // ─── BRUNO MARS SEATS ─────────────────────────────────────────────────────────
 const BRUNO_MARS_SEATS = [
-  // Upper Level
   { id: "bm-426-r21", section: "426", row: 21, type: "Resale - Upper Level", price: 213.01 },
-  { id: "bm-403-r18", section: "403", row: 18, type: "Resale - Upper Level", price: 215.39 },
+  { id: "bm-403-r18", section: "403", row: 18, type: "Resale - Upper Level", price: 150.39 },
   { id: "bm-425-r18", section: "425", row: 18, type: "Resale - Upper Level", price: 220.15 },
-  { id: "bm-425-r17", section: "425", row: 17, type: "Resale - Upper Level", price: 223.72 },
+  { id: "bm-425-r17", section: "425", row: 17, type: "Resale - Upper Level", price: 123.72 },
   { id: "bm-428-r6", section: "428", row: 6, type: "Resale - Upper Level", price: 226.10 },
   { id: "bm-402-r13", section: "402", row: 13, type: "Resale - Upper Level", price: 232.05 },
   { id: "bm-403-r1", section: "403", row: 1, type: "Resale - Upper Level", price: 232.05 },
-  { id: "bm-426-r8", section: "426", row: 8, type: "Resale - Upper Level", price: 246.33 },
+  { id: "bm-426-r8", section: "426", row: 8, type: "Resale - Upper Level", price: 136.33 },
   { id: "bm-402-r2", section: "402", row: 2, type: "Resale - Upper Level", price: 245.14 },
   { id: "bm-426-r10", section: "426", row: 10, type: "Resale - Upper Level", price: 251.09 },
-  { id: "bm-402-r9", section: "402", row: 9, type: "Resale - Upper Level", price: 258.23 },
+  { id: "bm-402-r9", section: "402", row: 9, type: "Resale - Upper Level", price: 153.23 },
   { id: "bm-426-r3", section: "426", row: 3, type: "Resale - Upper Level", price: 268.94 },
-  { id: "bm-426-r1", section: "426", row: 1, type: "Resale - Upper Level", price: 302.26 },
+  { id: "bm-426-r1", section: "426", row: 1, type: "Resale - Upper Level", price: 214.26 },
   { id: "bm-426-r18", section: "426", row: 18, type: "Resale - Upper Level", price: 305.83 },
-  { id: "bm-426-r14", section: "426", row: 14, type: "Resale - Upper Level", price: 312.97 },
+  { id: "bm-426-r14", section: "426", row: 14, type: "Resale - Upper Level", price: 220.97 },
   { id: "bm-429-r15", section: "429", row: 15, type: "Resale - Upper Level", price: 304.64 },
   { id: "bm-430-r20", section: "430", row: 20, type: "Resale - Upper Level", price: 324.87 },
-  { id: "bm-432-r3", section: "432", row: 3, type: "Resale - Upper Level", price: 362.95 },
+  { id: "bm-432-r3", section: "432", row: 3, type: "Resale - Upper Level", price: 226.95 },
   { id: "bm-451-r11", section: "451", row: 11, type: "Resale - Upper Level", price: 303.45 },
   { id: "bm-453-r17", section: "453", row: 17, type: "Resale - Upper Level", price: 280.84 },
-  // Club Level
   { id: "bm-319-r18", section: "319", row: 18, type: "Resale - Club Level", price: 272.51 },
   { id: "bm-319-r17", section: "319", row: 17, type: "Resale - Club Level", price: 274.89 },
   { id: "bm-303-r16", section: "303", row: 16, type: "Resale - Club Level", price: 276.08 },
   { id: "bm-303-r15", section: "303", row: 15, type: "Resale - Club Level", price: 277.27 },
-  { id: "bm-319-r14", section: "319", row: 14, type: "Resale - Club Level", price: 282.03 },
+  { id: "bm-319-r14", section: "319", row: 14, type: "Resale - Club Level", price: 130.03 },
   { id: "bm-303-r13", section: "303", row: 13, type: "Resale - Club Level", price: 286.79 },
   { id: "bm-401-r16", section: "401", row: 16, type: "Resale - Club Level", price: 289.17 },
-  { id: "bm-303-r11", section: "303", row: 11, type: "Resale - Club Level", price: 328.44 },
+  { id: "bm-303-r11", section: "303", row: 11, type: "Resale - Club Level", price: 228.44 },
   { id: "bm-219-r8", section: "219", row: 8, type: "Resale - Club Level", price: 337.96 },
   { id: "bm-326-r17", section: "326", row: 17, type: "Resale - Club Level", price: 360.57 },
   { id: "bm-320-r19", section: "320", row: 19, type: "Resale - Club Level", price: 367.71 },
@@ -218,7 +209,6 @@ const BRUNO_MARS_SEATS = [
   { id: "bm-338-r15", section: "338", row: 15, type: "Resale - Club Level", price: 464.10 },
   { id: "bm-226-r11", section: "226", row: 11, type: "Resale - Club Level", price: 434.35 },
   { id: "bm-228-r2", section: "228", row: 2, type: "Resale - Club Level", price: 418.88 },
-  // Lower Level
   { id: "bm-136-r20", section: "136", row: 20, type: "Resale - Lower Level", price: 380.80 },
   { id: "bm-127-r16", section: "127", row: 16, type: "Resale - Lower Level", price: 395.08 },
   { id: "bm-135-r14", section: "135", row: 14, type: "Resale - Lower Level", price: 399.84 },
@@ -257,7 +247,6 @@ const BRUNO_MARS_SEATS = [
   { id: "bm-101-r12", section: "101", row: 12, type: "Resale - Lower Level", price: 785.40 },
   { id: "bm-120-r5", section: "120", row: 5, type: "Resale - Lower Level", price: 850.85 },
   { id: "bm-121-r4", section: "121", row: 4, type: "Resale - Lower Level", price: 896.07 },
-  // Floor / Field
   { id: "bm-fielda10-r19", section: "FIELD A10", row: 19, type: "Resale - Floor/Field", price: 672.35 },
   { id: "bm-a9-r6", section: "A9", row: 6, type: "Resale - Floor/Field", price: 706.86 },
   { id: "bm-a7-r15", section: "A7", row: 15, type: "Resale - Floor/Field", price: 724.71 },
@@ -288,17 +277,86 @@ const BRUNO_MARS_SEATS = [
   { id: "bm-floora3-r9", section: "FLOOR A3", row: 9, type: "Resale - Floor/Field", price: 1970.64 },
 ] as const;
 
+// ─── CANADA SEATS ─────────────────────────────────────────────────────────────
+const CANADA_SEATS = [
+  { id: "ca-b1-r20", section: "B1", row: 20, type: "Featured - Standard", price: 118.13 },
+  { id: "ca-a2-r22", section: "A2", row: 22, type: "Featured - Standard", price: 265.40 },
+  { id: "ca-a2-r23", section: "A2", row: 23, type: "Featured - Standard", price: 165.40 },
+  { id: "ca-d1-r2", section: "D1", row: 2, type: "Verified Resale", price: 115.28 },
+  { id: "ca-w106-r36", section: "W106", row: 36, type: "Verified Resale", price: 243.60 },
+  { id: "ca-d5-r5a", section: "D5", row: 5, type: "Verified Resale", price: 201.20 },
+  { id: "ca-e124-r47", section: "E124", row: 47, type: "Verified Resale", price: 230.64 },
+  { id: "ca-d5-r5b", section: "D5", row: 5, type: "Verified Resale", price: 173.69 },
+  { id: "ca-d3-r5a", section: "D3", row: 5, type: "Verified Resale", price: 230.50 },
+  { id: "ca-c6-r26", section: "C6", row: 26, type: "Verified Resale", price: 170.50 },
+  { id: "ca-d3-r5b", section: "D3", row: 5, type: "Verified Resale", price: 150.80 },
+  { id: "ca-d3-r5c", section: "D3", row: 5, type: "Verified Resale", price: 282.00 },
+  { id: "ca-c2-r22a", section: "C2", row: 22, type: "Verified Resale", price: 284.40 },
+  { id: "ca-c6-r20", section: "C6", row: 20, type: "Verified Resale", price: 285.60 },
+  { id: "ca-d5-r4a", section: "D5", row: 4, type: "Verified Resale", price: 285.60 },
+  { id: "ca-c2-r13", section: "C2", row: 13, type: "Verified Resale", price: 287.28 },
+  { id: "ca-c7-r25", section: "C7", row: 25, type: "Verified Resale", price: 287.28 },
+  { id: "ca-d5-r1", section: "D5", row: 1, type: "Verified Resale", price: 287.28 },
+  { id: "ca-w104-r50", section: "W104", row: 50, type: "Verified Resale", price: 287.28 },
+  { id: "ca-d5-r4b", section: "D5", row: 4, type: "Verified Resale", price: 288.00 },
+  { id: "ca-e124-r44", section: "E124", row: 44, type: "Verified Resale", price: 296.40 },
+  { id: "ca-e123-r51", section: "E123", row: 51, type: "Verified Resale", price: 300.00 },
+  { id: "ca-w104-r29", section: "W104", row: 29, type: "Verified Resale", price: 306.00 },
+  { id: "ca-w103-r34", section: "W103", row: 34, type: "Verified Resale", price: 306.00 },
+  { id: "ca-e124-r41", section: "E124", row: 41, type: "Verified Resale", price: 206.00 },
+  { id: "ca-w103-r33", section: "W103", row: 33, type: "Verified Resale", price: 313.20 },
+  { id: "ca-c6-r6", section: "C6", row: 6, type: "Verified Resale", price: 313.20 },
+  { id: "ca-w104-r27", section: "W104", row: 27, type: "Verified Resale", price: 314.40 },
+  { id: "ca-e122-r36", section: "E122", row: 36, type: "Verified Resale", price: 214.40 },
+  { id: "ca-w104-r52", section: "W104", row: 52, type: "Verified Resale", price: 315.60 },
+  { id: "ca-c6-r5", section: "C6", row: 5, type: "Verified Resale", price: 318.00 },
+  { id: "ca-e124-r35", section: "E124", row: 35, type: "Verified Resale", price: 321.60 },
+  { id: "ca-w101-r54", section: "W101", row: 54, type: "Verified Resale", price: 322.80 },
+  { id: "ca-c2-r3", section: "C2", row: 3, type: "Verified Resale", price: 322.80 },
+  { id: "ca-e124-r30a", section: "E124", row: 30, type: "Verified Resale", price: 325.20 },
+  { id: "ca-e122-r33", section: "E122", row: 33, type: "Verified Resale", price: 327.60 },
+  { id: "ca-c2-r2a", section: "C2", row: 2, type: "Verified Resale", price: 327.60 },
+  { id: "ca-e125-r46", section: "E125", row: 46, type: "Verified Resale", price: 120.00 },
+  { id: "ca-e125-r47", section: "E125", row: 47, type: "Verified Resale", price: 330.00 },
+  { id: "ca-w101-r27", section: "W101", row: 27, type: "Verified Resale", price: 331.20 },
+  { id: "ca-w103-r37", section: "W103", row: 37, type: "Verified Resale", price: 331.20 },
+  { id: "ca-c6-r2", section: "C6", row: 2, type: "Verified Resale", price: 332.40 },
+  { id: "ca-c2-r2b", section: "C2", row: 2, type: "Verified Resale", price: 332.40 },
+  { id: "ca-w106-r6", section: "W106", row: 6, type: "Verified Resale", price: 126.00 },
+  { id: "ca-b2-r27", section: "B2", row: 27, type: "Verified Resale", price: 336.00 },
+  { id: "ca-c2-r2c", section: "C2", row: 2, type: "Verified Resale", price: 337.20 },
+  { id: "ca-w101-r51", section: "W101", row: 51, type: "Verified Resale", price: 338.40 },
+  { id: "ca-e124-r30b", section: "E124", row: 30, type: "Verified Resale", price: 342.00 },
+  { id: "ca-c3-r15", section: "C3", row: 15, type: "Verified Resale", price: 342.00 },
+  { id: "ca-w101-r45", section: "W101", row: 45, type: "Verified Resale", price: 344.40 },
+  { id: "ca-e124-r28", section: "E124", row: 28, type: "Verified Resale", price: 345.60 },
+  { id: "ca-e125-r42", section: "E125", row: 42, type: "Verified Resale", price: 345.60 },
+  { id: "ca-c5-r12", section: "C5", row: 12, type: "Verified Resale", price: 346.80 },
+  { id: "ca-w107-r4", section: "W107", row: 4, type: "Verified Resale", price: 348.00 },
+  { id: "ca-e125-r44", section: "E125", row: 44, type: "Verified Resale", price: 348.00 },
+  { id: "ca-b7-r28", section: "B7", row: 28, type: "Verified Resale", price: 350.40 },
+  { id: "ca-b6-r24", section: "B6", row: 24, type: "Verified Resale", price: 351.60 },
+  { id: "ca-c5-r7", section: "C5", row: 7, type: "Verified Resale", price: 351.60 },
+  { id: "ca-e119-r3", section: "E119", row: 3, type: "Verified Resale", price: 354.00 },
+  { id: "ca-e122-r31", section: "E122", row: 31, type: "Verified Resale", price: 354.00 },
+  { id: "ca-w101-r39", section: "W101", row: 39, type: "Verified Resale", price: 354.00 },
+  { id: "ca-e124-r43", section: "E124", row: 43, type: "Verified Resale", price: 354.00 },
+] as const;
+
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 type SombrSeat = (typeof SOMBR_SEATS)[number];
 type BrunoSeat = (typeof BRUNO_MARS_SEATS)[number];
-type AnySeat = SombrSeat | BrunoSeat;
+type CanadaSeat = (typeof CANADA_SEATS)[number];
+type AnySeat = SombrSeat | BrunoSeat | CanadaSeat;
 
 type SombrFilter = "Standard Admission" | "Artist Presale" | "HOMEWRECKER VIP PACKAGE" | "Official Platinum";
 type BrunoFilter = "Resale - Upper Level" | "Resale - Club Level" | "Resale - Lower Level" | "Resale - Floor/Field";
-type AnyFilter = SombrFilter | BrunoFilter;
+type CanadaFilter = "Featured - Standard" | "Verified Resale";
+type AnyFilter = SombrFilter | BrunoFilter | CanadaFilter;
 
 const SOMBR_FILTERS: SombrFilter[] = ["Standard Admission", "Artist Presale", "HOMEWRECKER VIP PACKAGE", "Official Platinum"];
 const BRUNO_FILTERS: BrunoFilter[] = ["Resale - Upper Level", "Resale - Club Level", "Resale - Lower Level", "Resale - Floor/Field"];
+const CANADA_FILTERS: CanadaFilter[] = ["Featured - Standard", "Verified Resale"];
 
 const VALID_PASSCODE = "POTENTIAL";
 const TM_BLUE = "#0064d2";
@@ -373,20 +431,12 @@ function SombrArenaMap() {
 function BrunoArenaMap() {
   return (
     <svg width="340" height="220" viewBox="0 0 680 440" style={{ display: "block", margin: "0 auto" }}>
-      {/* Outer stadium - gray upper sections */}
       <rect x="20" y="20" width="640" height="400" rx="80" fill="#d1d5db" stroke="#9ca3af" strokeWidth="2" />
-      {/* Club level - light blue */}
       <rect x="60" y="60" width="560" height="320" rx="60" fill="#93c5fd" stroke="#60a5fa" strokeWidth="1.5" />
-      {/* Lower level - blue */}
       <rect x="110" y="100" width="460" height="240" rx="40" fill="#3b82f6" stroke="#2563eb" strokeWidth="1.5" />
-      {/* Field - light */}
       <rect x="160" y="130" width="360" height="180" rx="20" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="1.5" />
-
-      {/* STAGE left side */}
       <rect x="30" y="170" width="80" height="100" rx="6" fill="#111827" />
       <text x="70" y="225" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">STAGE</text>
-
-      {/* Floor sections A1-A14 */}
       {[
         {n:"A1",x:175,y:145},{n:"A2",x:215,y:145},{n:"A3",x:255,y:145},{n:"A4",x:295,y:145},
         {n:"A5",x:335,y:145},{n:"A6",x:375,y:145},{n:"A7",x:415,y:145},{n:"A8",x:455,y:145},
@@ -398,63 +448,36 @@ function BrunoArenaMap() {
           <text x={s.x} y={s.y + 2} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
         </g>
       ))}
-
-      {/* Floor sections bottom */}
-      {[
-        {n:"A1",x:175,y:210},{n:"A2",x:215,y:210},{n:"A3",x:255,y:210},{n:"A4",x:295,y:210},
-        {n:"A5",x:335,y:210},{n:"A6",x:375,y:210},{n:"A7",x:415,y:210},{n:"A8",x:455,y:210},
-      ].map((s, i) => (
-        <g key={`bot-${i}`}>
-          <rect x={s.x - 17} y={s.y - 13} width="36" height="22" rx="3" fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.8" />
-          <text x={s.x} y={s.y + 2} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{s.n}</text>
-        </g>
-      ))}
-
-      {/* Lower sections top row */}
       {["119","120","121","122","123","124","125","126","127","128","129","130"].map((n, i) => (
         <text key={n} x={130 + i*35} y={118} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
       ))}
-      {/* Lower sections bottom row */}
       {["131","132","133","134","135","136","137","138","139","140","141","142"].map((n, i) => (
         <text key={n} x={130 + i*35} y={322} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
       ))}
-      {/* Lower left side */}
       {["101","102","103","104"].map((n, i) => (
         <text key={n} x={125} y={160 + i*28} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
       ))}
-      {/* Right side lower */}
       {["107","108","109","110"].map((n, i) => (
         <text key={n} x={555} y={160 + i*28} textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">{n}</text>
       ))}
-
-      {/* Club sections 200s top */}
       {["219","220","221","222","223","224","225","226","227","228"].map((n, i) => (
         <text key={n} x={100 + i*48} y={82} textAnchor="middle" fill="#1e3a8a" fontSize="9" fontWeight="bold">{n}</text>
       ))}
-      {/* Club sections 300s top */}
       {["319","320","321","322","323","324","325","326","327","328"].map((n, i) => (
         <text key={n} x={100 + i*48} y={48} textAnchor="middle" fill="#374151" fontSize="8" fontWeight="bold">{n}</text>
       ))}
-
-      {/* Upper sections 400s top */}
       {["424","425","426","427","428","429","430","431"].map((n, i) => (
         <text key={n} x={110 + i*58} y={28} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
       ))}
-      {/* Upper sections 400s bottom */}
       {["401","402","403","404","405","406","407","408"].map((n, i) => (
         <text key={n} x={110 + i*58} y={428} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
       ))}
-
-      {/* Left side sections */}
       {["450","451","452","453","454"].map((n, i) => (
         <text key={n} x={45} y={160 + i*22} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
       ))}
-      {/* Right side sections */}
       {["432","433","434","435","436"].map((n, i) => (
         <text key={n} x={635} y={160 + i*22} textAnchor="middle" fill="#6b7280" fontSize="8">{n}</text>
       ))}
-
-      {/* MIX label */}
       <rect x="488" y="203" width="30" height="16" rx="3" fill="#374151" />
       <text x="503" y="215" textAnchor="middle" fill="white" fontSize="8">MIX</text>
     </svg>
@@ -476,9 +499,11 @@ export default function SeatPage() {
   const time = search.get("time") ?? "7:00 PM";
   const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}`;
 
+  const isCanada = isBruno && (city.includes("Canada") || venue === "Rogers Stadium" || venue === "BC Place");
+
   const tourName = isBruno ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour";
-  const allSeats: readonly AnySeat[] = isBruno ? BRUNO_MARS_SEATS : SOMBR_SEATS;
-  const allTypes: AnyFilter[] = isBruno ? [...BRUNO_FILTERS] : [...SOMBR_FILTERS];
+  const allSeats: readonly AnySeat[] = isCanada ? CANADA_SEATS : isBruno ? BRUNO_MARS_SEATS : SOMBR_SEATS;
+  const allTypes: AnyFilter[] = isCanada ? [...CANADA_FILTERS] : isBruno ? [...BRUNO_FILTERS] : [...SOMBR_FILTERS];
 
   const [showPresaleModal, setShowPresaleModal] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -516,6 +541,8 @@ export default function SeatPage() {
   }, [filtered, sortBy, presaleUnlocked, unlockedPrices]);
 
   const typeColor = (type: string) => {
+    if (type === "Featured - Standard") return "#b45309";
+    if (type === "Verified Resale") return "#0891b2";
     if (type === "HOMEWRECKER VIP PACKAGE") return "#b45309";
     if (type === "Resale - Floor/Field") return "#7c3aed";
     if (type === "Resale - Lower Level") return TM_BLUE;
@@ -596,21 +623,22 @@ export default function SeatPage() {
         <button type="button" onClick={() => setShowFilterModal(true)} style={pillBase}>⚙ Filters</button>
       </div>
 
-      <div style={{ margin: "0 16px 10px", background: "#fff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-            <span>📢</span>
-            <span style={{ fontSize: 13, fontWeight: 900 }}>
-              {isBruno ? "RESALE TICKETS AVAILABLE!" : "PRESALE HAPPENING NOW!"}
-            </span>
+      {!isBruno && (
+        <div style={{ margin: "0 16px 10px", background: "#fff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span>📢</span>
+              <span style={{ fontSize: 13, fontWeight: 900 }}>PRESALE HAPPENING NOW!</span>
+            </div>
+            <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View Sales</span>
           </div>
-          <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View All</span>
         </div>
-      </div>
+      )}
 
       <div style={{ margin: "0 16px 10px", background: "#fff7ed", borderRadius: 10, padding: "10px 12px", border: "1px solid #fed7aa" }}>
         <p style={{ margin: 0, fontSize: 13, color: "#7c2d12", fontWeight: 700 }}>
           <strong>All-In Pricing:</strong> Prices include fees (before taxes).
+          {isCanada && <span> Prices shown in CA$.</span>}
         </p>
       </div>
 
@@ -627,7 +655,7 @@ export default function SeatPage() {
         </>
       )}
 
-      {isBruno && (
+      {isBruno && !isCanada && (
         <>
           <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -637,6 +665,19 @@ export default function SeatPage() {
             <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
           </div>
           <div style={{ margin: "0 16px", height: 3, background: "#7c3aed" }} />
+        </>
+      )}
+
+      {isCanada && (
+        <>
+          <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <span>🍁</span>
+              <strong style={{ fontSize: 15 }}>Canadian Venue Tickets</strong>
+            </div>
+            <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
+          </div>
+          <div style={{ margin: "0 16px", height: 3, background: "#dc2626" }} />
         </>
       )}
 
@@ -655,13 +696,17 @@ export default function SeatPage() {
                   {seat.type === "HOMEWRECKER VIP PACKAGE" ? <span>⭐ {seat.type}</span>
                     : seat.type === "Artist Presale" ? <span>🔒 {seat.type}</span>
                     : seat.type === "Resale - Floor/Field" ? <span>🎤 {seat.type}</span>
+                    : seat.type === "Featured - Standard" ? <span>⭐ {seat.type}</span>
+                    : seat.type === "Verified Resale" ? <span>✅ {seat.type}</span>
                     : seat.type}
                 </p>
                 {isBruno && <p style={{ margin: "2px 0 0", fontSize: 12, color: "#6b7280" }}>Mobile Entry</p>}
               </div>
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 {effective != null ? (
-                  <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>${effective.toFixed(2)}</p>
+                  <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>
+                    {isCanada ? "CA $" : "$"}{effective.toFixed(2)}
+                  </p>
                 ) : (
                   <button type="button" style={{ background: "#fff", border: `2px solid ${TM_BLUE}`, color: TM_BLUE, borderRadius: 10, padding: "8px 12px", fontSize: 13, cursor: "pointer", fontWeight: 950 }}
                     onClick={(e) => { e.stopPropagation(); setUnlockError(null); setShowPresaleModal(true); }}>
