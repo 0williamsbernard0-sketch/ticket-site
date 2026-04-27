@@ -185,41 +185,46 @@ export default function TourDatesPage() {
     router.push(`/waiting/${eventId}?${p.toString()}`);
   };
 
-  const renderDateList = (dates: DateEntry[]) => dates.map((event) => {
-    const parts = event.date.split(" ");
-    const month = parts[0];
-    const day = parts[1];
-    return (
-      <div key={event.id} style={{ borderBottom: "1px solid #e0e0e0", padding: "16px 20px", background: "white", marginBottom: 2 }}>
-     {!isBruno && (
-  <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#7b2fbe", letterSpacing: 0.5 }}>
-    PRESALE HAPPENING NOW
-  </p>
-)}
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div style={{ width: 56, minWidth: 56, textAlign: "center", border: "1px solid #ddd", borderRadius: 6, padding: "8px 0", background: "#fafafa" }}>
-            <p style={{ margin: 0, fontSize: 11, color: "#888", fontWeight: "bold" }}>{month}</p>
-            <p style={{ margin: "2px 0 0", fontSize: 24, fontWeight: "bold", lineHeight: 1 }}>{day}</p>
-          </div>
-          <div style={{ flex: 1 }}>
-            <p style={{ margin: 0, fontSize: 13, color: "#666" }}>{event.day} • {event.time}</p>
-            <p style={{ margin: "3px 0 0", fontSize: 16, fontWeight: "bold", color: "#111" }}>{event.city}</p>
-            <p style={{ margin: "2px 0 0", fontSize: 14, fontWeight: "600", color: "#333" }}>{event.venue}</p>
-            <p style={{ margin: "2px 0 6px", fontSize: 13, color: "#999" }}>{tourName}</p>
-            <button style={{ border: "1px solid #bbb", borderRadius: 20, padding: "6px 14px", fontSize: 13, background: "white", cursor: "pointer", color: "#333" }}>
-              Reminders 🔔
-            </button>
-          </div>
-          <button
-            onClick={() => handleSelect(event)}
-            style={{ width: 46, height: 46, minWidth: 46, borderRadius: "50%", background: "#0050d0", border: "none", color: "white", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,80,208,0.3)" }}
-          >
-            ›
+ const renderDateList = (dates: DateEntry[]) => dates.map((event) => {
+  const parts = event.date.split(" ");
+  const month = parts[0];
+  const day = parts[1];
+  return (
+    <div
+      key={event.id}
+      style={{ borderBottom: "1px solid #e0e0e0", padding: "16px 20px", background: "white", marginBottom: 2, cursor: "pointer" }}
+      onClick={() => handleSelect(event)}
+    >
+      {!isBruno && (
+        <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#7b2fbe", letterSpacing: 0.5 }}>
+          PRESALE HAPPENING NOW
+        </p>
+      )}
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ width: 56, minWidth: 56, textAlign: "center", border: "1px solid #ddd", borderRadius: 6, padding: "8px 0", background: "#fafafa" }}>
+          <p style={{ margin: 0, fontSize: 11, color: "#888", fontWeight: "bold" }}>{month}</p>
+          <p style={{ margin: "2px 0 0", fontSize: 24, fontWeight: "bold", lineHeight: 1 }}>{day}</p>
+        </div>
+        <div style={{ flex: 1 }}>
+          <p style={{ margin: 0, fontSize: 13, color: "#666" }}>{event.day} • {event.time}</p>
+          <p style={{ margin: "3px 0 0", fontSize: 16, fontWeight: "bold", color: "#111" }}>{event.city}</p>
+          <p style={{ margin: "2px 0 0", fontSize: 14, fontWeight: "600", color: "#333" }}>{event.venue}</p>
+          <p style={{ margin: "2px 0 6px", fontSize: 13, color: "#999" }}>{tourName}</p>
+          <button style={{ border: "1px solid #bbb", borderRadius: 20, padding: "6px 14px", fontSize: 13, background: "white", cursor: "pointer", color: "#333" }}>
+            Reminders 🔔
           </button>
         </div>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); handleSelect(event); }}
+          style={{ width: 46, height: 46, minWidth: 46, borderRadius: "50%", background: "#0050d0", border: "none", color: "white", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,80,208,0.3)" }}
+        >
+          ›
+        </button>
       </div>
-    );
-  });
+    </div>
+  );
+});
 
   return (
     <div style={{ fontFamily: "Arial", background: "#f5f5f5", minHeight: "100vh" }}>
