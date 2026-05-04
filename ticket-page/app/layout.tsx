@@ -15,11 +15,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SOMBR - You Are The Reason Tour",
-  description: "Get tickets for the SOMBR You Are The Reason Tour at venues across the US.",
+  title: "BMars - Buy Verified Tickets for Concerts,Sports,Theater and Events.",
+  description: "Get tickets for all your Favorite Concerts  across the World.",
   openGraph: {
-    title: "SOMBR - You Are The Reason Tour",
-    description: "Get tickets for the SOMBR You Are The Reason Tour at venues across the US.",
+    title: "BMars - Buy Verified Tickets for Concerts,Sports,Theater and Event.",
+    description: "Get tickets for all your Favorite Concerts  across the World.",
     url: "https://sombr.vercel.app",
     siteName: "SOMBR Tickets",
     images: [
@@ -27,15 +27,15 @@ export const metadata: Metadata = {
         url: "https://sombr.vercel.app/og-image.png", // 👈 full URL, not /og-image.png
         width: 1200,
         height: 630,
-        alt: "SOMBR - You Are The Reason Tour",
+        alt: "BMars - Get Your Concert Tickets",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "SOMBR - You Are The Reason Tour",
-    description: "Get tickets for the SOMBR You Are The Reason Tour at venues across the US.",
+    title: "BMars - Buy Verified Tickets for Concerts,Sports,Theater and Events.",
+     description: "Get tickets for all your Favorite Concerts  across the World.",
     images: ["https://sombr.vercel.app/og-image.png"], // 👈 same here
   },
 };
