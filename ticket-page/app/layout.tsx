@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "BMars - Buy Verified Tickets for Concerts,Sports,Theater and Event.",
     description: "Get tickets for all your Favorite Concerts  across the World.",
-    url: "https://sombr.vercel.app",
+    url: "https://BMars.vercel.app",
     siteName: "SOMBR Tickets",
     images: [
       {
