@@ -41,4 +41,12 @@ export const events: Event[] = [
   price: 200,
   image: "https://images.unsplash.com/photo-1501612780327-45045538702b",
 },
+  {
+    id: "oof-tatata",
+    name: "OOF TATATA",
+    date: "2026-06-12",
+    location: "Auckland, New Zealand",
+    price: 50,
+    image: "/oof-tatata.jpg",
+  },
 ];
