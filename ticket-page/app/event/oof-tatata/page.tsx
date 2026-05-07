@@ -33,9 +33,9 @@ export default function OofTatatePage() {
 
       {/* EVENT HEADER */}
       <div style={{ display: "flex", gap: 16, padding: "20px 16px", alignItems: "flex-start" }}>
-        <div style={{ width: 110, height: 110, background: "#222", borderRadius: 8, flexShrink: 0, overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <span style={{ color: "white", fontSize: 11, fontWeight: 900, textAlign: "center", padding: 8 }}>OOF TATATA</span>
-        </div>
+        <div style={{ width: 110, height: 110, borderRadius: 8, flexShrink: 0, overflow: "hidden" }}>
+  <img src="/oof-tatata.jpg" alt="OOF TATATA" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+</div>
         <div>
           <h1 style={{ margin: 0, fontSize: 22, fontWeight: 900 }}>OOF TATATA</h1>
           <p style={{ margin: "6px 0 0", fontSize: 14, color: "#333" }}>7:00pm, Fri 12 June, 2026</p>
