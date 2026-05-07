@@ -195,7 +195,7 @@ export default function CheckoutPage() {
               {isOof ? (
                 <>
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14 }}>
-                    <span style={{ fontWeight: 800, color: "#374151" }}>${PRICE.toFixed(2)} × {quantity}</span>
+                    <span style={{ fontWeight: 800, color: "#374151" }}>${price.toFixed(2)} × {quantity}</span>
                     <span style={{ fontWeight: 950 }}>{money(oofSubtotal, true)}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: 14, marginTop: 10 }}>
