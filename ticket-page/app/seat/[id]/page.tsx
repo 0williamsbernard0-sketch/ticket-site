@@ -650,7 +650,11 @@ const isBottleRock = eventId === "bottlerock";
 const bottleRockDay = date === "MAY 22" ? "fri" : date === "MAY 23" ? "sat" : "sun";
 
 
-  const tourName = isBruno ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour";
+  const tourName = isBottleRock
+  ? "BottleRock Napa Valley"
+  : isBruno
+  ? "Bruno Mars - The Romantic Tour"
+  : "SOMBR - You Are The Reason Tour";
   const allSeats: readonly AnySeat[] = isBottleRock
   ? bottleRockDay === "fri" ? BOTTLEROCK_SEATS_FRI
   : bottleRockDay === "sat" ? BOTTLEROCK_SEATS_SAT
