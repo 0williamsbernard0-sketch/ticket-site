@@ -343,6 +343,68 @@ const CANADA_SEATS = [
   { id: "ca-e124-r43", section: "E124", row: 43, type: "Verified Resale", price: 354.00 },
 ] as const;
 
+// ─── BOTTLEROCK SEATS ─────────────────────────────────────────────────────────
+const BOTTLEROCK_SEATS_FRI = [
+  { id: "br-fri-ga1", section: "GA", row: "GA", type: "General Admission", price: 205 },
+  { id: "br-fri-ga2", section: "GA", row: "GA", type: "General Admission", price: 215 },
+  { id: "br-fri-ga3", section: "GA", row: "GA", type: "General Admission", price: 225 },
+  { id: "br-fri-ga4", section: "GA", row: "GA", type: "General Admission", price: 235 },
+  { id: "br-fri-ga5", section: "GA", row: "GA", type: "General Admission", price: 245 },
+  { id: "br-fri-ga6", section: "GA", row: "GA", type: "General Admission", price: 255 },
+  { id: "br-fri-ga7", section: "GA", row: "GA", type: "General Admission", price: 265 },
+  { id: "br-fri-ga8", section: "GA", row: "GA", type: "General Admission", price: 275 },
+  { id: "br-fri-ga9", section: "GA", row: "GA", type: "General Admission", price: 285 },
+  { id: "br-fri-vip1", section: "VIP", row: "VIP", type: "VIP", price: 501 },
+  { id: "br-fri-vip2", section: "VIP", row: "GA", type: "VIP", price: 506 },
+  { id: "br-fri-vip3", section: "VIP", row: "VID", type: "VIP", price: 403 },
+  { id: "br-fri-vip4", section: "VIP", row: "GA", type: "VIP", price: 614 },
+  { id: "br-fri-vip5", section: "VIP", row: "VIP1", type: "VIP", price: 568 },
+  { id: "br-fri-vip6", section: "VIP", row: "GA", type: "VIP", price: 2014 },
+  { id: "br-fri-sky1", section: "SKYDECK", row: "GA", type: "SkyDeck", price: 6186 },
+  { id: "br-fri-back1", section: "BACKSTAGE", row: "B1", type: "Backstage", price: 120 },
+  { id: "br-fri-back2", section: "BACKSTAGE", row: "B2", type: "Backstage", price: 135 },
+] as const;
+
+const BOTTLEROCK_SEATS_SAT = [
+  { id: "br-sat-ga1", section: "GA", row: "GA", type: "General Admission", price: 195 },
+  { id: "br-sat-ga2", section: "GA", row: "GA", type: "General Admission", price: 210 },
+  { id: "br-sat-ga3", section: "GA", row: "GA", type: "General Admission", price: 220 },
+  { id: "br-sat-ga4", section: "GA", row: "GA", type: "General Admission", price: 240 },
+  { id: "br-sat-ga5", section: "GA", row: "GA", type: "General Admission", price: 250 },
+  { id: "br-sat-ga6", section: "GA", row: "GA", type: "General Admission", price: 260 },
+  { id: "br-sat-ga7", section: "GA", row: "GA", type: "General Admission", price: 270 },
+  { id: "br-sat-ga8", section: "GA", row: "GA", type: "General Admission", price: 290 },
+  { id: "br-sat-vip1", section: "VIP", row: "VIP", type: "VIP", price: 490 },
+  { id: "br-sat-vip2", section: "VIP", row: "GA", type: "VIP", price: 515 },
+  { id: "br-sat-vip3", section: "VIP", row: "VID", type: "VIP", price: 395 },
+  { id: "br-sat-vip4", section: "VIP", row: "GA", type: "VIP", price: 625 },
+  { id: "br-sat-vip5", section: "VIP", row: "VIP1", type: "VIP", price: 580 },
+  { id: "br-sat-vip6", section: "VIP", row: "GA", type: "VIP", price: 1980 },
+  { id: "br-sat-sky1", section: "SKYDECK", row: "GA", type: "SkyDeck", price: 6250 },
+  { id: "br-sat-back1", section: "BACKSTAGE", row: "B1", type: "Backstage", price: 115 },
+  { id: "br-sat-back2", section: "BACKSTAGE", row: "B2", type: "Backstage", price: 140 },
+] as const;
+
+const BOTTLEROCK_SEATS_SUN = [
+  { id: "br-sun-ga1", section: "GA", row: "GA", type: "General Admission", price: 200 },
+  { id: "br-sun-ga2", section: "GA", row: "GA", type: "General Admission", price: 218 },
+  { id: "br-sun-ga3", section: "GA", row: "GA", type: "General Admission", price: 228 },
+  { id: "br-sun-ga4", section: "GA", row: "GA", type: "General Admission", price: 238 },
+  { id: "br-sun-ga5", section: "GA", row: "GA", type: "General Admission", price: 248 },
+  { id: "br-sun-ga6", section: "GA", row: "GA", type: "General Admission", price: 258 },
+  { id: "br-sun-ga7", section: "GA", row: "GA", type: "General Admission", price: 268 },
+  { id: "br-sun-ga8", section: "GA", row: "GA", type: "General Admission", price: 278 },
+  { id: "br-sun-vip1", section: "VIP", row: "VIP", type: "VIP", price: 510 },
+  { id: "br-sun-vip2", section: "VIP", row: "GA", type: "VIP", price: 495 },
+  { id: "br-sun-vip3", section: "VIP", row: "VID", type: "VIP", price: 415 },
+  { id: "br-sun-vip4", section: "VIP", row: "GA", type: "VIP", price: 598 },
+  { id: "br-sun-vip5", section: "VIP", row: "VIP1", type: "VIP", price: 555 },
+  { id: "br-sun-vip6", section: "VIP", row: "GA", type: "VIP", price: 2050 },
+  { id: "br-sun-sky1", section: "SKYDECK", row: "GA", type: "SkyDeck", price: 6100 },
+  { id: "br-sun-back1", section: "BACKSTAGE", row: "B1", type: "Backstage", price: 125 },
+  { id: "br-sun-back2", section: "BACKSTAGE", row: "B2", type: "Backstage", price: 130 },
+] as const;
+
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 type SombrSeat = (typeof SOMBR_SEATS)[number];
 type BrunoSeat = (typeof BRUNO_MARS_SEATS)[number];
@@ -352,7 +414,9 @@ type AnySeat = SombrSeat | BrunoSeat | CanadaSeat;
 type SombrFilter = "Standard Admission" | "Artist Presale" | "HOMEWRECKER VIP PACKAGE" | "Official Platinum";
 type BrunoFilter = "Resale - Upper Level" | "Resale - Club Level" | "Resale - Lower Level" | "Resale - Floor/Field";
 type CanadaFilter = "Featured - Standard" | "Verified Resale";
-type AnyFilter = SombrFilter | BrunoFilter | CanadaFilter;
+type BottleRockFilter = "General Admission" | "VIP" | "SkyDeck" | "Backstage";
+type AnyFilter = SombrFilter | BrunoFilter | CanadaFilter | BottleRockFilter;
+const BOTTLEROCK_FILTERS: BottleRockFilter[] = ["General Admission", "VIP", "SkyDeck", "Backstage"];
 
 const SOMBR_FILTERS: SombrFilter[] = ["Standard Admission", "Artist Presale", "HOMEWRECKER VIP PACKAGE", "Official Platinum"];
 const BRUNO_FILTERS: BrunoFilter[] = ["Resale - Upper Level", "Resale - Club Level", "Resale - Lower Level", "Resale - Floor/Field"];
@@ -482,6 +546,34 @@ function BrunoArenaMap() {
       <text x="503" y="215" textAnchor="middle" fill="white" fontSize="8">MIX</text>
     </svg>
   );
+
+}
+function BottleRockMap() {
+  return (
+    <svg width="340" height="200" viewBox="0 0 680 400" style={{ display: "block", margin: "0 auto" }}>
+      <rect x="10" y="10" width="660" height="380" rx="20" fill="#86efac" stroke="#16a34a" strokeWidth="2" />
+      <rect x="240" y="20" width="200" height="70" rx="8" fill="#111827" />
+      <text x="340" y="62" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">MAIN STAGE</text>
+      <rect x="130" y="105" width="420" height="140" rx="8" fill="#fde68a" stroke="#f59e0b" strokeWidth="2" />
+      <text x="340" y="182" textAnchor="middle" fill="#92400e" fontSize="14" fontWeight="bold">GENERAL ADMISSION</text>
+      <rect x="30" y="105" width="90" height="140" rx="8" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2" />
+      <text x="75" y="178" textAnchor="middle" fill="#4c1d95" fontSize="10" fontWeight="bold">VIP</text>
+      <rect x="560" y="105" width="90" height="140" rx="8" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="2" />
+      <text x="605" y="178" textAnchor="middle" fill="#4c1d95" fontSize="10" fontWeight="bold">VIP</text>
+      <rect x="190" y="258" width="300" height="60" rx="8" fill="#67e8f9" stroke="#0891b2" strokeWidth="2" />
+      <text x="340" y="294" textAnchor="middle" fill="#164e63" fontSize="13" fontWeight="bold">SKYDECK</text>
+      <rect x="250" y="330" width="180" height="40" rx="6" fill="#374151" />
+      <text x="340" y="356" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">BACKSTAGE</text>
+      <rect x="22" y="340" width="10" height="10" fill="#fde68a" stroke="#f59e0b" strokeWidth="1" />
+      <text x="38" y="350" fill="#374151" fontSize="9" fontWeight="bold">GA</text>
+      <rect x="65" y="340" width="10" height="10" fill="#c4b5fd" stroke="#7c3aed" strokeWidth="1" />
+      <text x="81" y="350" fill="#374151" fontSize="9" fontWeight="bold">VIP</text>
+      <rect x="115" y="340" width="10" height="10" fill="#67e8f9" stroke="#0891b2" strokeWidth="1" />
+      <text x="131" y="350" fill="#374151" fontSize="9" fontWeight="bold">SkyDeck</text>
+      <rect x="185" y="340" width="10" height="10" fill="#374151" />
+      <text x="201" y="350" fill="#374151" fontSize="9" fontWeight="bold">Backstage</text>
+    </svg>
+  );
 }
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
@@ -500,10 +592,20 @@ export default function SeatPage() {
   const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}`;
 
   const isCanada = isBruno && (city.includes("Canada") || venue === "Rogers Stadium" || venue === "BC Place");
+const isBottleRock = eventId === "bottlerock";
+const bottleRockDay = date === "MAY 22" ? "fri" : date === "MAY 23" ? "sat" : "sun";
+
 
   const tourName = isBruno ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour";
-  const allSeats: readonly AnySeat[] = isCanada ? CANADA_SEATS : isBruno ? BRUNO_MARS_SEATS : SOMBR_SEATS;
-  const allTypes: AnyFilter[] = isCanada ? [...CANADA_FILTERS] : isBruno ? [...BRUNO_FILTERS] : [...SOMBR_FILTERS];
+  const allSeats: readonly AnySeat[] = isBottleRock
+  ? bottleRockDay === "fri" ? BOTTLEROCK_SEATS_FRI
+  : bottleRockDay === "sat" ? BOTTLEROCK_SEATS_SAT
+  : BOTTLEROCK_SEATS_SUN
+  : isCanada ? CANADA_SEATS
+  : isBruno ? BRUNO_MARS_SEATS
+  : SOMBR_SEATS;
+const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada ? [...CANADA_FILTERS] : isBruno ? [...BRUNO_FILTERS] : [...SOMBR_FILTERS];
+
 
   const [showPresaleModal, setShowPresaleModal] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -541,6 +643,10 @@ export default function SeatPage() {
   }, [filtered, sortBy, presaleUnlocked, unlockedPrices]);
 
   const typeColor = (type: string) => {
+    if (type === "VIP") return "#7c3aed";
+    if (type === "SkyDeck") return "#0891b2";
+    if (type === "Backstage") return "#374151";
+    if (type === "General Admission" && isBottleRock) return "#92400e";
     if (type === "Featured - Standard") return "#b45309";
     if (type === "Verified Resale") return "#0891b2";
     if (type === "HOMEWRECKER VIP PACKAGE") return "#b45309";
@@ -609,7 +715,7 @@ export default function SeatPage() {
         <button type="button" style={{ background: "#fff", border: "1px solid #cbd5e1", borderRadius: 999, padding: "10px 16px", fontSize: 13, fontWeight: 900, color: TM_TEXT, cursor: "pointer", marginBottom: 12, width: "100%", maxWidth: 520 }}>
           ⇄ Switch to Map
         </button>
-        {isBruno ? <BrunoArenaMap /> : <SombrArenaMap />}
+        {isBottleRock ? <BottleRockMap /> : isBruno ? <BrunoArenaMap /> : <SombrArenaMap />}
       </div>
 
       <div style={{ padding: "12px 16px", display: "flex", gap: 10 }}>
@@ -623,17 +729,29 @@ export default function SeatPage() {
         <button type="button" onClick={() => setShowFilterModal(true)} style={pillBase}>⚙ Filters</button>
       </div>
 
-      {!isBruno && (
-        <div style={{ margin: "0 16px 10px", background: "#fff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <span>📢</span>
-              <span style={{ fontSize: 13, fontWeight: 900 }}>PRESALE HAPPENING NOW!</span>
-            </div>
-            <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View Sales</span>
-          </div>
-        </div>
-      )}
+     {!isBruno && !isBottleRock && (
+  <div style={{ margin: "0 16px 10px", background: "#fff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <span>📢</span>
+        <span style={{ fontSize: 13, fontWeight: 900 }}>PRESALE HAPPENING NOW!</span>
+      </div>
+      <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View Sales</span>
+    </div>
+  </div>
+)}
+{isBottleRock && (
+  <div style={{ margin: "0 16px 10px", background: "#f0fdf4", borderRadius: 10, padding: "12px 14px", border: "1px solid #86efac" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <span>🎪</span>
+        <span style={{ fontSize: 13, fontWeight: 900, color: "#166534" }}>RESALE TICKETS AVAILABLE</span>
+      </div>
+      <span style={{ color: "#16a34a", fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View All</span>
+    </div>
+  </div>
+)}
+
 
       <div style={{ margin: "0 16px 10px", background: "#fff7ed", borderRadius: 10, padding: "10px 12px", border: "1px solid #fed7aa" }}>
         <p style={{ margin: 0, fontSize: 13, color: "#7c2d12", fontWeight: 700 }}>
@@ -698,6 +816,9 @@ export default function SeatPage() {
                     : seat.type === "Resale - Floor/Field" ? <span>🎤 {seat.type}</span>
                     : seat.type === "Featured - Standard" ? <span>⭐ {seat.type}</span>
                     : seat.type === "Verified Resale" ? <span>✅ {seat.type}</span>
+                     : seat.type === "VIP" ? <span>💜 {seat.type}</span>
+                     : seat.type === "SkyDeck" ? <span>🌤 {seat.type}</span>
+                     : seat.type === "Backstage" ? <span>🎭 {seat.type}</span>
                     : seat.type}
                 </p>
                 {isBruno && <p style={{ margin: "2px 0 0", fontSize: 12, color: "#6b7280" }}>Mobile Entry</p>}
