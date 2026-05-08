@@ -53,11 +53,9 @@ export default function CheckoutPage() {
   const day = search.get("day") ?? (isBruno ? "Fri" : isOof ? "Fri" : "Mon");
   const time = search.get("time") ?? "7:00 PM";
 
-  const tourName = isOof
-    ? "OOF TATATA"
-    : isBruno
-    ? "Bruno Mars - The Romantic Tour"
-    : "SOMBR - You Are The Reason Tour";
+  const isBottleRock = eventId === "bottlerock";
+const tourName = isOof ? "OOF TATATA" : isBruno ? "Bruno Mars - The Romantic Tour" : isBottleRock ? "BottleRock Napa Valley" : "SOMBR - You Are The Reason Tour";
+
 
   // OOF TATATA uses pre-calculated total with NZD transaction fee
   const TRANSACTION_FEE = 4.30;
