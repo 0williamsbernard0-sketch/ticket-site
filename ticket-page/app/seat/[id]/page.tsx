@@ -338,9 +338,6 @@ const CANADA_SEATS = [
   { id: "ca-b6-r24", section: "B6", row: 24, type: "Verified Resale", price: 351.60 },
   { id: "ca-c5-r7", section: "C5", row: 7, type: "Verified Resale", price: 351.60 },
   { id: "ca-e119-r3", section: "E119", row: 3, type: "Verified Resale", price: 354.00 },
-  { id: "ca-e122-r31", section: "E122", row: 31, type: "Verified Resale", price: 354.00 },
-  { id: "ca-w101-r39", section: "W101", row: 39, type: "Verified Resale", price: 354.00 },
-  { id: "ca-e124-r43", section: "E124", row: 43, type: "Verified Resale", price: 354.00 },
 ] as const;
 
 // ─── BOTTLEROCK SEATS ─────────────────────────────────────────────────────────
@@ -409,18 +406,75 @@ const BOTTLEROCK_SEATS_SUN = [
 type SombrSeat = (typeof SOMBR_SEATS)[number];
 type BrunoSeat = (typeof BRUNO_MARS_SEATS)[number];
 type CanadaSeat = (typeof CANADA_SEATS)[number];
-type AnySeat = SombrSeat | BrunoSeat | CanadaSeat;
 
-type SombrFilter = "Standard Admission" | "Artist Presale" | "HOMEWRECKER VIP PACKAGE" | "Official Platinum";
-type BrunoFilter = "Resale - Upper Level" | "Resale - Club Level" | "Resale - Lower Level" | "Resale - Floor/Field";
-type CanadaFilter = "Featured - Standard" | "Verified Resale";
-type BottleRockFilter = "General Admission" | "VIP" | "SkyDeck" | "Backstage";
-type AnyFilter = SombrFilter | BrunoFilter | CanadaFilter | BottleRockFilter;
-const BOTTLEROCK_FILTERS: BottleRockFilter[] = ["General Admission", "VIP", "SkyDeck", "Backstage"];
+type BottleRockFriSeat = (typeof BOTTLEROCK_SEATS_FRI)[number];
+type BottleRockSatSeat = (typeof BOTTLEROCK_SEATS_SAT)[number];
+type BottleRockSunSeat = (typeof BOTTLEROCK_SEATS_SUN)[number];
 
-const SOMBR_FILTERS: SombrFilter[] = ["Standard Admission", "Artist Presale", "HOMEWRECKER VIP PACKAGE", "Official Platinum"];
-const BRUNO_FILTERS: BrunoFilter[] = ["Resale - Upper Level", "Resale - Club Level", "Resale - Lower Level", "Resale - Floor/Field"];
-const CANADA_FILTERS: CanadaFilter[] = ["Featured - Standard", "Verified Resale"];
+type BottleRockSeat =
+  | BottleRockFriSeat
+  | BottleRockSatSeat
+  | BottleRockSunSeat;
+
+type AnySeat =
+  | SombrSeat
+  | BrunoSeat
+  | CanadaSeat
+  | BottleRockSeat;
+
+type SombrFilter =
+  | "Standard Admission"
+  | "Artist Presale"
+  | "HOMEWRECKER VIP PACKAGE"
+  | "Official Platinum";
+
+type BrunoFilter =
+  | "Resale - Upper Level"
+  | "Resale - Club Level"
+  | "Resale - Lower Level"
+  | "Resale - Floor/Field";
+
+type CanadaFilter =
+  | "Featured - Standard"
+  | "Verified Resale";
+
+type BottleRockFilter =
+  | "General Admission"
+  | "VIP"
+  | "SkyDeck"
+  | "Backstage";
+
+type AnyFilter =
+  | SombrFilter
+  | BrunoFilter
+  | CanadaFilter
+  | BottleRockFilter;
+
+const BOTTLEROCK_FILTERS: BottleRockFilter[] = [
+  "General Admission",
+  "VIP",
+  "SkyDeck",
+  "Backstage",
+];
+
+const SOMBR_FILTERS: SombrFilter[] = [
+  "Standard Admission",
+  "Artist Presale",
+  "HOMEWRECKER VIP PACKAGE",
+  "Official Platinum",
+];
+
+const BRUNO_FILTERS: BrunoFilter[] = [
+  "Resale - Upper Level",
+  "Resale - Club Level",
+  "Resale - Lower Level",
+  "Resale - Floor/Field",
+];
+
+const CANADA_FILTERS: CanadaFilter[] = [
+  "Featured - Standard",
+  "Verified Resale",
+];
 
 const VALID_PASSCODE = "POTENTIAL";
 const TM_BLUE = "#0064d2";
