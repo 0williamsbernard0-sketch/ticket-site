@@ -4,15 +4,11 @@ import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 // ─── SOMBR DATA ───────────────────────────────────────────────────────────────
-
 const SOMBR_DATES = [
-  // ── International ──
   { id: "sombr-mexico", date: "JUL 22", day: "Wed", time: "9:00 PM", city: "México, CDMX, Mexico", venue: "Pepsi Center" },
-  // ── Summer ──
   { id: "sombr-redrocks1", date: "JUL 26", day: "Sun", time: "7:00 PM", city: "Morrison, CO", venue: "Red Rocks Amphitheatre" },
   { id: "sombr-redrocks2", date: "JUL 27", day: "Mon", time: "7:30 PM", city: "Morrison, CO", venue: "Red Rocks Amphitheatre" },
   { id: "sombr-lolla", date: "JUL 30", day: "Thu", time: "11:00 AM", city: "Chicago, IL", venue: "Grant Park – Lollapalooza" },
-  // ── Fall Tour ──
   { id: "sombr-seattle", date: "OCT 01", day: "Thu", time: "7:00 PM", city: "Seattle, WA", venue: "Climate Pledge Arena" },
   { id: "sombr-portland", date: "OCT 02", day: "Fri", time: "7:30 PM", city: "Portland, OR", venue: "Moda Center" },
   { id: "sombr-sacramento", date: "OCT 06", day: "Tue", time: "7:30 PM", city: "Sacramento, CA", venue: "Golden 1 Center" },
@@ -63,7 +59,6 @@ const SOMBR_REVIEWS = [
 ];
 
 // ─── BRUNO MARS DATA ──────────────────────────────────────────────────────────
-
 const BRUNO_MARS_DATES_US = [
   { id: "bm-charlotte", date: "APR 29", day: "Wed", time: "7:00 PM", city: "Charlotte, NC", venue: "Bank of America Stadium" },
   { id: "bm-landover1", date: "MAY 02", day: "Sat", time: "7:00 PM", city: "Landover, MD", venue: "Northwest Stadium" },
@@ -154,24 +149,51 @@ const BRUNO_MARS_REVIEWS = [
   { name: "Andre T.", date: "Oct 2026", stars: 5, text: "When he opened with Uptown Funk the whole stadium erupted. Three hours of pure entertainment. Bruno Mars is one of the greatest performers alive, full stop." },
 ];
 
-// ─── COMPONENT ────────────────────────────────────────────────────────────────
+// ─── BOTTLEROCK DATA ──────────────────────────────────────────────────────────
+const BOTTLEROCK_DATES = [
+  { id: "br-fri", date: "MAY 22", day: "Fri", time: "11:30 AM", city: "Napa, CA", venue: "Napa Valley Expo", headline: "Lorde, Teddy Swims, Lil Wayne" },
+  { id: "br-sat", date: "MAY 23", day: "Sat", time: "11:30 AM", city: "Napa, CA", venue: "Napa Valley Expo", headline: "Post Malone, Hozier, Doechii" },
+  { id: "br-sun", date: "MAY 24", day: "Sun", time: "11:30 AM", city: "Napa, CA", venue: "Napa Valley Expo", headline: "Green Day, Gracie Abrams, Jelly Roll" },
+];
 
+const BOTTLEROCK_ABOUT = `With its unique combination of phenomenal live music acts, iconic wineries, and world-renowned culinary foods, you won't find a more sensational event around than the BottleRock Festival. All of the action is going down at the Napa Valley Expo in Napa, California, and with BottleRock Napa tickets you can be one of the lucky to experience four days of Northern California heaven.
+
+Everyone from the comedians to the food to the musicians is custom-picked to be enjoyed in the idyllic Napa atmosphere, and the diversified BottleRock lineup features everything from country to rock to hip-hop and folk. This one-of-a-kind festival is all-encompassing, but it's even better when you consider that it's all happening live in downtown Napa.
+
+BottleRock is more than a music festival — it's a full sensory experience. World-class chefs, award-winning wineries, and craft beverage makers line the grounds, making every moment between sets just as memorable as the performances themselves.`;
+
+const BOTTLEROCK_REVIEWS = [
+  { name: "Rachel T.", date: "May 2025", stars: 5, text: "BottleRock is the perfect festival — incredible music, amazing food, and the Napa scenery makes it all magical. Went all three days and would do it every year." },
+  { name: "David K.", date: "May 2025", stars: 5, text: "This was our fourth year attending and it just keeps getting better. The lineup, the wine, the food — it's a bucket list festival. Already have tickets for next year." },
+  { name: "Serena M.", date: "May 2025", stars: 5, text: "Flew in from NYC specifically for BottleRock. The atmosphere is unlike any other festival I've been to. Relaxed, beautiful, world-class entertainment." },
+  { name: "Tom B.", date: "May 2025", stars: 4, text: "Fantastic event top to bottom. The VIP experience is worth every penny — private viewing areas and exclusive food/wine pairings made it unforgettable." },
+  { name: "Yuki N.", date: "May 2025", stars: 5, text: "Best festival in America, no contest. The combination of music and culinary experiences is something you can only get at BottleRock. Absolutely stunning weekend." },
+  { name: "Marcus P.", date: "May 2025", stars: 5, text: "Saw three days of incredible headliners, ate food from James Beard-nominated chefs, and drank some of the best wine in the world. BottleRock delivers every time." },
+];
+
+// ─── COMPONENT ────────────────────────────────────────────────────────────────
 type Tab = "CONCERTS" | "ABOUT" | "REVIEWS";
-type DateEntry = { id: string; date: string; day: string; time: string; city: string; venue: string };
+type DateEntry = { id: string; date: string; day: string; time: string; city: string; venue: string; headline?: string };
 
 export default function TourDatesPage() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const eventId = params?.id ?? "sombr";
   const isBruno = eventId === "bruno-mars";
+  const isBottleRock = eventId === "bottlerock";
 
   const [activeTab, setActiveTab] = useState<Tab>("CONCERTS");
   const [showIntl, setShowIntl] = useState(false);
 
-  const tourName = isBruno ? "Bruno Mars - The Romantic Tour" : "SOMBR - You Are The Reason Tour";
-  const aboutText = isBruno ? BRUNO_MARS_ABOUT : SOMBR_ABOUT;
-  const reviews = isBruno ? BRUNO_MARS_REVIEWS : SOMBR_REVIEWS;
-  const usDates: DateEntry[] = isBruno ? BRUNO_MARS_DATES_US : SOMBR_DATES;
+  const tourName = isBottleRock
+    ? "BottleRock Napa Valley"
+    : isBruno
+    ? "Bruno Mars - The Romantic Tour"
+    : "SOMBR - You Are The Reason Tour";
+
+  const aboutText = isBottleRock ? BOTTLEROCK_ABOUT : isBruno ? BRUNO_MARS_ABOUT : SOMBR_ABOUT;
+  const reviews = isBottleRock ? BOTTLEROCK_REVIEWS : isBruno ? BRUNO_MARS_REVIEWS : SOMBR_REVIEWS;
+  const usDates: DateEntry[] = isBottleRock ? BOTTLEROCK_DATES : isBruno ? BRUNO_MARS_DATES_US : SOMBR_DATES;
   const intlDates: DateEntry[] = isBruno ? BRUNO_MARS_DATES_INTL : [];
 
   const handleSelect = (event: DateEntry) => {
@@ -185,60 +207,102 @@ export default function TourDatesPage() {
     router.push(`/waiting/${eventId}?${p.toString()}`);
   };
 
- const renderDateList = (dates: DateEntry[]) => dates.map((event) => {
-  const parts = event.date.split(" ");
-  const month = parts[0];
-  const day = parts[1];
-  return (
-    <div
-      key={event.id}
-      style={{ borderBottom: "1px solid #e0e0e0", padding: "16px 20px", background: "white", marginBottom: 2, cursor: "pointer" }}
-      onClick={() => handleSelect(event)}
-    >
-      {!isBruno && (
-        <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#7b2fbe", letterSpacing: 0.5 }}>
-          PRESALE HAPPENING NOW
-        </p>
-      )}
-      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        <div style={{ width: 56, minWidth: 56, textAlign: "center", border: "1px solid #ddd", borderRadius: 6, padding: "8px 0", background: "#fafafa" }}>
-          <p style={{ margin: 0, fontSize: 11, color: "#888", fontWeight: "bold" }}>{month}</p>
-          <p style={{ margin: "2px 0 0", fontSize: 24, fontWeight: "bold", lineHeight: 1 }}>{day}</p>
-        </div>
-        <div style={{ flex: 1 }}>
-          <p style={{ margin: 0, fontSize: 13, color: "#666" }}>{event.day} • {event.time}</p>
-          <p style={{ margin: "3px 0 0", fontSize: 16, fontWeight: "bold", color: "#111" }}>{event.city}</p>
-          <p style={{ margin: "2px 0 0", fontSize: 14, fontWeight: "600", color: "#333" }}>{event.venue}</p>
-          <p style={{ margin: "2px 0 6px", fontSize: 13, color: "#999" }}>{tourName}</p>
-          <button style={{ border: "1px solid #bbb", borderRadius: 20, padding: "6px 14px", fontSize: 13, background: "white", cursor: "pointer", color: "#333" }}>
-            Reminders 🔔
+  const renderDateList = (dates: DateEntry[]) => dates.map((event) => {
+    const parts = event.date.split(" ");
+    const month = parts[0];
+    const day = parts[1];
+    return (
+      <div
+        key={event.id}
+        style={{ borderBottom: "1px solid #e0e0e0", padding: "16px 20px", background: "white", marginBottom: 2, cursor: "pointer" }}
+        onClick={() => handleSelect(event)}
+      >
+        {!isBruno && !isBottleRock && (
+          <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#7b2fbe", letterSpacing: 0.5 }}>
+            PRESALE HAPPENING NOW
+          </p>
+        )}
+        {isBottleRock && (
+          <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: "bold", color: "#16a34a", letterSpacing: 0.5 }}>
+            🎪 FESTIVAL • RESALE TICKETS AVAILABLE
+          </p>
+        )}
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ width: 56, minWidth: 56, textAlign: "center", border: "1px solid #ddd", borderRadius: 6, padding: "8px 0", background: "#fafafa" }}>
+            <p style={{ margin: 0, fontSize: 11, color: "#888", fontWeight: "bold" }}>{month}</p>
+            <p style={{ margin: "2px 0 0", fontSize: 24, fontWeight: "bold", lineHeight: 1 }}>{day}</p>
+          </div>
+          <div style={{ flex: 1 }}>
+            <p style={{ margin: 0, fontSize: 13, color: "#666" }}>{event.day} • {event.time}</p>
+            <p style={{ margin: "3px 0 0", fontSize: 16, fontWeight: "bold", color: "#111" }}>{event.city}</p>
+            <p style={{ margin: "2px 0 0", fontSize: 14, fontWeight: "600", color: "#333" }}>{event.venue}</p>
+            {event.headline && (
+              <p style={{ margin: "2px 0 0", fontSize: 13, color: "#0050d0", fontWeight: 600 }}>{event.headline}</p>
+            )}
+            <p style={{ margin: "2px 0 6px", fontSize: 13, color: "#999" }}>{tourName}</p>
+            <button
+              type="button"
+              onClick={(e) => e.stopPropagation()}
+              style={{ border: "1px solid #bbb", borderRadius: 20, padding: "6px 14px", fontSize: 13, background: "white", cursor: "pointer", color: "#333" }}
+            >
+              Reminders 🔔
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); handleSelect(event); }}
+            style={{ width: 46, height: 46, minWidth: 46, borderRadius: "50%", background: "#0050d0", border: "none", color: "white", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,80,208,0.3)" }}
+          >
+            ›
           </button>
         </div>
-        <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); handleSelect(event); }}
-          style={{ width: 46, height: 46, minWidth: 46, borderRadius: "50%", background: "#0050d0", border: "none", color: "white", fontSize: 24, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(0,80,208,0.3)" }}
-        >
-          ›
-        </button>
       </div>
-    </div>
-  );
-});
+    );
+  });
 
   return (
     <div style={{ fontFamily: "Arial", background: "#f5f5f5", minHeight: "100vh" }}>
       <div style={{ background: "#0050d0", height: 4 }} />
-      <div style={{ background: "#111", color: "white", padding: "16px 20px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: 22, cursor: "pointer", padding: "4px 8px" }} onClick={() => router.back()}>←</span>
-          <div>
-            <h2 style={{ margin: 0, fontSize: 17, fontWeight: "bold" }}>{tourName}</h2>
-            <p style={{ margin: "4px 0 0", color: "#aaa", fontSize: 13 }}>Select a date to find tickets</p>
+
+      {/* BOTTLEROCK HERO HEADER */}
+      {isBottleRock && (
+        <div style={{ position: "relative", height: 200, overflow: "hidden" }}>
+          <img src="/bottlerock.jpg" alt="BottleRock" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "20px 20px" }}>
+            <p style={{ margin: 0, fontSize: 13, color: "#ccc", fontWeight: 600 }}>Festival</p>
+            <h1 style={{ margin: "4px 0 0", fontSize: 26, fontWeight: 900, color: "white" }}>BottleRock Napa Valley</h1>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 8 }}>
+              <div style={{ border: "1px solid rgba(255,255,255,0.5)", borderRadius: 8, padding: "4px 12px", display: "flex", alignItems: "center", gap: 6 }}>
+                <span style={{ color: "#f5a623", fontSize: 14 }}>★</span>
+                <span style={{ color: "white", fontSize: 14, fontWeight: 700 }}>5.0</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
+      {/* STANDARD HEADER (non-BottleRock) */}
+      {!isBottleRock && (
+        <div style={{ background: "#111", color: "white", padding: "16px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ fontSize: 22, cursor: "pointer", padding: "4px 8px" }} onClick={() => router.back()}>←</span>
+            <div>
+              <h2 style={{ margin: 0, fontSize: 17, fontWeight: "bold" }}>{tourName}</h2>
+              <p style={{ margin: "4px 0 0", color: "#aaa", fontSize: 13 }}>Select a date to find tickets</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* BOTTLEROCK NAV */}
+      {isBottleRock && (
+        <div style={{ background: "#111", color: "white", padding: "12px 20px", display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ fontSize: 20, cursor: "pointer" }} onClick={() => router.back()}>←</span>
+          <p style={{ margin: 0, fontSize: 13, color: "#aaa" }}>Select a day to find tickets</p>
+        </div>
+      )}
+
+      {/* TABS */}
       <div style={{ display: "flex", background: "white", borderBottom: "1px solid #ddd" }}>
         {(["CONCERTS", "ABOUT", "REVIEWS"] as Tab[]).map((tab) => (
           <button key={tab} onClick={() => setActiveTab(tab)} style={{ flex: 1, padding: "14px 0", fontSize: 13, fontWeight: "bold", cursor: "pointer", background: "none", border: "none", borderBottom: activeTab === tab ? "3px solid #0050d0" : "3px solid transparent", color: activeTab === tab ? "#0050d0" : "#888" }}>
@@ -247,15 +311,18 @@ export default function TourDatesPage() {
         ))}
       </div>
 
+      {/* CONCERTS TAB */}
       {activeTab === "CONCERTS" && (
         <div>
+          {isBottleRock && (
+            <div style={{ padding: "12px 20px", background: "#f0f9f0", borderBottom: "1px solid #ddd" }}>
+              <p style={{ margin: 0, fontSize: 14, fontWeight: "bold", color: "#166534" }}>🍷 Concerts in United States — Napa Valley Expo</p>
+            </div>
+          )}
           {renderDateList(usDates)}
           {isBruno && intlDates.length > 0 && (
             <>
-              <div
-                onClick={() => setShowIntl(!showIntl)}
-                style={{ padding: "16px 20px", background: "#f0f4ff", borderTop: "1px solid #ddd", borderBottom: "1px solid #ddd", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}
-              >
+              <div onClick={() => setShowIntl(!showIntl)} style={{ padding: "16px 20px", background: "#f0f4ff", borderTop: "1px solid #ddd", borderBottom: "1px solid #ddd", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }}>
                 <strong style={{ fontSize: 15, color: "#0050d0" }}>🌍 International Concerts</strong>
                 <span style={{ fontSize: 18, color: "#0050d0" }}>{showIntl ? "▲" : "▼"}</span>
               </div>
@@ -265,18 +332,20 @@ export default function TourDatesPage() {
         </div>
       )}
 
+      {/* ABOUT TAB */}
       {activeTab === "ABOUT" && (
         <div style={{ background: "white", margin: 16, borderRadius: 12, padding: 24, boxShadow: "0 1px 6px rgba(0,0,0,0.08)" }}>
           <h2 style={{ margin: "0 0 16px", fontSize: 20, fontWeight: "bold" }}>
-            About {isBruno ? "Bruno Mars" : "sombr"}
+            About {isBottleRock ? "BottleRock Napa Valley" : isBruno ? "Bruno Mars" : "sombr"}
           </h2>
-          <div style={{ width: 60, height: 4, background: "#0050d0", borderRadius: 2, marginBottom: 20 }} />
+          <div style={{ width: 60, height: 4, background: isBottleRock ? "#16a34a" : "#0050d0", borderRadius: 2, marginBottom: 20 }} />
           {aboutText.split("\n\n").map((para, i) => (
             <p key={i} style={{ margin: "0 0 16px", fontSize: 15, color: "#333", lineHeight: 1.7 }}>{para}</p>
           ))}
         </div>
       )}
 
+      {/* REVIEWS TAB */}
       {activeTab === "REVIEWS" && (
         <div style={{ padding: "16px 16px 40px" }}>
           <div style={{ background: "white", borderRadius: 12, padding: "20px", marginBottom: 12, boxShadow: "0 1px 6px rgba(0,0,0,0.08)" }}>
@@ -292,7 +361,7 @@ export default function TourDatesPage() {
             <div key={i} style={{ background: "white", borderRadius: 12, padding: 20, marginBottom: 10, boxShadow: "0 1px 6px rgba(0,0,0,0.06)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#0050d0", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: 15 }}>
+                  <div style={{ width: 38, height: 38, borderRadius: "50%", background: isBottleRock ? "#16a34a" : "#0050d0", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: 15 }}>
                     {review.name[0]}
                   </div>
                   <div>
