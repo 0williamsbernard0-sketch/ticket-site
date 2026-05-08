@@ -49,4 +49,12 @@ export const events: Event[] = [
     price: 50,
     image: "/oof-tatata.jpg",
   },
+{
+    id: "bottlerock",
+    name: "BottleRock Napa Valley",
+    date: "2026-06-12",
+    location: "Napa,CA",
+    price: 400,
+    image: "/bottlerock.jpg",
+  },
 ];
