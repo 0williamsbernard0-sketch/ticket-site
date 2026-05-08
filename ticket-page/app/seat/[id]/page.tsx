@@ -799,6 +799,20 @@ const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada 
         </>
       )}
 
+{isBottleRock && (
+  <>
+    <div style={{ margin: "0 16px 10px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <span>🍷</span>
+        <strong style={{ fontSize: 15 }}>Festival Tickets — Napa Valley Expo</strong>
+      </div>
+      <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>More Info</span>
+    </div>
+    <div style={{ margin: "0 16px", height: 3, background: "#16a34a" }} />
+  </>
+)}
+
+
       <div style={{ margin: "10px 16px 90px" }}>
         {sorted.map((seat) => {
           const locked = isLocked(seat);
