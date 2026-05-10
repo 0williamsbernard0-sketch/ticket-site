@@ -57,4 +57,12 @@ export const events: Event[] = [
     price: 400,
     image: "/bottlerock.jpg",
   },
+{
+    id: "magic-men",
+    name: "Magic Men World Tour 2026",
+    date: "2026-06-22",
+    location: "Australia,SA",
+    price: 400,
+    image: "/magic-men.jpg",
+  },
 ];
