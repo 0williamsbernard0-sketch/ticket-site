@@ -54,7 +54,18 @@ export default function CheckoutPage() {
   const time = search.get("time") ?? "7:00 PM";
 
   const isBottleRock = eventId === "bottlerock";
-const tourName = isOof ? "OOF TATATA" : isBruno ? "Bruno Mars - The Romantic Tour" : isBottleRock ? "BottleRock Napa Valley" : "SOMBR - You Are The Reason Tour";
+const isMagicMen = eventId === "magic-men";
+const mmRegion = search.get("region") ?? "AU";
+
+const tourName = isOof
+  ? "OOF TATATA"
+  : isBruno
+  ? "Bruno Mars - The Romantic Tour"
+  : isBottleRock
+  ? "BottleRock Napa Valley"
+  : isMagicMen
+  ? "Magic Men World Tour 2026"
+  : "SOMBR - You Are The Reason Tour";
 
 
   // OOF TATATA uses pre-calculated total with NZD transaction fee
@@ -269,10 +280,28 @@ const tourName = isOof ? "OOF TATATA" : isBruno ? "Bruno Mars - The Romantic Tou
           disabled={loading}
           style={{ ...btnReset, width: "100%", padding: "16px 14px", background: "#16a34a", color: "#ffffff", border: "2px solid #15803d", borderRadius: 12, fontSize: 17, fontWeight: 950, cursor: loading ? "not-allowed" : "pointer", boxShadow: "0 10px 24px rgba(22,163,74,0.25)", opacity: loading ? 0.75 : 1 }}
         >
-          {loading ? "Redirecting..." : `Pay ${money(total, isOof)}`}
+          {loading
+  ? "Redirecting..."
+  : `Pay ${
+      isMagicMen && (mmRegion === "EU" || mmRegion === "UK")
+        ? `£${total.toFixed(2)}`
+        : isMagicMen && mmRegion === "AU"
+        ? `A$${total.toFixed(2)}`
+        : isMagicMen && mmRegion === "NZ"
+        ? `NZ$${total.toFixed(2)}`
+        : money(total, isOof)
+    }`}
         </button>
         <p style={{ margin: "10px 0 0", textAlign: "center", fontSize: 12, color: "#6b7280", fontWeight: 650 }}>
-          Total due {money(total, isOof)} • Secure checkout
+          Total due{" "}
+{isMagicMen && (mmRegion === "EU" || mmRegion === "UK")
+  ? `£${total.toFixed(2)}`
+  : isMagicMen && mmRegion === "AU"
+  ? `A$${total.toFixed(2)}`
+  : isMagicMen && mmRegion === "NZ"
+  ? `NZ$${total.toFixed(2)}`
+  : money(total, isOof)}{" "}
+• Secure checkout
         </p>
       </div>
     </div>
