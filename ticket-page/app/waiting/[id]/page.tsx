@@ -18,11 +18,8 @@ export default function WaitingPage() {
   const day = search.get("day") ?? "Mon";
   const time = search.get("time") ?? "7:00 PM";
 
-  const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(
-    city
-  )}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(
-    day
-  )}&time=${encodeURIComponent(time)}`;
+  const region = search.get("region") ?? "";
+const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}${region ? `&region=${encodeURIComponent(region)}` : ""}`;
 
   const [stage, setStage] = useState<Stage>("lobby");
   const [queueId, setQueueId] = useState<string | null>(null);
