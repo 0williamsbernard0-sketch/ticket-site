@@ -525,8 +525,27 @@ type BottleRockFilter =
   | "SkyDeck"
   | "Backstage";
 
-type MagicMenFilter = "Full Price Ticket" | "Verified Resale Ticket" | "Regular - General (Non-Reserved)" | "Deluxe - Priority Reserved Seating" | "Premium - VIP Reserved Seating" | "Ultra-Premium" | "Premium" | "Deluxe" | "B Reserve" | "A Reserve" | "General Admission" | "Deluxe - Priority Seating" | "Premium - VIP Seating";
-type AnyFilter = SombrFilter | BrunoFilter | CanadaFilter | BottleRockFilter | MagicMenFilter;
+type MagicMenFilter =
+  | "Full Price Ticket"
+  | "Verified Resale Ticket"
+  | "Regular - General (Non-Reserved)"
+  | "Deluxe - Priority Reserved Seating"
+  | "Premium - VIP Reserved Seating"
+  | "Ultra-Premium"
+  | "Premium"
+  | "Deluxe"
+  | "B Reserve"
+  | "A Reserve"
+  | "General Admission"
+  | "Deluxe - Priority Seating"
+  | "Premium - VIP Seating";
+
+type AnyFilter =
+  | SombrFilter
+  | BrunoFilter
+  | CanadaFilter
+  | BottleRockFilter
+  | MagicMenFilter;
 
 const MM_FILTERS_AU: MagicMenFilter[] = ["Regular - General (Non-Reserved)", "Deluxe - Priority Reserved Seating", "Premium - VIP Reserved Seating"];
 const MM_FILTERS_CA: MagicMenFilter[] = ["Deluxe", "Premium", "Ultra-Premium"];
@@ -534,12 +553,6 @@ const MM_FILTERS_EU: MagicMenFilter[] = ["Full Price Ticket", "Verified Resale T
 const MM_FILTERS_NZ: MagicMenFilter[] = ["B Reserve", "A Reserve", "Premium"];
 const MM_FILTERS_UK: MagicMenFilter[] = ["Full Price Ticket"];
 const MM_FILTERS_USA: MagicMenFilter[] = ["General Admission", "Deluxe - Priority Seating", "Premium - VIP Seating"];
-
-type AnyFilter =
-  | SombrFilter
-  | BrunoFilter
-  | CanadaFilter
-  | BottleRockFilter;
 
 const BOTTLEROCK_FILTERS: BottleRockFilter[] = [
   "General Admission",
