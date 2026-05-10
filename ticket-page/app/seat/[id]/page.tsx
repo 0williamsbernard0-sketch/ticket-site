@@ -402,6 +402,87 @@ const BOTTLEROCK_SEATS_SUN = [
   { id: "br-sun-back2", section: "BACKSTAGE", row: "B2", type: "Backstage", price: 130 },
 ] as const;
 
+// ─── MAGIC MEN SEATS ──────────────────────────────────────────────────────────
+const MM_SEATS_AU = [
+  { id: "mm-au-regular", section: "GA", row: "General", type: "Regular - General (Non-Reserved)", price: 55.00 },
+  { id: "mm-au-deluxe", section: "Priority", row: "Reserved", type: "Deluxe - Priority Reserved Seating", price: 80.00 },
+  { id: "mm-au-premium", section: "VIP", row: "VIP", type: "Premium - VIP Reserved Seating", price: 99.00 },
+] as const;
+
+const MM_SEATS_CA = [
+  { id: "mm-ca-deluxe", section: "GA", row: "GA", type: "Deluxe", price: 85.04 },
+  { id: "mm-ca-premium", section: "Premium", row: "Reserved", type: "Premium", price: 99.11 },
+  { id: "mm-ca-ultra", section: "VIP", row: "Front", type: "Ultra-Premium", price: 110.02 },
+] as const;
+
+const MM_SEATS_EU = [
+  { id: "mm-eu-stalls-ee", section: "STALLS", row: "EE", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-ff", section: "STALLS", row: "FF", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-gg", section: "STALLS", row: "GG", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-hh", section: "STALLS", row: "HH", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-jj", section: "STALLS", row: "JJ", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-l", section: "STALLS", row: "L", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-m", section: "STALLS", row: "M", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-n", section: "STALLS", row: "N", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-o", section: "STALLS", row: "O", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-p", section: "STALLS", row: "P", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-q", section: "STALLS", row: "Q", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-r", section: "STALLS", row: "R", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-s", section: "STALLS", row: "S", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-t", section: "STALLS", row: "T", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-h", section: "STALLS", row: "H", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-j", section: "STALLS", row: "J", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-k", section: "STALLS", row: "K", type: "Full Price Ticket", price: 64.40 },
+  { id: "mm-eu-stalls-ff-resale", section: "STALLS", row: "FF", type: "Verified Resale Ticket", price: 75.71 },
+  { id: "mm-eu-stalls-d", section: "STALLS", row: "D", type: "Full Price Ticket", price: 87.10 },
+  { id: "mm-eu-stalls-e", section: "STALLS", row: "E", type: "Full Price Ticket", price: 87.10 },
+  { id: "mm-eu-stalls-f", section: "STALLS", row: "F", type: "Full Price Ticket", price: 87.10 },
+  { id: "mm-eu-stalls-g", section: "STALLS", row: "G", type: "Full Price Ticket", price: 87.10 },
+] as const;
+
+const MM_SEATS_NZ = [
+  { id: "mm-nz-b-reserve", section: "B Reserve", row: "GA", type: "B Reserve", price: 57.60 },
+  { id: "mm-nz-a-reserve", section: "A Reserve", row: "GA", type: "A Reserve", price: 82.60 },
+  { id: "mm-nz-premium", section: "Premium", row: "Front", type: "Premium", price: 101.60 },
+] as const;
+
+const MM_SEATS_UK = [
+  { id: "mm-uk-gall-a", section: "GALL", row: "A", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-b", section: "GALL", row: "B", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-c", section: "GALL", row: "C", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-d", section: "GALL", row: "D", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-e", section: "GALL", row: "E", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-f", section: "GALL", row: "F", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-g", section: "GALL", row: "G", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-h", section: "GALL", row: "H", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-gall-j", section: "GALL", row: "J", type: "Full Price Ticket", price: 43.00 },
+  { id: "mm-uk-rcirc-p", section: "RCIRC", row: "P", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-q", section: "RCIRC", row: "Q", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-r", section: "RCIRC", row: "R", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-s", section: "RCIRC", row: "S", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-t", section: "RCIRC", row: "T", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-u", section: "RCIRC", row: "U", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-v", section: "RCIRC", row: "V", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-w", section: "RCIRC", row: "W", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-rcirc-x", section: "RCIRC", row: "X", type: "Full Price Ticket", price: 54.35 },
+  { id: "mm-uk-stalls-q", section: "STALLS", row: "Q", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-stalls-r", section: "STALLS", row: "R", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-stalls-s", section: "STALLS", row: "S", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-stalls-t", section: "STALLS", row: "T", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-fcirc-b", section: "FCIRC", row: "B", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-fcirc-c", section: "FCIRC", row: "C", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-fcirc-d", section: "FCIRC", row: "D", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-fcirc-e", section: "FCIRC", row: "E", type: "Full Price Ticket", price: 65.70 },
+  { id: "mm-uk-fcirc-f", section: "FCIRC", row: "F", type: "Full Price Ticket", price: 65.70 },
+] as const;
+
+const MM_SEATS_USA = [
+  { id: "mm-usa-ga", section: "GA", row: "GA", type: "General Admission", price: 59.18 },
+  { id: "mm-usa-deluxe", section: "Priority", row: "Priority", type: "Deluxe - Priority Seating", price: 87.67 },
+  { id: "mm-usa-vip", section: "VIP", row: "VIP", type: "Premium - VIP Seating", price: 110.47 },
+] as const;
+
+
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 type SombrSeat = (typeof SOMBR_SEATS)[number];
 type BrunoSeat = (typeof BRUNO_MARS_SEATS)[number];
@@ -443,6 +524,16 @@ type BottleRockFilter =
   | "VIP"
   | "SkyDeck"
   | "Backstage";
+
+type MagicMenFilter = "Full Price Ticket" | "Verified Resale Ticket" | "Regular - General (Non-Reserved)" | "Deluxe - Priority Reserved Seating" | "Premium - VIP Reserved Seating" | "Ultra-Premium" | "Premium" | "Deluxe" | "B Reserve" | "A Reserve" | "General Admission" | "Deluxe - Priority Seating" | "Premium - VIP Seating";
+type AnyFilter = SombrFilter | BrunoFilter | CanadaFilter | BottleRockFilter | MagicMenFilter;
+
+const MM_FILTERS_AU: MagicMenFilter[] = ["Regular - General (Non-Reserved)", "Deluxe - Priority Reserved Seating", "Premium - VIP Reserved Seating"];
+const MM_FILTERS_CA: MagicMenFilter[] = ["Deluxe", "Premium", "Ultra-Premium"];
+const MM_FILTERS_EU: MagicMenFilter[] = ["Full Price Ticket", "Verified Resale Ticket"];
+const MM_FILTERS_NZ: MagicMenFilter[] = ["B Reserve", "A Reserve", "Premium"];
+const MM_FILTERS_UK: MagicMenFilter[] = ["Full Price Ticket"];
+const MM_FILTERS_USA: MagicMenFilter[] = ["General Admission", "Deluxe - Priority Seating", "Premium - VIP Seating"];
 
 type AnyFilter =
   | SombrFilter
@@ -629,6 +720,31 @@ function BottleRockMap() {
     </svg>
   );
 }
+function MagicMenMap({ region }: { region: string }) {
+  const colors: Record<string, string> = {
+    AU: "#84cc16", CA: "#f59e0b", EU: "#3b82f6",
+    NZ: "#10b981", UK: "#8b5cf6", USA: "#ef4444"
+  };
+  const color = colors[region] || "#c8a84b";
+  return (
+    <svg width="300" height="180" viewBox="0 0 600 360" style={{ display: "block", margin: "0 auto" }}>
+      <rect x="10" y="10" width="580" height="340" rx="16" fill="#111" stroke="#333" strokeWidth="2" />
+      <rect x="220" y="20" width="160" height="60" rx="6" fill="#0a0a0a" stroke={color} strokeWidth="2" />
+      <text x="300" y="57" textAnchor="middle" fill={color} fontSize="14" fontWeight="bold">STAGE</text>
+      <rect x="80" y="95" width="440" height="160" rx="8" fill="#1a1a1a" stroke={color} strokeWidth="1.5" />
+      <text x="300" y="182" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">STALLS / GENERAL ADMISSION</text>
+      <rect x="20" y="95" width="50" height="160" rx="6" fill="#222" stroke="#555" strokeWidth="1" />
+      <text x="45" y="180" textAnchor="middle" fill="#aaa" fontSize="9" fontWeight="bold">L</text>
+      <text x="45" y="193" textAnchor="middle" fill="#aaa" fontSize="8">CIRC</text>
+      <rect x="530" y="95" width="50" height="160" rx="6" fill="#222" stroke="#555" strokeWidth="1" />
+      <text x="555" y="180" textAnchor="middle" fill="#aaa" fontSize="9" fontWeight="bold">R</text>
+      <text x="555" y="193" textAnchor="middle" fill="#aaa" fontSize="8">CIRC</text>
+      <rect x="80" y="265" width="440" height="70" rx="8" fill="#161616" stroke="#444" strokeWidth="1" />
+      <text x="300" y="305" textAnchor="middle" fill="#888" fontSize="11" fontWeight="bold">UPPER GALLERY / BALCONY</text>
+      <text x="300" y="340" textAnchor="middle" fill={color} fontSize="10" fontWeight="bold">MAGIC MEN WORLD TOUR 2026</text>
+    </svg>
+  );
+}
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function SeatPage() {
@@ -645,119 +761,209 @@ export default function SeatPage() {
   const time = search.get("time") ?? "7:00 PM";
   const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}&day=${encodeURIComponent(day)}&time=${encodeURIComponent(time)}`;
 
-  const isCanada = isBruno && (city.includes("Canada") || venue === "Rogers Stadium" || venue === "BC Place");
+const isCanada = isBruno && (city.includes("Canada") || venue === "Rogers Stadium" || venue === "BC Place");
 const isBottleRock = eventId === "bottlerock";
+const isMagicMen = eventId === "magic-men";
+const mmRegion = search.get("region") ?? "AU";
 const bottleRockDay = date === "MAY 22" ? "fri" : date === "MAY 23" ? "sat" : "sun";
 
-
-  const tourName = isBottleRock
+const tourName = isBottleRock
   ? "BottleRock Napa Valley"
   : isBruno
   ? "Bruno Mars - The Romantic Tour"
+  : isMagicMen
+  ? "Magic Men Australia"
   : "SOMBR - You Are The Reason Tour";
-  const allSeats: readonly AnySeat[] = isBottleRock
-  ? bottleRockDay === "fri" ? BOTTLEROCK_SEATS_FRI
-  : bottleRockDay === "sat" ? BOTTLEROCK_SEATS_SAT
-  : BOTTLEROCK_SEATS_SUN
-  : isCanada ? CANADA_SEATS
-  : isBruno ? BRUNO_MARS_SEATS
+
+const allSeats: readonly AnySeat[] = isMagicMen
+  ? mmRegion === "AU"
+    ? MM_SEATS_AU
+    : mmRegion === "CA"
+    ? MM_SEATS_CA
+    : mmRegion === "EU"
+    ? MM_SEATS_EU
+    : mmRegion === "NZ"
+    ? MM_SEATS_NZ
+    : mmRegion === "UK"
+    ? MM_SEATS_UK
+    : MM_SEATS_USA
+  : isBottleRock
+  ? bottleRockDay === "fri"
+    ? BOTTLEROCK_SEATS_FRI
+    : bottleRockDay === "sat"
+    ? BOTTLEROCK_SEATS_SAT
+    : BOTTLEROCK_SEATS_SUN
+  : isCanada
+  ? CANADA_SEATS
+  : isBruno
+  ? BRUNO_MARS_SEATS
   : SOMBR_SEATS;
-const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada ? [...CANADA_FILTERS] : isBruno ? [...BRUNO_FILTERS] : [...SOMBR_FILTERS];
 
+const allTypes: AnyFilter[] = isMagicMen
+  ? mmRegion === "AU"
+    ? [...MM_FILTERS_AU]
+    : mmRegion === "CA"
+    ? [...MM_FILTERS_CA]
+    : mmRegion === "EU"
+    ? [...MM_FILTERS_EU]
+    : mmRegion === "NZ"
+    ? [...MM_FILTERS_NZ]
+    : mmRegion === "UK"
+    ? [...MM_FILTERS_UK]
+    : [...MM_FILTERS_USA]
+  : isBottleRock
+  ? [...BOTTLEROCK_FILTERS]
+  : isCanada
+  ? [...CANADA_FILTERS]
+  : isBruno
+  ? [...BRUNO_FILTERS]
+  : [...SOMBR_FILTERS];
 
-  const [showPresaleModal, setShowPresaleModal] = useState(false);
-  const [showFilterModal, setShowFilterModal] = useState(false);
-  const [passcode, setPasscode] = useState("");
-  const [unlockError, setUnlockError] = useState<string | null>(null);
-  const [presaleUnlocked, setPresaleUnlocked] = useState(false);
-  const [sortBy, setSortBy] = useState<"all" | "top">("all");
-  const [activeFilters, setActiveFilters] = useState<AnyFilter[]>(allTypes);
+const [showPresaleModal, setShowPresaleModal] = useState(false);
+const [showFilterModal, setShowFilterModal] = useState(false);
+const [passcode, setPasscode] = useState("");
+const [unlockError, setUnlockError] = useState<string | null>(null);
+const [presaleUnlocked, setPresaleUnlocked] = useState(false);
+const [sortBy, setSortBy] = useState<"all" | "top">("all");
+const [activeFilters, setActiveFilters] = useState<AnyFilter[]>(allTypes);
 
-  const unlockedPrices = useMemo(() => {
-    if (!presaleUnlocked || isBruno) return {} as Record<string, number>;
-    const map: Record<string, number> = {};
-    for (const s of SOMBR_SEATS) {
-      if (s.price == null) map[s.id] = rand50to160();
-    }
-    return map;
-  }, [presaleUnlocked, isBruno]);
+const unlockedPrices = useMemo(() => {
+  if (!presaleUnlocked || isBruno) return {} as Record<string, number>;
 
-  const toggleFilter = (t: AnyFilter) => {
-    setActiveFilters((prev) => prev.includes(t) ? prev.filter((f) => f !== t) : [...prev, t]);
-  };
+  const map: Record<string, number> = {};
 
-  const filtered = useMemo(
-    () => allSeats.filter((s) => activeFilters.includes(s.type as AnyFilter)),
-    [allSeats, activeFilters]
+  for (const s of SOMBR_SEATS) {
+    if (s.price == null) map[s.id] = rand50to160();
+  }
+
+  return map;
+}, [presaleUnlocked, isBruno]);
+
+const toggleFilter = (t: AnyFilter) => {
+  setActiveFilters((prev) =>
+    prev.includes(t)
+      ? prev.filter((f) => f !== t)
+      : [...prev, t]
   );
+};
 
-  const sorted = useMemo(() => {
-    if (sortBy !== "top") return filtered;
-    return [...filtered].sort((a, b) => {
-      const pa = a.price ?? (presaleUnlocked ? unlockedPrices[a.id] ?? 9999 : 9999);
-      const pb = b.price ?? (presaleUnlocked ? unlockedPrices[b.id] ?? 9999 : 9999);
-      return pa - pb;
-    });
-  }, [filtered, sortBy, presaleUnlocked, unlockedPrices]);
+const filtered = useMemo(
+  () =>
+    allSeats.filter((s) =>
+      activeFilters.includes(s.type as AnyFilter)
+    ),
+  [allSeats, activeFilters]
+);
 
-  const typeColor = (type: string) => {
-    if (type === "VIP") return "#7c3aed";
-    if (type === "SkyDeck") return "#0891b2";
-    if (type === "Backstage") return "#374151";
-    if (type === "General Admission" && isBottleRock) return "#92400e";
-    if (type === "Featured - Standard") return "#b45309";
-    if (type === "Verified Resale") return "#0891b2";
-    if (type === "HOMEWRECKER VIP PACKAGE") return "#b45309";
-    if (type === "Resale - Floor/Field") return "#7c3aed";
-    if (type === "Resale - Lower Level") return TM_BLUE;
-    if (type === "Resale - Club Level") return "#0891b2";
-    if (type === "Resale - Upper Level") return "#374151";
-    if (type === "Official Platinum" || type === "Artist Presale") return TM_BLUE;
-    return TM_TEXT;
-  };
+const sorted = useMemo(() => {
+  if (sortBy !== "top") return filtered;
 
-  const getEffectivePrice = (seat: AnySeat): number | null => {
-    if (seat.price != null) return seat.price;
-    if (!presaleUnlocked) return null;
-    return unlockedPrices[seat.id] ?? null;
-  };
+  return [...filtered].sort((a, b) => {
+    const pa =
+      a.price ??
+      (presaleUnlocked ? unlockedPrices[a.id] ?? 9999 : 9999);
 
-  const isLocked = (seat: AnySeat) => seat.price == null;
+    const pb =
+      b.price ??
+      (presaleUnlocked ? unlockedPrices[b.id] ?? 9999 : 9999);
 
-  const goToDetail = (seat: AnySeat) => {
-    if (!eventId) return;
-    const p = getEffectivePrice(seat);
-    router.push(`/seat/${eventId}/detail?section=${seat.section}&row=${seat.row}&type=${encodeURIComponent(seat.type)}&price=${p ?? 0}&seatId=${seat.id}&${venueParams}`);
-  };
+    return pa - pb;
+  });
+}, [filtered, sortBy, presaleUnlocked, unlockedPrices]);
 
-  const handleSelect = (seat: AnySeat) => {
-    if (!isLocked(seat)) { goToDetail(seat); return; }
-    if (!presaleUnlocked) { setShowPresaleModal(true); return; }
+const typeColor = (type: string) => {
+  if (type === "VIP") return "#7c3aed";
+  if (type === "SkyDeck") return "#0891b2";
+  if (type === "Backstage") return "#374151";
+  if (type === "Full Price Ticket") return "#2563eb";
+  if (type === "Verified Resale Ticket") return "#7c3aed";
+  if (type === "Ultra-Premium") return "#b45309";
+  if (type === "Premium - VIP Reserved Seating" || type === "Premium - VIP Seating") return "#b45309";
+  if (type === "Deluxe - Priority Reserved Seating" || type === "Deluxe - Priority Seating" || type === "Deluxe") return "#0891b2";
+  if (type === "Regular - General (Non-Reserved)") return "#374151";
+  if (type === "General Admission" && isBottleRock) return "#92400e";
+  if (type === "Featured - Standard") return "#b45309";
+  if (type === "Verified Resale") return "#0891b2";
+  if (type === "HOMEWRECKER VIP PACKAGE") return "#b45309";
+  if (type === "Resale - Floor/Field") return "#7c3aed";
+  if (type === "Resale - Lower Level") return TM_BLUE;
+  if (type === "Resale - Club Level") return "#0891b2";
+  if (type === "Resale - Upper Level") return "#374151";
+  if (
+    type === "Official Platinum" ||
+    type === "Artist Presale"
+  )
+    return TM_BLUE;
+
+  return TM_TEXT;
+};
+
+const getEffectivePrice = (seat: AnySeat): number | null => {
+  if (seat.price != null) return seat.price;
+
+  if (!presaleUnlocked) return null;
+
+  return unlockedPrices[seat.id] ?? null;
+};
+
+const isLocked = (seat: AnySeat) => seat.price == null;
+
+const goToDetail = (seat: AnySeat) => {
+  if (!eventId) return;
+
+  const p = getEffectivePrice(seat);
+
+  router.push(
+    `/seat/${eventId}/detail?section=${seat.section}&row=${seat.row}&type=${encodeURIComponent(
+      seat.type
+    )}&price=${p ?? 0}&seatId=${seat.id}&${venueParams}`
+  );
+};
+
+const handleSelect = (seat: AnySeat) => {
+  if (!isLocked(seat)) {
     goToDetail(seat);
-  };
+    return;
+  }
 
-  const handleUnlock = () => {
-    if (passcode.trim().toUpperCase() === VALID_PASSCODE) {
-      setPresaleUnlocked(true);
-      setUnlockError(null);
-      setShowPresaleModal(false);
-    } else {
-      setUnlockError("Invalid passcode. Try POTENTIAL.");
-    }
-  };
+  if (!presaleUnlocked) {
+    setShowPresaleModal(true);
+    return;
+  }
 
-  const pillBase: React.CSSProperties = {
-    flex: 1, borderRadius: 999, padding: "11px 10px", fontSize: 13,
-    fontWeight: 800, cursor: "pointer", border: "1px solid #d1d5db",
-    background: "#ffffff", color: TM_TEXT,
-  };
+  goToDetail(seat);
+};
 
-  const pillSelected: React.CSSProperties = {
-    ...pillBase, background: "#e8f1ff", border: `1px solid ${TM_BLUE}`, color: TM_BLUE,
-  };
+const handleUnlock = () => {
+  if (passcode.trim().toUpperCase() === VALID_PASSCODE) {
+    setPresaleUnlocked(true);
+    setUnlockError(null);
+    setShowPresaleModal(false);
+  } else {
+    setUnlockError("Invalid passcode. Try POTENTIAL.");
+  }
+};
 
-  if (!eventId) return <div style={{ padding: 24 }}>Loading…</div>;
+const pillBase: React.CSSProperties = {
+  flex: 1,
+  borderRadius: 999,
+  padding: "11px 10px",
+  fontSize: 13,
+  fontWeight: 800,
+  cursor: "pointer",
+  border: "1px solid #d1d5db",
+  background: "#ffffff",
+  color: TM_TEXT,
+};
 
+const pillSelected: React.CSSProperties = {
+  ...pillBase,
+  background: "#e8f1ff",
+  border: `1px solid ${TM_BLUE}`,
+  color: TM_BLUE,
+};
+
+if (!eventId) return <div style={{ padding: 24 }}>Loading…</div>;
   return (
     <div style={{ fontFamily: "system-ui, Arial", background: "#f3f4f6", minHeight: "100vh", color: TM_TEXT }}>
       <div style={{ background: TM_BLUE, height: 4 }} />
@@ -773,7 +979,7 @@ const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada 
         <button type="button" style={{ background: "#fff", border: "1px solid #cbd5e1", borderRadius: 999, padding: "10px 16px", fontSize: 13, fontWeight: 900, color: TM_TEXT, cursor: "pointer", marginBottom: 12, width: "100%", maxWidth: 520 }}>
           ⇄ Switch to Map
         </button>
-        {isBottleRock ? <BottleRockMap /> : isBruno ? <BrunoArenaMap /> : <SombrArenaMap />}
+        {isMagicMen ? <MagicMenMap region={mmRegion} /> : isBottleRock ? <BottleRockMap /> : isBruno ? <BrunoArenaMap /> : <SombrArenaMap />}
       </div>
 
       <div style={{ padding: "12px 16px", display: "flex", gap: 10 }}>
@@ -787,7 +993,7 @@ const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada 
         <button type="button" onClick={() => setShowFilterModal(true)} style={pillBase}>⚙ Filters</button>
       </div>
 
-     {!isBruno && !isBottleRock && (
+     {!isBruno && !isBottleRock && !isMagicMen && (
   <div style={{ margin: "0 16px 10px", background: "#fff", borderRadius: 10, padding: "12px 14px", border: "1px solid #e5e7eb" }}>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -795,6 +1001,22 @@ const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada 
         <span style={{ fontSize: 13, fontWeight: 900 }}>PRESALE HAPPENING NOW!</span>
       </div>
       <span style={{ color: TM_BLUE, fontSize: 13, fontWeight: 900, cursor: "pointer" }}>View Sales</span>
+    </div>
+  </div>
+)}
+
+{isMagicMen && (
+  <div style={{ margin: "0 16px 10px", background: "#0a0a0a", borderRadius: 10, padding: "12px 14px", border: "1px solid #c8a84b" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <span>🎩</span>
+        <span style={{ fontSize: 13, fontWeight: 900, color: "#c8a84b" }}>
+          MAGIC MEN WORLD TOUR 2026
+        </span>
+      </div>
+      <span style={{ color: "#84cc16", fontSize: 13, fontWeight: 900 }}>
+        ON SALE
+      </span>
     </div>
   </div>
 )}
@@ -897,10 +1119,21 @@ const allTypes: AnyFilter[] = isBottleRock ? [...BOTTLEROCK_FILTERS] : isCanada 
               </div>
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 {effective != null ? (
-                  <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>
-                    {isCanada ? "CA $" : "$"}{effective.toFixed(2)}
-                  </p>
-                ) : (
+  <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>
+    {
+      isMagicMen && mmRegion === "AU"
+        ? "A$"
+        : isMagicMen && (mmRegion === "EU" || mmRegion === "UK")
+        ? "£"
+        : isMagicMen && mmRegion === "NZ"
+        ? "NZ$"
+        : isCanada
+        ? "CA $"
+        : "$"
+    }
+    {effective.toFixed(2)}
+  </p>
+) : (
                   <button type="button" style={{ background: "#fff", border: `2px solid ${TM_BLUE}`, color: TM_BLUE, borderRadius: 10, padding: "8px 12px", fontSize: 13, cursor: "pointer", fontWeight: 950 }}
                     onClick={(e) => { e.stopPropagation(); setUnlockError(null); setShowPresaleModal(true); }}>
                     🔒 Unlock
