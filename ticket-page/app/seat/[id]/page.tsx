@@ -501,7 +501,8 @@ type AnySeat =
   | SombrSeat
   | BrunoSeat
   | CanadaSeat
-  | BottleRockSeat;
+  | BottleRockSeat
+  | MagicMenSeat;
 
 type SombrFilter =
   | "Standard Admission"
