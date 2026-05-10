@@ -497,6 +497,14 @@ type BottleRockSeat =
   | BottleRockSatSeat
   | BottleRockSunSeat;
 
+type MagicMenSeat =
+  | (typeof MM_SEATS_AU)[number]
+  | (typeof MM_SEATS_CA)[number]
+  | (typeof MM_SEATS_EU)[number]
+  | (typeof MM_SEATS_NZ)[number]
+  | (typeof MM_SEATS_UK)[number]
+  | (typeof MM_SEATS_USA)[number];
+
 type AnySeat =
   | SombrSeat
   | BrunoSeat
