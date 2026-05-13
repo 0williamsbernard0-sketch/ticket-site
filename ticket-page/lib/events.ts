@@ -65,4 +65,20 @@ export const events: Event[] = [
     price: 400,
     image: "/magic-men.jpg",
   },
+{
+    id: "morgan-wallen",
+    name: "Morgan Wallen",
+    date: "2026-05-23",
+    location: "USA,CA",
+    price: 400,
+    image: "/morganwallen.jpg",
+  },
+{
+    id: "luke-comb",
+    name: "Luke Comb",
+    date: "2026-06-22",
+    location: "USA,LA",
+    price: 500,
+    image: "/lukecomb.jpg",
+  },
 ];
