@@ -55,18 +55,17 @@ export default function CheckoutPage() {
 
   const isBottleRock = eventId === "bottlerock";
 const isMagicMen = eventId === "magic-men";
+const isMorganWallen = eventId === "morgan-wallen";
+const isLukeCombs = eventId === "luke-combs";
 const mmRegion = search.get("region") ?? "AU";
 
-const tourName = isOof
-  ? "OOF TATATA"
-  : isBruno
-  ? "Bruno Mars - The Romantic Tour"
-  : isBottleRock
-  ? "BottleRock Napa Valley"
-  : isMagicMen
-  ? "Magic Men World Tour 2026"
+const tourName = isOof ? "OOF TATATA"
+  : isBruno ? "Bruno Mars - The Romantic Tour"
+  : isBottleRock ? "BottleRock Napa Valley"
+  : isMagicMen ? "Magic Men World Tour 2026"
+  : isMorganWallen ? "Morgan Wallen: Still the Problem Tour"
+  : isLukeCombs ? "Luke Combs - My Kinda Saturday Night Tour"
   : "SOMBR - You Are The Reason Tour";
-
 
   // OOF TATATA uses pre-calculated total with NZD transaction fee
   const TRANSACTION_FEE = 4.30;
