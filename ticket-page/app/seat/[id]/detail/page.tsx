@@ -44,7 +44,9 @@ export default function SeatDetailPage() {
           <button type="button" onClick={() => router.back()} style={{ ...btnReset, width: 44, height: 44, borderRadius: 10, border: "1px solid rgba(255,255,255,0.25)", background: "rgba(255,255,255,0.10)", color: "#ffffff", fontSize: 20, fontWeight: 900, cursor: "pointer" }} aria-label="Back">←</button>
           <div style={{ minWidth: 0 }}>
            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 950, lineHeight: 1.2 }}>
-  {eventId === "magic-men" ? "Magic Men World Tour 2026"
+  {eventId === "morgan-wallen" ? "Morgan Wallen: Still the Problem Tour"
+  : eventId === "luke-combs" ? "Luke Combs - My Kinda Saturday Night Tour"
+  : eventId === "magic-men" ? "Magic Men World Tour 2026"
   : eventId === "bruno-mars" ? "Bruno Mars - The Romantic Tour"
   : eventId === "bottlerock" ? "BottleRock Napa Valley"
   : "SOMBR - You Are The Reason Tour"}
