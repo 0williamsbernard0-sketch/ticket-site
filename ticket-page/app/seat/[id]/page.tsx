@@ -1156,6 +1156,16 @@ const MM_FILTERS_EU: MagicMenFilter[] = ["Full Price Ticket", "Verified Resale T
 const MM_FILTERS_NZ: MagicMenFilter[] = ["B Reserve", "A Reserve", "Premium"];
 const MM_FILTERS_UK: MagicMenFilter[] = ["Full Price Ticket"];
 const MM_FILTERS_USA: MagicMenFilter[] = ["General Admission", "Deluxe - Priority Seating", "Premium - VIP Seating"];
+const MW_FILTERS: MorganWallenFilter[] = ["Side View", "Standard Adult", "Limited View Seating", "Official Platinum", "GA PIT"];
+const LC_FILTERS_DEFAULT: LukeCombsFilter[] = ["Standard Admission"];
+const LC_FILTERS_MAY16: LukeCombsFilter[] = ["Standard Admission", "Verified Resale Ticket"];
+const LC_FILTERS_UK_SMALL: LukeCombsFilter[] = ["Standard Ticket"];
+const LC_FILTERS_ALAN_JACKSON: LukeCombsFilter[] = ["Resale Ticket"];
+const LC_FILTERS_MURRAYFIELD: LukeCombsFilter[] = ["Gold - Nashville Seated Ticket"];
+const LC_FILTERS_WEMBLEY: LukeCombsFilter[] = ["Reserved Seating", "Reserved Aisle Seating"];
+const LC_FILTERS_CANADA_MAY: LukeCombsFilter[] = ["Regular General Admission", "Pit GA", "Loges - Suites", "Banquettes - Booths", "Tables", "Terrasse GA"];
+const LC_FILTERS_CANADA_JUN: LukeCombsFilter[] = ["Verified Resale Ticket", "Standard Ticket"];
+const LC_FILTERS_UK_GENERAL: LukeCombsFilter[] = ["Seated Ticket"];
 
 const BOTTLEROCK_FILTERS: BottleRockFilter[] = [
   "General Admission",
@@ -1361,6 +1371,42 @@ function MagicMenMap({ region }: { region: string }) {
     </svg>
   );
 }
+function MorganWallenMap() {
+  return (
+    <svg width="340" height="200" viewBox="0 0 680 400" style={{ display: "block", margin: "0 auto" }}>
+      <ellipse cx="340" cy="200" rx="330" ry="190" fill="#d4a96a" stroke="#92400e" strokeWidth="2" />
+      <ellipse cx="340" cy="200" rx="270" ry="150" fill="#f59e0b" stroke="#d97706" strokeWidth="1.5" />
+      <ellipse cx="340" cy="200" rx="210" ry="110" fill="#fde68a" stroke="#f59e0b" strokeWidth="1.5" />
+      <rect x="270" y="90" width="140" height="60" rx="8" fill="#111827" />
+      <text x="340" y="127" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">STAGE</text>
+      <rect x="270" y="155" width="140" height="90" rx="6" fill="#92400e" />
+      <text x="340" y="205" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">GA PIT</text>
+      {["1","2","3","4","5","6","7","8"].map((n, i) => (
+        <text key={n} x={150 + i*50} y={170} textAnchor="middle" fill="#92400e" fontSize="10" fontWeight="bold">Sec {n}</text>
+      ))}
+      {["38","39","40","41","42","43","44","45"].map((n, i) => (
+        <text key={n} x={150 + i*50} y={240} textAnchor="middle" fill="#92400e" fontSize="10" fontWeight="bold">Sec {n}</text>
+      ))}
+      <text x="340" y="375" textAnchor="middle" fill="#92400e" fontSize="11" fontWeight="bold">MORGAN WALLEN • STILL THE PROBLEM TOUR</text>
+    </svg>
+  );
+}
+
+function LukeCombsMap() {
+  return (
+    <svg width="340" height="200" viewBox="0 0 680 400" style={{ display: "block", margin: "0 auto" }}>
+      <ellipse cx="340" cy="200" rx="330" ry="190" fill="#d4c5a9" stroke="#78350f" strokeWidth="2" />
+      <ellipse cx="340" cy="200" rx="270" ry="150" fill="#fbbf24" stroke="#d97706" strokeWidth="1.5" />
+      <ellipse cx="340" cy="200" rx="200" ry="100" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" />
+      <rect x="270" y="90" width="140" height="55" rx="8" fill="#111827" />
+      <text x="340" y="124" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">STAGE</text>
+      {["102","103","104","105","107","108","109","111","112","114","115","116","117","119","120","122","123","124","126"].map((n, i) => (
+        <text key={n} x={80 + (i % 10) * 52} y={180 + Math.floor(i / 10) * 25} textAnchor="middle" fill="#78350f" fontSize="9" fontWeight="bold">{n}</text>
+      ))}
+      <text x="340" y="375" textAnchor="middle" fill="#78350f" fontSize="11" fontWeight="bold">LUKE COMBS • MY KINDA SATURDAY NIGHT TOUR</text>
+    </svg>
+  );
+}
 
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 export default function SeatPage() {
@@ -1381,58 +1427,85 @@ const isCanada = isBruno && (city.includes("Canada") || venue === "Rogers Stadiu
 const isBottleRock = eventId === "bottlerock";
 const isMagicMen = eventId === "magic-men";
 const mmRegion = search.get("region") ?? "AU";
+const isMorganWallen = eventId === "morgan-wallen";
+const isLukeCombs = eventId === "luke-combs";
+// Luke Combs sub-detection by venue/city
+const isLCAllanJackson = isLukeCombs && venue.includes("Nissan Stadium");
+const isLCCanadaMay = isLukeCombs && city.includes("Montreal");
+const isLCCanadaJun = isLukeCombs && (city.includes("Toronto") || venue.includes("Rogers Stadium"));
+const isLCWembleyJul31 = isLukeCombs && venue.includes("Wembley") && date === "JUL 31";
+const isLCWembleyAug = isLukeCombs && venue.includes("Wembley") && (date === "AUG 01" || date === "AUG 02");
+const isLCMurrayfield = isLukeCombs && venue.includes("Murrayfield");
+const isLCUKSmall = isLukeCombs && (venue.includes("State Theatre") || venue.includes("Empire Live") || venue.includes("Wally's") || venue.includes("Tally Ho") || venue.includes("Off The Rails") || venue.includes("The Queen") || venue.includes("Mulcahy") || venue.includes("Daryl's House") || venue.includes("Stone Pony"));
+const isLCUKGeneral = isLukeCombs && !isLCWembleyJul31 && !isLCWembleyAug && !isLCMurrayfield && (city.includes("United Kingdom") || city.includes("Ireland") || city.includes("France") || city.includes("Sweden") || city.includes("Netherlands") || city.includes("Birmingham"));
+const isLCMay16 = isLukeCombs && date === "MAY 16" && city.includes("Green Bay");
+
 const bottleRockDay = date === "MAY 22" ? "fri" : date === "MAY 23" ? "sat" : "sun";
 
-const tourName = isBottleRock
+const tourName = isMorganWallen
+  ? "Morgan Wallen: Still the Problem Tour"
+  : isLukeCombs
+  ? "Luke Combs - My Kinda Saturday Night Tour"
+  : isBottleRock
   ? "BottleRock Napa Valley"
   : isBruno
   ? "Bruno Mars - The Romantic Tour"
   : isMagicMen
-  ? "Magic Men Australia"
+  ? "Magic Men World Tour 2026"
   : "SOMBR - You Are The Reason Tour";
 
-const allSeats: readonly AnySeat[] = isMagicMen
-  ? mmRegion === "AU"
-    ? MM_SEATS_AU
-    : mmRegion === "CA"
-    ? MM_SEATS_CA
-    : mmRegion === "EU"
-    ? MM_SEATS_EU
-    : mmRegion === "NZ"
-    ? MM_SEATS_NZ
-    : mmRegion === "UK"
-    ? MM_SEATS_UK
-    : MM_SEATS_USA
+const allSeats: readonly AnySeat[] = isMorganWallen
+  ? MORGAN_WALLEN_SEATS
+  : isLukeCombs
+  ? isLCAllanJackson ? LC_SEATS_ALAN_JACKSON
+  : isLCCanadaMay ? LC_SEATS_CANADA_MAY
+  : isLCCanadaJun ? LC_SEATS_CANADA_JUN
+  : isLCWembleyJul31 ? LC_SEATS_WEMBLEY_JUL31
+  : isLCWembleyAug ? LC_SEATS_WEMBLEY_AUG
+  : isLCMurrayfield ? LC_SEATS_MURRAYFIELD
+  : isLCUKSmall ? LC_SEATS_UK_SMALL
+  : isLCUKGeneral ? LC_SEATS_UK_GENERAL
+  : isLCMay16 ? LC_SEATS_MAY16
+  : LC_SEATS_DEFAULT
+  : isMagicMen
+  ? mmRegion === "AU" ? MM_SEATS_AU
+  : mmRegion === "CA" ? MM_SEATS_CA
+  : mmRegion === "EU" ? MM_SEATS_EU
+  : mmRegion === "NZ" ? MM_SEATS_NZ
+  : mmRegion === "UK" ? MM_SEATS_UK
+  : MM_SEATS_USA
   : isBottleRock
-  ? bottleRockDay === "fri"
-    ? BOTTLEROCK_SEATS_FRI
-    : bottleRockDay === "sat"
-    ? BOTTLEROCK_SEATS_SAT
-    : BOTTLEROCK_SEATS_SUN
-  : isCanada
-  ? CANADA_SEATS
-  : isBruno
-  ? BRUNO_MARS_SEATS
+  ? bottleRockDay === "fri" ? BOTTLEROCK_SEATS_FRI
+  : bottleRockDay === "sat" ? BOTTLEROCK_SEATS_SAT
+  : BOTTLEROCK_SEATS_SUN
+  : isCanada ? CANADA_SEATS
+  : isBruno ? BRUNO_MARS_SEATS
   : SOMBR_SEATS;
 
-const allTypes: AnyFilter[] = isMagicMen
-  ? mmRegion === "AU"
-    ? [...MM_FILTERS_AU]
-    : mmRegion === "CA"
-    ? [...MM_FILTERS_CA]
-    : mmRegion === "EU"
-    ? [...MM_FILTERS_EU]
-    : mmRegion === "NZ"
-    ? [...MM_FILTERS_NZ]
-    : mmRegion === "UK"
-    ? [...MM_FILTERS_UK]
-    : [...MM_FILTERS_USA]
-  : isBottleRock
-  ? [...BOTTLEROCK_FILTERS]
-  : isCanada
-  ? [...CANADA_FILTERS]
-  : isBruno
-  ? [...BRUNO_FILTERS]
+
+const allTypes: AnyFilter[] = isMorganWallen
+  ? [...MW_FILTERS]
+  : isLukeCombs
+  ? isLCAllanJackson ? [...LC_FILTERS_ALAN_JACKSON]
+  : isLCCanadaMay ? [...LC_FILTERS_CANADA_MAY]
+  : isLCCanadaJun ? [...LC_FILTERS_CANADA_JUN]
+  : isLCWembleyJul31 ? [...LC_FILTERS_WEMBLEY]
+  : isLCWembleyAug ? [...LC_FILTERS_WEMBLEY]
+  : isLCMurrayfield ? [...LC_FILTERS_MURRAYFIELD]
+  : isLCUKSmall ? [...LC_FILTERS_UK_SMALL]
+  : isLCUKGeneral ? [...LC_FILTERS_UK_GENERAL]
+  : isLCMay16 ? [...LC_FILTERS_MAY16]
+  : [...LC_FILTERS_DEFAULT]
+  : isMagicMen
+  ? mmRegion === "AU" ? [...MM_FILTERS_AU]
+  : mmRegion === "CA" ? [...MM_FILTERS_CA]
+  : mmRegion === "EU" ? [...MM_FILTERS_EU]
+  : mmRegion === "NZ" ? [...MM_FILTERS_NZ]
+  : mmRegion === "UK" ? [...MM_FILTERS_UK]
+  : [...MM_FILTERS_USA]
+  : isBottleRock ? [...BOTTLEROCK_FILTERS]
+  : isCanada ? [...CANADA_FILTERS]
+  : isBruno ? [...BRUNO_FILTERS]
   : [...SOMBR_FILTERS];
 
 const [showPresaleModal, setShowPresaleModal] = useState(false);
@@ -1488,6 +1561,16 @@ const sorted = useMemo(() => {
 }, [filtered, sortBy, presaleUnlocked, unlockedPrices]);
 
 const typeColor = (type: string) => {
+if (type === "Side View") return "#d97706";
+if (type === "Standard Adult") return "#b45309";
+if (type === "Limited View Seating") return "#92400e";
+if (type === "GA PIT") return "#7c3aed";
+if (type === "Gold - Nashville Seated Ticket") return "#d4a017";
+if (type === "Reserved Seating" || type === "Reserved Aisle Seating") return "#2563eb";
+if (type === "Seated Ticket") return "#0891b2";
+if (type === "Resale Ticket") return "#6b7280";
+if (type === "Regular General Admission" || type === "Pit GA" || type === "Terrasse GA") return "#16a34a";
+if (type === "Loges - Suites" || type === "Banquettes - Booths" || type === "Tables") return "#9333ea";
   if (type === "VIP") return "#7c3aed";
   if (type === "SkyDeck") return "#0891b2";
   if (type === "Backstage") return "#374151";
@@ -1595,7 +1678,12 @@ if (!eventId) return <div style={{ padding: 24 }}>Loading…</div>;
         <button type="button" style={{ background: "#fff", border: "1px solid #cbd5e1", borderRadius: 999, padding: "10px 16px", fontSize: 13, fontWeight: 900, color: TM_TEXT, cursor: "pointer", marginBottom: 12, width: "100%", maxWidth: 520 }}>
           ⇄ Switch to Map
         </button>
-        {isMagicMen ? <MagicMenMap region={mmRegion} /> : isBottleRock ? <BottleRockMap /> : isBruno ? <BrunoArenaMap /> : <SombrArenaMap />}
+        {isMorganWallen ? <MorganWallenMap />
+  : isLukeCombs ? <LukeCombsMap />
+  : isMagicMen ? <MagicMenMap region={mmRegion} />
+  : isBottleRock ? <BottleRockMap />
+  : isBruno ? <BrunoArenaMap />
+  : <SombrArenaMap />}
       </div>
 
       <div style={{ padding: "12px 16px", display: "flex", gap: 10 }}>
@@ -1636,6 +1724,29 @@ if (!eventId) return <div style={{ padding: 24 }}>Loading…</div>;
     </div>
   </div>
 )}
+{isMorganWallen && (
+  <div style={{ margin: "0 16px 10px", background: "#fff7ed", borderRadius: 10, padding: "12px 14px", border: "1px solid #d97706" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <span>🤠</span>
+        <span style={{ fontSize: 13, fontWeight: 900, color: "#d97706" }}>MORGAN WALLEN — STILL THE PROBLEM TOUR</span>
+      </div>
+      <span style={{ color: "#d97706", fontSize: 13, fontWeight: 900 }}>ON SALE</span>
+    </div>
+  </div>
+)}
+{isLukeCombs && (
+  <div style={{ margin: "0 16px 10px", background: "#fef3c7", borderRadius: 10, padding: "12px 14px", border: "1px solid #92400e" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <span>🎸</span>
+        <span style={{ fontSize: 13, fontWeight: 900, color: "#92400e" }}>LUKE COMBS — MY KINDA SATURDAY NIGHT TOUR</span>
+      </div>
+      <span style={{ color: "#92400e", fontSize: 13, fontWeight: 900 }}>ON SALE</span>
+    </div>
+  </div>
+)}
+
 {isBottleRock && (
   <div style={{ margin: "0 16px 10px", background: "#f0fdf4", borderRadius: 10, padding: "12px 14px", border: "1px solid #86efac" }}>
     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -1736,17 +1847,16 @@ if (!eventId) return <div style={{ padding: 24 }}>Loading…</div>;
               <div style={{ textAlign: "right", flexShrink: 0 }}>
                 {effective != null ? (
   <p style={{ margin: 0, fontWeight: 950, fontSize: 17 }}>
-    {
-      isMagicMen && mmRegion === "AU"
-        ? "A$"
-        : isMagicMen && (mmRegion === "EU" || mmRegion === "UK")
-        ? "£"
-        : isMagicMen && mmRegion === "NZ"
-        ? "NZ$"
-        : isCanada
-        ? "CA $"
-        : "$"
-    }
+  
+ {
+   isMagicMen && mmRegion === "AU" ? "A$"
+  : isMagicMen && (mmRegion === "EU" || mmRegion === "UK") ? "£"
+  : isMagicMen && mmRegion === "NZ" ? "NZ$"
+  : isLCWembleyJul31 || isLCWembleyAug || isLCMurrayfield || isLCUKSmall || isLCUKGeneral ? "£"
+  : isLCCanadaMay || isLCCanadaJun ? "CA$"
+  : isCanada ? "CA $"
+  : "$"
+ }
     {effective.toFixed(2)}
   </p>
 ) : (
