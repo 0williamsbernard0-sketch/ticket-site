@@ -94,7 +94,9 @@ const venueParams = `venue=${encodeURIComponent(venue)}&city=${encodeURIComponen
           ticketmaster
         </div>
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: "bold" }}>
-  {eventId === "magic-men" ? "Magic Men World Tour 2026"
+  {eventId === "morgan-wallen" ? "Morgan Wallen: Still the Problem Tour"
+  : eventId === "luke-combs" ? "Luke Combs - My Kinda Saturday Night Tour"
+  : eventId === "magic-men" ? "Magic Men World Tour 2026"
   : eventId === "bruno-mars" ? "Bruno Mars - The Romantic Tour"
   : eventId === "bottlerock" ? "BottleRock Napa Valley"
   : "SOMBR - You Are The Reason Tour"}
