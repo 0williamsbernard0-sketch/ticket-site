@@ -1057,12 +1057,29 @@ type MagicMenSeat =
   | (typeof MM_SEATS_UK)[number]
   | (typeof MM_SEATS_USA)[number];
 
+type MorganWallenSeat =
+  | (typeof MORGAN_WALLEN_SEATS)[number];
+
+type LukeCombsSeat =
+  | (typeof LC_SEATS_DEFAULT)[number]
+  | (typeof LC_SEATS_MAY16)[number]
+  | (typeof LC_SEATS_UK_SMALL)[number]
+  | (typeof LC_SEATS_ALAN_JACKSON)[number]
+  | (typeof LC_SEATS_MURRAYFIELD)[number]
+  | (typeof LC_SEATS_WEMBLEY_JUL31)[number]
+  | (typeof LC_SEATS_WEMBLEY_AUG)[number]
+  | (typeof LC_SEATS_CANADA_MAY)[number]
+  | (typeof LC_SEATS_CANADA_JUN)[number]
+  | (typeof LC_SEATS_UK_GENERAL)[number];
+
 type AnySeat =
   | SombrSeat
   | BrunoSeat
   | CanadaSeat
   | BottleRockSeat
-  | MagicMenSeat;
+  | MagicMenSeat
+  | MorganWallenSeat
+  | LukeCombsSeat;
 
 type SombrFilter =
   | "Standard Admission"
@@ -1101,12 +1118,37 @@ type MagicMenFilter =
   | "Deluxe - Priority Seating"
   | "Premium - VIP Seating";
 
+type MorganWallenFilter =
+  | "Side View"
+  | "Standard Adult"
+  | "Limited View Seating"
+  | "Official Platinum"
+  | "GA PIT";
+
+type LukeCombsFilter =
+  | "Standard Admission"
+  | "Verified Resale Ticket"
+  | "Standard Ticket"
+  | "Resale Ticket"
+  | "Gold - Nashville Seated Ticket"
+  | "Reserved Seating"
+  | "Reserved Aisle Seating"
+  | "Regular General Admission"
+  | "Pit GA"
+  | "Loges - Suites"
+  | "Banquettes - Booths"
+  | "Tables"
+  | "Terrasse GA"
+  | "Seated Ticket";
+
 type AnyFilter =
   | SombrFilter
   | BrunoFilter
   | CanadaFilter
   | BottleRockFilter
-  | MagicMenFilter;
+  | MagicMenFilter
+  | MorganWallenFilter
+  | LukeCombsFilter;
 
 const MM_FILTERS_AU: MagicMenFilter[] = ["Regular - General (Non-Reserved)", "Deluxe - Priority Reserved Seating", "Premium - VIP Reserved Seating"];
 const MM_FILTERS_CA: MagicMenFilter[] = ["Deluxe", "Premium", "Ultra-Premium"];
